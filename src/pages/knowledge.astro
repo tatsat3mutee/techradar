@@ -1,0 +1,219 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const topics = [
+  {
+    icon: '🧠',
+    title: 'Reasoning Models Changed Everything',
+    tag: 'Models',
+    tagColor: '#d4a574',
+    points: [
+      'o3, o4-mini, and Gemini Deep Think use chain-of-thought reasoning — they think before answering, dramatically improving code accuracy.',
+      'Claude Opus 4.7 introduced "xhigh" effort — more thinking tokens = better results on hard problems, but higher cost.',
+      'GPT-5.4 is the first general-purpose model with native computer-use — it can operate browsers and desktops via screenshots + mouse/keyboard.',
+      'Reasoning models are trained via reinforcement learning on tool use. They decide when to search, code, or browse — not just respond.',
+    ],
+  },
+  {
+    icon: '🔌',
+    title: 'MCP Is the New Standard for Tool Integration',
+    tag: 'Protocol',
+    tagColor: '#10a37f',
+    points: [
+      'Model Context Protocol (MCP) lets any AI model connect to any tool via a standardized JSON-RPC interface. Think USB-C for AI.',
+      'Every major vendor now supports MCP: VS Code, Claude, Cursor, Windsurf, JetBrains. Build once, run everywhere.',
+      'MCP servers expose tools, resources, and prompts. Clients discover them at runtime — no hardcoding tool lists.',
+      'GPT-5.4\'s "tool search" reduces tokens by 47% with MCP. Instead of loading all tool definitions upfront, the model searches for them on demand.',
+    ],
+  },
+  {
+    icon: '🤖',
+    title: 'Agentic Coding Is Production-Ready',
+    tag: 'Agents',
+    tagColor: '#6366f1',
+    points: [
+      'GitHub Copilot now runs as an agent: it reads files, runs terminal commands, iterates on errors, and commits fixes — not just autocomplete.',
+      'Claude Code, Codex CLI, and Cursor Composer all support autonomous multi-step workflows with file editing and testing.',
+      'Agent mode works best with clear instructions files (.github/copilot-instructions.md) that define project conventions.',
+      'The key pattern: define the task → agent plans → executes → verifies → iterates. Human reviews the PR, not every keystroke.',
+    ],
+  },
+  {
+    icon: '📐',
+    title: 'Context Windows Are 10× Bigger — Use Them',
+    tag: 'Architecture',
+    tagColor: '#4285f4',
+    points: [
+      'Llama 4 Scout supports 10M tokens. GPT-5.4 and Gemini 3.x support 1M+. That\'s entire codebases in a single prompt.',
+      'RAG is still important for cost/latency, but "stuff the context" is now viable for many production use cases.',
+      'Long context doesn\'t mean infinite attention. Models still lose accuracy in the middle of very long inputs (the "lost in the middle" problem).',
+      'Practical tip: put the most important context at the beginning and end of your prompt, not buried in the middle.',
+    ],
+  },
+  {
+    icon: '🏗️',
+    title: 'The IDE Is Becoming an Agent Runtime',
+    tag: 'Tools',
+    tagColor: '#007acc',
+    points: [
+      'VS Code agent mode lets Copilot edit files, run commands, manage git — turning your IDE into an autonomous development environment.',
+      'Custom instructions (.instructions.md, .prompt.md) let you persist project context so every chat session knows your stack.',
+      'BYOK (Bring Your Own Key) lets you use Claude, Gemini, or other models directly in VS Code — you\'re not locked to one provider.',
+      'Google launched "Antigravity" — a full agent-first IDE. JetBrains has Junie. The IDE war is now an agent war.',
+    ],
+  },
+  {
+    icon: '🔐',
+    title: 'AI Security Is a Real Attack Surface',
+    tag: 'Security',
+    tagColor: '#ef4444',
+    points: [
+      'Prompt injection is the #1 risk: untrusted data in prompts can hijack model behavior. Always sanitize inputs at system boundaries.',
+      'Supply chain attacks now include poisoned training data and malicious MCP servers. Vet your tool integrations.',
+      'Claude Opus 4.7 and GPT-5.4 both deploy "cyber safeguards" — automated monitoring that blocks prohibited security requests.',
+      'OpenAI\'s Privacy Filter (Apr 2026) and Anthropic\'s Cyber Verification Program signal that vendors are treating this seriously.',
+    ],
+  },
+  {
+    icon: '💰',
+    title: 'Pricing & Cost Optimization Matter More Than Ever',
+    tag: 'Business',
+    tagColor: '#ff9d00',
+    points: [
+      'GPT-5.4: $2.50/$15/M tokens. Claude Opus 4.7: $5/$25/M. Cached input is 10× cheaper — design for cache hits.',
+      'Reasoning effort levels (low/medium/high/xhigh) let you trade accuracy for cost. Most tasks don\'t need max effort.',
+      'Open-weight models (DeepSeek-R1, Qwen3, Llama 4) offer zero API cost for self-hosted inference. MIT/Apache licensing.',
+      'Batch and flex pricing from OpenAI is 50% off. If your workload isn\'t real-time, use async processing.',
+    ],
+  },
+  {
+    icon: '🌐',
+    title: 'Open-Source Is Closing the Gap Fast',
+    tag: 'Ecosystem',
+    tagColor: '#238636',
+    points: [
+      'DeepSeek-R1 (MIT license) matches o1 on reasoning benchmarks. Qwen3 tops open-source leaderboards with Apache 2.0.',
+      'Llama 4 Maverick beats GPT-4o on many benchmarks while being open-weight with 17B active params.',
+      'MoE architecture is the open-source secret weapon: 400B total params but only 17B active = efficient inference.',
+      'Hugging Face, Ollama, and vLLM make running frontier-class models on your own hardware increasingly practical.',
+    ],
+  },
+];
+---
+<BaseLayout title="What Devs Should Know" activeNav="knowledge">
+
+<main class="container">
+  <section class="page-section">
+    <div class="section-header">
+      <h2>💡 What Developers Should Know</h2>
+      <p>Essential knowledge about AI models, tools, and practices — updated with verified facts from official sources</p>
+    </div>
+
+    <div class="knowledge-grid">
+      {topics.map((topic, i) => (
+        <article class="knowledge-card" style={`--card-accent:${topic.tagColor};animation-delay:${i * 60}ms;`}>
+          <div class="knowledge-header">
+            <span class="knowledge-icon">{topic.icon}</span>
+            <div>
+              <h3 class="knowledge-title">{topic.title}</h3>
+              <span class="tag" style={`background:${topic.tagColor}22;color:${topic.tagColor};border:1px solid ${topic.tagColor}44;`}>{topic.tag}</span>
+            </div>
+          </div>
+          <ul class="knowledge-points">
+            {topic.points.map(p => <li>{p}</li>)}
+          </ul>
+        </article>
+      ))}
+    </div>
+
+    <div style="margin-top:40px;padding:20px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);">
+      <p style="font-size:0.85rem;color:var(--text-muted);">
+        <strong style="color:var(--accent);">ℹ️ Sources:</strong> All facts verified against official announcements from Anthropic, OpenAI, Google DeepMind, Meta AI, and VS Code. Last updated April 2026.
+      </p>
+    </div>
+  </section>
+</main>
+
+</BaseLayout>
+
+<style>
+  .knowledge-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+    gap: 20px;
+    margin-top: 24px;
+  }
+
+  .knowledge-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    transition: border-color 0.3s, transform 0.2s;
+    animation: fadeInUp 0.4s ease-out both;
+  }
+
+  .knowledge-card:hover {
+    border-color: var(--card-accent);
+    transform: translateY(-2px);
+  }
+
+  .knowledge-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+
+  .knowledge-icon {
+    font-size: 1.8rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .knowledge-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text);
+    margin: 0 0 6px;
+    line-height: 1.3;
+  }
+
+  .knowledge-points {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .knowledge-points li {
+    position: relative;
+    padding: 8px 0 8px 20px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .knowledge-points li:last-child {
+    border-bottom: none;
+  }
+
+  .knowledge-points li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--card-accent);
+    font-weight: 700;
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 900px) {
+    .knowledge-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

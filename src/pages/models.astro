@@ -1,0 +1,82 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const models = [
+  // ── Verified from https://www.anthropic.com/news/claude-opus-4-7 (Apr 16, 2026) ──
+  { name: 'Claude Opus 4.7', vendor: 'Anthropic', released: 'Apr 2026', context: '200K', params: '—', license: 'Proprietary', highlights: 'SOTA coding: +13% over Opus 4.6 on 93-task benchmark. 70% CursorBench. 3× vision resolution (2,576px). xhigh effort. $5/$25/M tokens.', color: '#d4a574', url: 'https://www.anthropic.com/news/claude-opus-4-7' },
+  { name: 'Claude Mythos Preview', vendor: 'Anthropic', released: 'Apr 2026', context: '200K', params: '—', license: 'Proprietary (Limited)', highlights: 'Anthropic\'s most powerful model. Best-aligned in evaluations. Advanced cyber capabilities. Limited release via Project Glasswing.', color: '#d4a574', url: 'https://www.anthropic.com/glasswing' },
+
+  // ── Verified from https://openai.com/index/introducing-gpt-5-4/ (Mar 2026) ──
+  { name: 'GPT-5.4', vendor: 'OpenAI', released: 'Mar 2026', context: '1M', params: '—', license: 'Proprietary', highlights: 'Native computer-use (75% OSWorld). Tool search (47% token savings). 83% GDPval. 57.7% SWE-bench Pro. $2.50/$15/M tokens.', color: '#10a37f', url: 'https://openai.com/index/introducing-gpt-5-4/' },
+  { name: 'GPT-5.3-Codex', vendor: 'OpenAI', released: 'Feb 2026', context: '272K', params: '—', license: 'Proprietary', highlights: 'Specialized coding model. 56.8% SWE-bench Pro. 74% OSWorld. Powers Codex cloud agent. /fast mode for 1.5× speed.', color: '#10a37f', url: 'https://openai.com/index/introducing-gpt-5-3-codex/' },
+
+  // ── Verified from https://deepmind.google/technologies/gemini/ (2026) ──
+  { name: 'Gemini 3.1 Pro', vendor: 'Google', released: '2026', context: '1M+', params: '—', license: 'Proprietary', highlights: 'SOTA: 80.6% SWE-bench Verified, 94.3% GPQA Diamond, 44.4% HLE, 77.1% ARC-AGI-2. Deep Think mode.', color: '#4285f4', url: 'https://deepmind.google/models/gemini/pro/' },
+  { name: 'Gemini 3 Flash', vendor: 'Google', released: '2026', context: '1M+', params: '—', license: 'Proprietary', highlights: 'Frontier intelligence at speed. 76.2% SWE-bench Verified. 91.9% GPQA. Advanced vibe coding + agentic tool use.', color: '#4285f4', url: 'https://deepmind.google/models/gemini/flash/' },
+
+  // ── Other verified models ──
+  { name: 'Qwen3-235B-A22B', vendor: 'Alibaba', released: 'Mar 2026', context: '128K', params: '235B MoE (22B active)', license: 'Apache 2.0', highlights: 'Hybrid thinking modes (fast/deep). MCP tool-use. Tops open-source benchmarks. Apache 2.0.', color: '#6d28d9', url: 'https://qwenlm.github.io/blog/qwen3/' },
+
+  // ── Verified from https://openai.com/index/introducing-o3-and-o4-mini/ (Apr 16, 2025) ──
+  { name: 'o3', vendor: 'OpenAI', released: 'Apr 2025', context: '200K', params: '—', license: 'Proprietary', highlights: 'Most powerful reasoning model. Thinks with images. Full ChatGPT tool access. Trained to reason about tool use via RL.', color: '#10a37f', url: 'https://openai.com/index/introducing-o3-and-o4-mini/' },
+  { name: 'o4-mini', vendor: 'OpenAI', released: 'Apr 2025', context: '200K', params: '—', license: 'Proprietary', highlights: 'Cost-efficient reasoning. 99.5% AIME 2025 (with tools). Best performance-per-dollar for reasoning tasks.', color: '#10a37f', url: 'https://openai.com/index/introducing-o3-and-o4-mini/' },
+
+  // ── Verified from https://ai.meta.com/blog/llama-4-multimodal-intelligence/ (Apr 5, 2025) ──
+  { name: 'Llama 4 Maverick', vendor: 'Meta', released: 'Apr 2025', context: '1M', params: '400B MoE (17B active)', license: 'Llama 4 Community', highlights: 'Multimodal MoE. 128 experts. Beats GPT-4o & Gemini 2.0 Flash. Distilled from Behemoth. Open-weight.', color: '#1877f2', url: 'https://ai.meta.com/blog/llama-4-multimodal-intelligence/' },
+  { name: 'Llama 4 Scout', vendor: 'Meta', released: 'Apr 2025', context: '10M', params: '109B MoE (17B active)', license: 'Llama 4 Community', highlights: 'Industry-leading 10M context. 16 experts. iRoPE architecture. Fits on single H100. Open-weight.', color: '#1877f2', url: 'https://ai.meta.com/blog/llama-4-multimodal-intelligence/' },
+
+  { name: 'Grok 3', vendor: 'xAI', released: 'Feb 2025', context: '128K', params: '—', license: 'Proprietary', highlights: 'Trained on Colossus (200k H100s). Think mode + DeepSearch. Leads AIME 2025, GPQA.', color: '#ef4444', url: 'https://x.ai/blog/grok-3' },
+  { name: 'DeepSeek-R1', vendor: 'DeepSeek', released: 'Jan 2025', context: '128K', params: '671B MoE (37B active)', license: 'MIT', highlights: 'Open-weight reasoning model. RL-trained chain-of-thought. Matches o1 on math/code. MIT license.', color: '#6366f1', url: 'https://github.com/deepseek-ai/DeepSeek-R1' },
+  { name: 'DeepSeek-V3', vendor: 'DeepSeek', released: 'Dec 2024', context: '128K', params: '671B MoE (37B active)', license: 'MIT', highlights: 'MoE trained on 14.8T tokens. Multi-token prediction. Competitive with GPT-4o at fraction of cost.', color: '#6366f1', url: 'https://github.com/deepseek-ai/DeepSeek-V3' },
+];
+---
+<BaseLayout title="Model Tracker" activeNav="models">
+
+<main class="container">
+  <section class="page-section">
+    <div class="section-header">
+      <h2>🧠 Frontier Model Tracker</h2>
+      <p>Verified specs for the latest AI models — context windows, parameter counts, licensing, and key capabilities</p>
+    </div>
+
+    <div style="overflow-x:auto;">
+      <table style="width:100%;border-collapse:collapse;font-size:0.85rem;">
+        <thead>
+          <tr style="border-bottom:2px solid var(--border);text-align:left;">
+            <th style="padding:12px 14px;color:var(--text-muted);font-weight:600;">Model</th>
+            <th style="padding:12px 14px;color:var(--text-muted);font-weight:600;">Vendor</th>
+            <th style="padding:12px 14px;color:var(--text-muted);font-weight:600;">Released</th>
+            <th style="padding:12px 14px;color:var(--text-muted);font-weight:600;">Params</th>
+            <th style="padding:12px 14px;color:var(--text-muted);font-weight:600;">Context</th>
+            <th style="padding:12px 14px;color:var(--text-muted);font-weight:600;">License</th>
+            <th style="padding:12px 14px;color:var(--text-muted);font-weight:600;">Highlights</th>
+          </tr>
+        </thead>
+        <tbody>
+          {models.map(m => (
+            <tr style="border-bottom:1px solid var(--border);transition:background 0.2s;" onmouseover="this.style.background='var(--surface)'" onmouseout="this.style.background='transparent'">
+              <td style="padding:12px 14px;font-weight:700;">
+                <span style={`display:inline-block;width:8px;height:8px;border-radius:50%;background:${m.color};margin-right:8px;vertical-align:middle;`}></span>
+                <a href={m.url} target="_blank" rel="noopener" style="color:var(--text);text-decoration:none;">{m.name}</a>
+              </td>
+              <td style="padding:12px 14px;color:var(--text-muted);">{m.vendor}</td>
+              <td style="padding:12px 14px;color:var(--text-muted);white-space:nowrap;">{m.released}</td>
+              <td style="padding:12px 14px;color:var(--text-muted);font-size:0.8rem;">{m.params}</td>
+              <td style="padding:12px 14px;"><span class="tag tag-tools">{m.context}</span></td>
+              <td style="padding:12px 14px;font-size:0.78rem;color:var(--text-muted);">{m.license}</td>
+              <td style="padding:12px 14px;color:var(--text-muted);font-size:0.8rem;max-width:300px;">{m.highlights}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <div style="margin-top:32px;padding:20px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);">
+      <p style="font-size:0.85rem;color:var(--text-muted);">
+        <strong style="color:var(--accent);">ℹ️ Sources:</strong> Data compiled from official announcements, model cards, and technical reports. Parameter counts for proprietary models are not publicly disclosed (marked —). Context window sizes reflect maximum API tier. Last updated April 2026.
+      </p>
+    </div>
+  </section>
+</main>
+
+</BaseLayout>

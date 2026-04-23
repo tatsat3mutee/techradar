@@ -1,0 +1,64 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  activeNav?: string;
+}
+
+const { title, description = 'One-stop AI & tech intelligence hub — daily aggregated news, model releases, SOTA research, sessions & more. By Tatsat Pandey.', activeNav = '' } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title} | TechRadar by Tatsat</title>
+  <meta name="description" content={description}>
+  <meta property="og:title" content={`${title} | TechRadar by Tatsat`}>
+  <meta property="og:description" content={description}>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav class="site-nav">
+  <a href="/" class="nav-brand">
+    <span class="brand-icon">⚡</span>
+    TechRadar
+  </a>
+  <div class="nav-links">
+    <a href="/" class:list={[{ active: activeNav === 'home' }]}>Home</a>
+    <a href="/feed" class:list={[{ active: activeNav === 'feed' }]}>Daily Feed</a>
+    <a href="/sessions" class:list={[{ active: activeNav === 'sessions' }]}>Sessions</a>
+    <a href="/resources" class:list={[{ active: activeNav === 'resources' }]}>Resources</a>
+    <a href="/models" class:list={[{ active: activeNav === 'models' }]}>Models</a>
+    <a href="/knowledge" class:list={[{ active: activeNav === 'knowledge' }]}>Dev Knowledge</a>
+  </div>
+  <div class="nav-search">
+    <input type="text" placeholder="Search..." id="globalSearch" autocomplete="off">
+  </div>
+</nav>
+
+<!-- ===== CONTENT ===== -->
+<slot />
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <div class="footer-brand">TechRadar by Tatsat</div>
+  <p style="margin-top:6px;">AI engineer's intelligence hub — auto-aggregated daily from 9+ sources</p>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/feed">Feed</a>
+    <a href="/sessions">Sessions</a>
+    <a href="/resources">Resources</a>
+    <a href="/models">Models</a>
+    <a href="/rss.xml" target="_blank">RSS</a>
+    <a href="https://github.com/Tatsat-Pandey" target="_blank">GitHub</a>
+  </div>
+  <p style="margin-top:16px;font-size:0.72rem;color:var(--text-muted);">Built with Astro · Updated daily via GitHub Actions · No API keys required</p>
+</footer>
+
+</body>
+</html>

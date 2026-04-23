@@ -1,0 +1,231 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allFeeds = await getCollection('feeds');
+const latestFeed = allFeeds.sort((a, b) => b.data.date.localeCompare(a.data.date))[0];
+const allSessions = await getCollection('sessions');
+const featuredSessions = allSessions.filter(s => s.data.featured).sort((a, b) => b.data.date.localeCompare(a.data.date));
+
+const totalEntries = allFeeds.reduce((sum, f) => sum + f.data.entries.length, 0);
+const uniqueSources = new Set(allFeeds.flatMap(f => f.data.entries.map(e => e.source))).size;
+
+const categories = ['all', 'models', 'agents', 'tools', 'research', 'releases', 'video'];
+
+const pathCards = [
+  { icon: '🚀', title: 'New here?', desc: 'Start with the Daily Feed — curated AI news from 9+ sources, zero noise.', link: '/feed', cta: 'Read today\'s digest →', color: 'var(--accent)' },
+  { icon: '🎓', title: 'Learn & Build', desc: 'Deep-dive sessions on agents, RAG pipelines, MCP servers, and Copilot mastery.', link: '/sessions', cta: 'Browse sessions →', color: 'var(--green)' },
+  { icon: '🧠', title: 'Compare Models', desc: '16 frontier models tracked — Claude Opus 4.7, GPT-5.4, Gemini 3.1 Pro, Llama 4, DeepSeek-R1.', link: '/models', cta: 'Open tracker →', color: 'var(--purple)' },
+  { icon: '⚡', title: 'Power User', desc: 'Copilot cheatsheet, slash commands, customization stack, MCP config — all in one place.', link: '/resources', cta: 'View resources →', color: 'var(--orange)' },
+];
+---
+<BaseLayout title="Home" activeNav="home">
+
+<section class="hero">
+  <div class="hero-badge">
+    <span class="hero-badge-dot"></span>
+    Updated {latestFeed?.data.date || '2026-04-23'} · {totalEntries} articles from {uniqueSources} sources
+  </div>
+  <h1>TechRadar <span class="hero-by">by Tatsat</span></h1>
+  <p class="subtitle">AI engineer's intelligence hub — daily aggregated news, model releases, SOTA research, hands-on sessions & developer tools. Built for practitioners, not hype.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="stat-num">{uniqueSources}</div><div class="stat-label">Sources</div></div>
+    <div class="hero-stat"><div class="stat-num">{totalEntries}</div><div class="stat-label">Articles</div></div>
+    <div class="hero-stat"><div class="stat-num">{allFeeds.length}</div><div class="stat-label">Digests</div></div>
+    <div class="hero-stat"><div class="stat-num">{allSessions.length}</div><div class="stat-label">Sessions</div></div>
+  </div>
+</section>
+
+<main class="container">
+
+  <!-- ===== ROLE-BASED QUICK START ===== -->
+  <section class="page-section" style="padding-top:8px;">
+    <div class="section-header">
+      <h2>🗺️ Pick Your Path</h2>
+      <p>Whether you're exploring AI for the first time or building production agents — start here</p>
+    </div>
+    <div class="cards-grid cards-grid-4">
+      {pathCards.map(card => (
+        <a href={card.link} class="path-card">
+          <span class="path-icon">{card.icon}</span>
+          <div class="path-title">{card.title}</div>
+          <p class="path-desc">{card.desc}</p>
+          <span class="path-cta" style={`color:${card.color}`}>{card.cta}</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- ===== LATEST FEED ===== -->
+  {latestFeed && (
+  <section class="page-section">
+    <div class="section-header">
+      <h2>📡 Latest Feed — {latestFeed.data.date}</h2>
+      <p>{latestFeed.data.entries.length} items from across the AI ecosystem</p>
+    </div>
+
+    <div class="filter-bar" id="feedFilter">
+      {categories.map(cat => (
+        <button class:list={['filter-btn', { active: cat === 'all' }]} data-category={cat}>
+          {cat === 'all' ? '🌐 All' : cat === 'models' ? '🧠 Models' : cat === 'agents' ? '🤖 Agents' : cat === 'tools' ? '🔧 Tools' : cat === 'research' ? '📄 Research' : cat === 'releases' ? '📦 Releases' : '🎬 Video'}
+        </button>
+      ))}
+    </div>
+
+    <div class="cards-grid" id="feedGrid">
+      {latestFeed.data.entries.map(entry => (
+        <div class="feed-card" data-category={entry.category}>
+          <div class="feed-card-source">
+            <span class="source-dot" style={`background:${entry.sourceColor || 'var(--accent)'}`}></span>
+            <span>{entry.source}</span>
+            <span style="margin-left:auto;font-size:0.7rem;color:var(--text-muted);">{latestFeed.data.date}</span>
+          </div>
+          <h3><a href={entry.url} target="_blank" rel="noopener">{entry.title}</a></h3>
+          <p>{entry.summary}</p>
+          <div class="feed-card-tags">
+            <span class={`tag tag-${entry.category}`}>{entry.category}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div style="text-align:center;margin-top:24px;">
+      <a href="/feed" style="color:var(--accent);font-weight:600;font-size:0.9rem;">View full feed archive →</a>
+    </div>
+  </section>
+  )}
+
+  <!-- ===== FEATURED SESSIONS (poster-style) ===== -->
+  <section class="page-section">
+    <div class="section-header">
+      <h2>🎓 Sessions & Workshops</h2>
+      <p>Deep-dive guides — each one is a standalone resource you can revisit</p>
+    </div>
+    <div class="poster-grid">
+      {featuredSessions.map(session => (
+        <a href={session.data.link || `/sessions/${session.id}`} class="poster-card">
+          <div class="poster-banner" style={`background:${session.data.bannerGradient || 'linear-gradient(135deg, var(--accent), var(--purple))'}`}>
+            <div class="poster-label">Session · Hands-on</div>
+          </div>
+          <div class="poster-body">
+            <h3>{session.data.title}</h3>
+            <p>{session.data.description}</p>
+            <div class="poster-meta">
+              <span>📅 {session.data.date}</span>
+              <span>👤 {session.data.author}</span>
+            </div>
+            <div class="poster-tags">
+              {session.data.tags.slice(0, 4).map(tag => (
+                <span class="poster-tag">{tag}</span>
+              ))}
+            </div>
+            <span class="poster-cta">Open session →</span>
+          </div>
+        </a>
+      ))}
+    </div>
+    <div style="text-align:center;margin-top:24px;">
+      <a href="/sessions" style="color:var(--accent);font-weight:600;font-size:0.9rem;">View all {allSessions.length} sessions →</a>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT THE AUTHOR ===== -->
+  <section class="page-section">
+    <div class="about-card">
+      <div class="about-header">
+        <div class="about-avatar">TP</div>
+        <div class="about-info">
+          <h3>Tatsat Pandey</h3>
+          <p class="about-role">AI Engineer · Transitioning into applied AI & intelligent systems</p>
+        </div>
+      </div>
+      <div class="about-body">
+        <p>I'm transitioning into AI engineering — building production systems with LLMs, agents, RAG pipelines, and developer tooling. TechRadar is my learning-in-public project: an auto-aggregated intelligence hub that tracks the AI ecosystem I'm working in every day.</p>
+        <div class="about-focus">
+          <div class="about-focus-item">
+            <span class="about-focus-icon">🤖</span>
+            <div><strong>AI Agents</strong><span>LangChain, LangGraph, tool calling, multi-agent systems</span></div>
+          </div>
+          <div class="about-focus-item">
+            <span class="about-focus-icon">🔧</span>
+            <div><strong>Developer Tooling</strong><span>GitHub Copilot, MCP servers, VS Code customization</span></div>
+          </div>
+          <div class="about-focus-item">
+            <span class="about-focus-icon">📊</span>
+            <div><strong>RAG & Retrieval</strong><span>Vector search, embeddings, reranking, evaluation</span></div>
+          </div>
+          <div class="about-focus-item">
+            <span class="about-focus-icon">🏗️</span>
+            <div><strong>Systems Thinking</strong><span>Architecture, deployment, observability, production ML</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="about-links">
+        <a href="https://github.com/Tatsat-Pandey" target="_blank">GitHub ↗</a>
+        <a href="/sessions">Sessions ↗</a>
+        <a href="/rss.xml" target="_blank">RSS Feed ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== QUICK LINKS ===== -->
+  <section class="page-section">
+    <div class="section-header">
+      <h2>🔗 Quick Links</h2>
+      <p>Jump straight to what matters</p>
+    </div>
+    <div class="cards-grid cards-grid-3">
+      <a href="/resources" class="link-card">
+        <span class="lc-icon">⚡</span>
+        <div class="lc-info"><strong>Copilot Cheatsheet</strong><span>Shortcuts, commands & tips</span></div>
+        <span class="lc-arrow">→</span>
+      </a>
+      <a href="/models" class="link-card">
+        <span class="lc-icon">🧠</span>
+        <div class="lc-info"><strong>Model Tracker</strong><span>16 frontier models compared</span></div>
+        <span class="lc-arrow">→</span>
+      </a>
+      <a href="/feed" class="link-card">
+        <span class="lc-icon">📡</span>
+        <div class="lc-info"><strong>Feed Archive</strong><span>Browse daily digests</span></div>
+        <span class="lc-arrow">→</span>
+      </a>
+      <a href="https://huggingface.co/papers" target="_blank" class="link-card">
+        <span class="lc-icon">🤗</span>
+        <div class="lc-info"><strong>HF Daily Papers</strong><span>huggingface.co/papers</span></div>
+        <span class="lc-arrow">→</span>
+      </a>
+      <a href="https://lmarena.ai/" target="_blank" class="link-card">
+        <span class="lc-icon">⚔️</span>
+        <div class="lc-info"><strong>LMArena</strong><span>Chatbot Arena leaderboard</span></div>
+        <span class="lc-arrow">→</span>
+      </a>
+      <a href="/rss.xml" target="_blank" class="link-card">
+        <span class="lc-icon">📡</span>
+        <div class="lc-info"><strong>Subscribe via RSS</strong><span>Add to your feed reader</span></div>
+        <span class="lc-arrow">→</span>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  // Category filter
+  document.querySelectorAll('#feedFilter .filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#feedFilter .filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.dataset.category;
+      document.querySelectorAll('#feedGrid .feed-card').forEach(card => {
+        if (cat === 'all' || card.dataset.category === cat) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+
+</BaseLayout>

@@ -1,0 +1,26 @@
+{
+  "lastUpdated": "2026-04-23",
+  "models": [
+    "Claude Opus 4.7",
+    "Claude Mythos Preview",
+    "GPT-5.4",
+    "GPT-5.3-Codex",
+    "GPT-5.3 Instant",
+    "GPT-5.2",
+    "GPT-5",
+    "o3",
+    "o4-mini",
+    "Gemini 3.1 Pro",
+    "Gemini 3 Flash",
+    "Gemini 3.1 Flash-Lite",
+    "Gemini 3.1 Deep Think",
+    "Llama 4 Maverick",
+    "Llama 4 Scout",
+    "Llama 4 Behemoth",
+    "Grok 3",
+    "DeepSeek-R1",
+    "DeepSeek-V3",
+    "Qwen3",
+    "Mistral Large 2"
+  ]
+}

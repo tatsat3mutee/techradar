@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const sessions = await getCollection('sessions');
+const sorted = sessions.sort((a, b) => b.data.date.localeCompare(a.data.date));
+const featured = sorted.filter(s => s.data.featured);
+const rest = sorted.filter(s => !s.data.featured);
+---
+<BaseLayout title="Sessions" activeNav="sessions">
+
+<main class="container">
+  <section class="page-section">
+    <div class="section-header">
+      <h2>🎓 Sessions & Workshops</h2>
+      <p>Deep-dive guides — each one is a standalone resource you can revisit. {sorted.length} sessions available.</p>
+    </div>
+
+    <div class="poster-grid">
+      {sorted.map(session => (
+        <a href={session.data.link || `/sessions/${session.id}`} class="poster-card">
+          <div class="poster-banner" style={`background:${session.data.bannerGradient || 'linear-gradient(135deg, var(--accent), var(--purple))'}`}>
+            <div class="poster-label">{session.data.featured ? 'Featured · Hands-on' : 'Session'}</div>
+          </div>
+          <div class="poster-body">
+            <h3>{session.data.title}</h3>
+            <p>{session.data.description}</p>
+            <div class="poster-meta">
+              <span>📅 {session.data.date}</span>
+              <span>👤 {session.data.author}</span>
+            </div>
+            <div class="poster-tags">
+              {session.data.tags.slice(0, 5).map(tag => (
+                <span class="poster-tag">{tag}</span>
+              ))}
+            </div>
+            <span class="poster-cta">Open session →</span>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    {sorted.length === 0 && (
+      <div style="text-align:center;padding:48px;color:var(--text-muted);">
+        <p style="font-size:1.4rem;">🎓</p>
+        <p>No sessions yet. Check back soon!</p>
+      </div>
+    )}
+  </section>
+</main>
+
+</BaseLayout>

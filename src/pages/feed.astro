@@ -1,0 +1,72 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allFeeds = await getCollection('feeds');
+const feeds = allFeeds.sort((a, b) => b.data.date.localeCompare(a.data.date));
+
+const categories = ['all', 'models', 'agents', 'tools', 'research', 'releases', 'video'];
+---
+<BaseLayout title="Daily Feed" activeNav="feed">
+
+<main class="container">
+  <section class="page-section">
+    <div class="section-header">
+      <h2>📡 Daily AI Feed</h2>
+      <p>Auto-aggregated digest from OpenAI, Anthropic, DeepMind, Hugging Face, ArXiv, GitHub Trending, VS Code & more</p>
+    </div>
+
+    <div class="filter-bar" id="feedFilter">
+      {categories.map(cat => (
+        <button class:list={['filter-btn', { active: cat === 'all' }]} data-category={cat}>
+          {cat === 'all' ? '🌐 All' : cat === 'models' ? '🧠 Models' : cat === 'agents' ? '🤖 Agents' : cat === 'tools' ? '🔧 Tools' : cat === 'research' ? '📄 Research' : cat === 'releases' ? '📦 Releases' : '🎬 Video'}
+        </button>
+      ))}
+    </div>
+
+    {feeds.map(feed => (
+      <div class="feed-day" style="margin-bottom:40px;">
+        <h3 style="font-size:1.1rem;font-weight:700;color:var(--accent);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--border);">
+          📅 {feed.data.date} — {feed.data.entries.length} items
+        </h3>
+        <div class="cards-grid" data-feed-grid>
+          {feed.data.entries.map(entry => (
+            <div class="feed-card" data-category={entry.category}>
+              <div class="feed-card-source">
+                <span class="source-dot" style={`background:${entry.sourceColor || 'var(--accent)'}`}></span>
+                <span>{entry.source}</span>
+              </div>
+              <h3><a href={entry.url} target="_blank" rel="noopener">{entry.title}</a></h3>
+              <p>{entry.summary}</p>
+              <div class="feed-card-tags">
+                <span class={`tag tag-${entry.category}`}>{entry.category}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    ))}
+
+    {feeds.length === 0 && (
+      <div style="text-align:center;padding:48px;color:var(--text-muted);">
+        <p style="font-size:1.4rem;">📭</p>
+        <p>No feed entries yet. The daily cron will populate this automatically.</p>
+      </div>
+    )}
+  </section>
+</main>
+
+<script>
+  document.querySelectorAll('#feedFilter .filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#feedFilter .filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.dataset.category;
+      document.querySelectorAll('.feed-card').forEach(card => {
+        card.style.display = (cat === 'all' || card.dataset.category === cat) ? '' : 'none';
+      });
+    });
+  });
+</script>
+
+</BaseLayout>

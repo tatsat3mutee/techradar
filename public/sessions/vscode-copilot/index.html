@@ -1,0 +1,2316 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VS Code &amp; Copilot Evolution: v1.106  v1.116</title>
+<meta name="description" content="Interactive version-by-version guide to VS Code and GitHub Copilot features from v1.106 (Nov 2025) to v1.116 (Apr 2026). Built by Tatsat Pandey.">
+<meta property="og:title" content="VS Code & Copilot: IDE  Agentic AI-First Platform (v1.106–v1.116)">
+<meta property="og:description" content="11 releases. One transformation. From IDE to AI-native development platform.">
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --text-muted: #8b949e;
+    --accent: #58a6ff;
+    --accent-glow: rgba(88,166,255,0.15);
+    --green: #3fb950;
+    --purple: #bc8cff;
+    --orange: #f0883e;
+    --pink: #f778ba;
+    --yellow: #d29922;
+    --red: #f85149;
+    --radius: 12px;
+    --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    font-size: 18px;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ===== GLOBAL SEARCH BAR ===== */
+  .search-bar {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(13,17,23,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 20px; display: flex; align-items: center; gap: 12px;
+  }
+  .search-bar input {
+    flex: 1; max-width: 400px; padding: 10px 16px; border-radius: 10px;
+    border: 1px solid var(--border); background: var(--surface); color: var(--text);
+    font-size: 0.9rem; font-family: var(--font); outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .search-bar input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(88,166,255,0.15); }
+  .search-bar input::placeholder { color: var(--text-muted); }
+  .quick-nav {
+    display: flex; gap: 2px; flex-wrap: nowrap; align-items: center;
+  }
+  .quick-nav a {
+    padding: 7px 16px; font-size: 0.76rem; font-weight: 600; letter-spacing: 0.3px;
+    background: transparent; border: none; color: var(--text-muted);
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s; text-decoration: none; white-space: nowrap;
+  }
+  .quick-nav a:hover { color: var(--accent); border-bottom-color: var(--accent); text-decoration: none; }
+  .quick-nav a:first-child { border-left: 1px solid var(--border); }
+  .quick-nav a + a { border-left: 1px solid rgba(48,54,61,0.5); }
+  @media (max-width: 768px) {
+    .search-bar { flex-direction: column; gap: 8px; }
+    .search-bar input { max-width: 100%; }
+    .quick-nav { flex-wrap: wrap; justify-content: center; }
+  }
+
+  /* ===== SECTION DIVIDERS ===== */
+  .guide-section { margin-top: 32px; margin-bottom: 40px; position: relative; }
+  .guide-section::before {
+    content: ''; position: absolute; top: -20px; left: 50%; transform: translateX(-50%);
+    width: 60px; height: 3px; border-radius: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--purple));
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    text-align: center;
+    padding: 48px 20px 32px;
+    background: linear-gradient(180deg, #161b22 0%, #0d1117 100%);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+    background: radial-gradient(circle at 30% 50%, rgba(88,166,255,0.06) 0%, transparent 50%),
+               radial-gradient(circle at 70% 50%, rgba(188,140,255,0.05) 0%, transparent 50%);
+    animation: heroGlow 8s ease-in-out infinite alternate;
+  }
+  @keyframes heroGlow { from { transform: rotate(0deg); } to { transform: rotate(3deg); } }
+  .hero h1 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--accent), var(--purple), var(--pink));
+    background-size: 200% 200%;
+    animation: gradientShift 4s ease infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 12px;
+    position: relative;
+  }
+  @keyframes gradientShift { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+  .hero .subtitle {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    max-width: 700px;
+    margin: 0 auto 16px;
+    position: relative;
+  }
+  .hero-stats {
+    display: flex; gap: 24px; justify-content: center; margin-top: 20px;
+    position: relative;
+  }
+  .hero-stat {
+    text-align: center; padding: 12px 20px;
+    background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+    border-radius: 10px; min-width: 120px;
+  }
+  .hero-stat .stat-num { font-size: 1.6rem; font-weight: 800; color: var(--accent); }
+  .hero-stat .stat-label { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; }
+  @media (max-width: 768px) {
+    .hero-stats { flex-wrap: wrap; gap: 10px; }
+    .hero-stat { min-width: 90px; padding: 8px 14px; }
+  }
+  /* ===== MAIN ===== */
+  main { max-width: 1100px; margin: 0 auto; padding: 20px 20px 60px; }
+
+  /* ===== VERSION SECTION ===== */
+  .version-section { margin-bottom: 28px; }
+  .version-header {
+    display: flex; align-items: center; gap: 16px;
+    margin-bottom: 32px; padding-bottom: 18px; border-bottom: 2px solid var(--border);
+  }
+  .version-tag { font-size: 2.2rem; font-weight: 800; color: var(--accent); white-space: nowrap; }
+  .version-meta { flex: 1; }
+  .version-meta .date { font-size: 1rem; color: var(--text-muted); }
+  .version-meta .theme { font-size: 1.15rem; color: var(--text); font-weight: 600; }
+
+  /* ===== CATEGORY GRID ===== */
+  .category-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 20px; align-items: start;
+  }
+  @media (max-width: 560px) { .category-grid { grid-template-columns: 1fr; } }
+
+  /* ===== CARD ===== */
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); overflow: hidden; transition: border-color 0.3s, box-shadow 0.3s, transform 0.2s;
+  }
+  .card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .card.open { box-shadow: 0 0 24px var(--accent-glow); border-color: var(--accent); transform: none; }
+  .card-head {
+    padding: 20px 22px; cursor: pointer; display: flex;
+    align-items: center; gap: 14px; user-select: none;
+  }
+  .card-head:hover { background: rgba(88,166,255,0.04); }
+  .card-icon {
+    font-size: 1.6rem; width: 44px; height: 44px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 10px; flex-shrink: 0;
+  }
+  .card-icon.agents { background: rgba(88,166,255,0.12); }
+  .card-icon.mcp { background: rgba(188,140,255,0.12); }
+  .card-icon.custom { background: rgba(63,185,80,0.12); }
+  .card-icon.tools { background: rgba(240,136,62,0.12); }
+  .card-icon.models { background: rgba(247,120,186,0.12); }
+  .card-icon.editor { background: rgba(210,153,34,0.12); }
+  .card-icon.agents::before { content: '\1F916'; }
+  .card-icon.mcp::before { content: '\1F50C'; }
+  .card-icon.tools::before { content: '\1F6E0\FE0F'; }
+  .card-icon.models::before { content: '\1F9E0'; }
+  .card-icon.custom::before { content: '\2699\FE0F'; }
+  .card-icon.editor::before { content: '\1F4DD'; }
+  .card-title { flex: 1; font-size: 1.15rem; font-weight: 700; color: var(--text); }
+  .card-count { font-size: 0.8rem; color: var(--text-muted); background: var(--bg); padding: 4px 10px; border-radius: 12px; }
+  .card-chevron { font-size: 1rem; color: var(--text-muted); transition: transform 0.3s; }
+  .card.open .card-chevron { transform: rotate(90deg); }
+  .card-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+  .card.open .card-body { max-height: 5000px; }
+  .card-content { padding: 8px 22px 24px; }
+
+  /* ===== FEATURE ITEM ===== */
+  .feature { padding: 20px 0; border-top: 1px solid var(--border); }
+  .feature:first-child { border-top: none; }
+  .feature h4 {
+    font-size: 1.05rem; color: var(--accent); margin-bottom: 8px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .feature h4 .tag {
+    font-size: 0.7rem; padding: 2px 8px; border-radius: 8px;
+    font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .tag-new { background: rgba(63,185,80,0.15); color: var(--green); }
+  .tag-preview { background: rgba(188,140,255,0.15); color: var(--purple); }
+  .tag-experimental { background: rgba(240,136,62,0.15); color: var(--orange); }
+  .tag-ga { background: rgba(88,166,255,0.15); color: var(--accent); }
+  .tag-breaking { background: rgba(248,81,73,0.15); color: var(--red); }
+  .feature p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.85; margin-top: 4px; }
+  .feature code {
+    background: var(--bg); padding: 2px 7px; border-radius: 4px;
+    font-size: 0.88rem; color: var(--accent); font-family: 'Consolas','Monaco',monospace;
+  }
+
+
+
+  /* ===== FOOTER ===== */
+  footer {
+    text-align: center; padding: 48px 20px; border-top: 1px solid var(--border);
+    color: var(--text-muted); font-size: 0.9rem;
+  }
+  footer a { color: var(--accent); }
+  .author-sign {
+    margin-top: 12px; font-size: 0.9rem; color: var(--text);
+  }
+  .author-sign .name {
+    font-size: 1rem; font-weight: 700;
+    background: linear-gradient(135deg, var(--accent), var(--purple));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .author-sign .role { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 2rem; }
+    .hero .subtitle { font-size: 1.05rem; }
+    .version-tag { font-size: 1.6rem; }
+    .category-grid { grid-template-columns: 1fr; }
+    .nav button { padding: 8px 14px; font-size: 0.85rem; }
+    main { padding: 24px 12px 60px; }
+  }
+
+  /* ===== VERSION BUTTONS GRID ===== */
+  .version-picker { margin-bottom: 28px; }
+  .version-picker h2 { text-align: center; font-size: 1.3rem; color: var(--text-muted); margin-bottom: 16px; font-weight: 600; }
+  .version-btns {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+  .version-btn {
+    position: relative;
+    background: var(--surface);
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: center;
+    font-family: var(--font);
+    width: 170px;
+    flex-shrink: 0;
+  }
+  .version-btn:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 6px 20px rgba(88,166,255,0.12); }
+  .version-btn.active { border-color: var(--accent); background: rgba(88,166,255,0.08); box-shadow: 0 0 24px var(--accent-glow); }
+  .version-btn .vb-num { font-size: 1.3rem; font-weight: 800; color: var(--accent); }
+  .version-btn .vb-date { font-size: 0.72rem; color: var(--text-muted); margin-top: 2px; }
+  .version-btn .vb-theme { font-size: 0.75rem; color: var(--text); margin-top: 6px; font-weight: 600; line-height: 1.3; }
+  .version-btn .vb-badge {
+    position: absolute; top: -8px; right: -8px;
+    font-size: 0.6rem; padding: 2px 8px; border-radius: 10px;
+    font-weight: 700; text-transform: uppercase;
+  }
+  .vb-badge.era1 { background: rgba(88,166,255,0.2); color: var(--accent); }
+  .vb-badge.era2 { background: rgba(63,185,80,0.2); color: var(--green); }
+  .vb-badge.era3 { background: rgba(188,140,255,0.2); color: var(--purple); }
+  .vb-badge.era4 { background: rgba(240,136,62,0.2); color: var(--orange); }
+
+  /* ===== VERSION DETAIL AREA ===== */
+  .version-detail-area {
+    min-height: 100px;
+    margin-bottom: 40px;
+  }
+  .version-section { display: none; }
+  .version-section.active { display: block; opacity: 1; transform: none; animation: fadeSlide 0.4s ease; }
+  @keyframes fadeSlide { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .version-placeholder {
+    text-align: center; padding: 40px 20px;
+    color: var(--text-muted); font-size: 1.1rem;
+  }
+  .version-placeholder .ph-icon { font-size: 3rem; margin-bottom: 12px; opacity: 0.5; }
+
+  /* ===== CUSTOMIZATION GUIDE ===== */
+  .guide-section h2 { font-size: 1.6rem; font-weight: 800; text-align: center; color: var(--accent); margin-bottom: 12px; }
+  .guide-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 20px; align-items: start;
+  }
+  .guide-grid-3col {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 20px; align-items: start;
+  }
+  .guide-grid-3col .guide-card-wide { grid-column: 1 / -1; }
+  .guide-grid-3col .guide-card-head { padding: 16px 14px; gap: 10px; min-height: 90px; }
+  .guide-grid-3col .guide-card-title { font-size: 1rem; }
+  .guide-grid-3col .guide-card-sub { font-size: 0.78rem; }
+  .guide-grid-3col .guide-card.open { grid-column: 1 / -1; }
+  @media (max-width: 900px) {
+    .guide-grid-3col { grid-template-columns: 1fr; }
+  }
+  .guide-card-wide { grid-column: 1 / -1; }
+  .guide-grid .guide-card.open { grid-column: 1 / -1; }
+  .guide-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    overflow: hidden; transition: border-color 0.3s, box-shadow 0.3s, transform 0.2s;
+  }
+  .guide-card:hover { border-color: var(--gc); transform: translateY(-2px); }
+  .guide-card.open { box-shadow: 0 0 24px rgba(88,166,255,0.1); border-color: var(--gc); transform: none; }
+  .guide-card-head {
+    padding: 20px 22px; cursor: pointer; display: flex; align-items: center; gap: 14px; user-select: none;
+  }
+  .guide-card-head:hover { background: rgba(255,255,255,0.02); }
+  .guide-icon { font-size: 1.6rem; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: rgba(255,255,255,0.05); border-radius: 10px; }
+  .guide-card-info { flex: 1; min-width: 0; }
+  .guide-card-title { font-size: 1.1rem; font-weight: 700; color: var(--text); line-height: 1.3; }
+  .guide-card-sub { font-size: 0.82rem; color: var(--text-muted); margin-top: 3px; line-height: 1.4; }
+  .guide-badge { color: #fff; padding: 3px 10px; border-radius: 12px; font-size: 0.65rem; font-weight: 700; flex-shrink: 0; }
+  .guide-chev { font-size: 1rem; color: var(--text-muted); transition: transform 0.3s; }
+  .guide-card.open .guide-chev { transform: rotate(90deg); color: var(--gc); }
+  .guide-card-body {
+    max-height: 0; overflow: hidden; transition: max-height 0.4s ease;
+    padding: 0 20px; font-size: 0.92rem; line-height: 1.8;
+  }
+  .guide-card.open .guide-card-body { max-height: 3000px; padding: 0 20px 24px; }
+  .guide-card-body h4 { color: var(--gc); font-size: 0.95rem; margin: 18px 0 10px; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+  .guide-card-body ul { padding-left: 18px; margin-bottom: 12px; }
+  .guide-card-body li { margin-bottom: 8px; color: var(--text-muted); line-height: 1.75; }
+  .guide-card-body li strong { color: var(--text); }
+  .guide-file-block {
+    background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+    padding: 14px 16px; font-family: 'Consolas','Monaco',monospace;
+    font-size: 0.85rem; line-height: 1.85; margin: 10px 0; color: var(--text-muted);
+  }
+  .gf-dir { color: var(--accent); }
+  .gf-file { color: var(--green); }
+  .gf-comment { color: #484f58; font-style: italic; }
+  .guide-tip {
+    background: rgba(210,153,34,0.1); border-left: 3px solid var(--yellow);
+    padding: 10px 14px; border-radius: 0 6px 6px 0; margin: 10px 0; font-size: 0.9rem;
+  }
+  .guide-flow {
+    display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+    margin: 10px 0; justify-content: center;
+  }
+  .gf-step {
+    background: rgba(35,134,54,0.12); border: 1px solid var(--green);
+    border-radius: 8px; padding: 10px 14px; font-size: 0.85rem; text-align: center;
+  }
+  .gf-arrow { color: var(--accent); font-weight: 700; font-size: 1.2rem; }
+  .guide-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin: 8px 0; }
+  .guide-table th { text-align: left; padding: 8px 10px; color: var(--accent); border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+  .guide-table td { padding: 6px 10px; border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text-muted); }
+  .guide-table td strong { color: var(--text); }
+  .guide-table tr:hover td { background: rgba(88,166,255,0.04); }
+  .guide-modes { display: flex; gap: 0; border-radius: 10px; overflow: hidden; margin: 10px 0; }
+  .guide-mode { flex: 1; padding: 12px 10px; text-align: center; font-size: 0.85rem; }
+  .guide-mode h5 { margin: 0 0 4px; font-size: 0.95rem; }
+  .guide-mode p { margin: 0; color: var(--text-muted); }
+  .gm-green { background: rgba(35,134,54,0.2); border: 1px solid var(--green); }
+  .gm-yellow { background: rgba(210,153,34,0.2); border: 1px solid var(--yellow); }
+  .gm-red { background: rgba(248,81,73,0.2); border: 1px solid var(--red); }
+
+  /* ===== COMPARISON SECTION ===== */
+  .comparison-section { margin-top: 16px; }
+  .comparison-section h2 {
+    font-size: 1.6rem; font-weight: 800; text-align: center;
+    color: var(--accent); margin-bottom: 8px;
+  }
+  .comparison-section .comp-sub {
+    text-align: center; color: var(--text-muted); font-size: 0.95rem; margin-bottom: 28px;
+  }
+  .compare-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; overflow-x: auto; display: block; -webkit-overflow-scrolling: touch; }
+  .compare-table table { width: 100%; border-collapse: collapse; min-width: 1400px; }
+  .compare-table th {
+    background: var(--surface); color: var(--accent); text-align: center;
+    padding: 12px 10px; border-bottom: 2px solid var(--accent); font-weight: 700; font-size: 0.8rem;
+    position: sticky; top: 0;
+  }
+  .compare-table th:first-child { text-align: left; color: var(--text); }
+  .compare-table td { padding: 10px; border-bottom: 1px solid var(--border); color: var(--text-muted); text-align: center; font-size: 0.8rem; }
+  .compare-table td:first-child { text-align: left; color: var(--text); font-weight: 600; white-space: nowrap; }
+  .compare-table tr:hover td { background: rgba(88,166,255,0.04); }
+  .compare-table .cell-empty { color: var(--border); }
+  .compare-table .cell-new { color: var(--green); font-weight: 600; }
+  .compare-table .cell-ga { color: var(--accent); font-weight: 700; }
+  .compare-table .cell-highlight { background: rgba(88,166,255,0.06); }
+
+  /* ===== EVOLUTION CHART (CSS bar chart) ===== */
+  .evo-chart { margin: 40px 0 20px; }
+  .evo-chart h3 { text-align: center; color: var(--text); font-size: 1.1rem; margin-bottom: 20px; }
+  .evo-bars { display: flex; align-items: flex-end; justify-content: center; gap: 6px; height: 200px; padding: 0 10px; }
+  .evo-bar {
+    flex: 1; max-width: 60px; border-radius: 6px 6px 0 0;
+    background: linear-gradient(180deg, var(--accent), rgba(88,166,255,0.3));
+    position: relative; transition: all 0.4s ease;
+    cursor: pointer; min-width: 30px;
+  }
+  .evo-bar:hover { filter: brightness(1.3); }
+  .evo-bar .bar-label {
+    position: absolute; bottom: -24px; left: 50%; transform: translateX(-50%);
+    font-size: 0.65rem; color: var(--text-muted); white-space: nowrap; font-weight: 700;
+  }
+  .evo-bar .bar-val {
+    position: absolute; top: -20px; left: 50%; transform: translateX(-50%);
+    font-size: 0.7rem; color: var(--accent); font-weight: 700;
+  }
+  .evo-legend {
+    display: flex; justify-content: center; gap: 20px; margin-top: 36px; flex-wrap: wrap;
+  }
+  .evo-legend span { font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
+  .evo-legend .leg-dot { width: 10px; height: 10px; border-radius: 3px; }
+
+  /* ===== COPILOT CHEATSHEET ===== */
+  .cheatsheet { margin-top: 32px; margin-bottom: 40px; position: relative; }
+  .cheatsheet::before {
+    content: ''; position: absolute; top: -20px; left: 50%; transform: translateX(-50%);
+    width: 60px; height: 3px; border-radius: 2px;
+    background: linear-gradient(90deg, var(--green), var(--accent));
+  }
+  .cheatsheet h2 { font-size: 1.6rem; font-weight: 800; text-align: center; color: var(--green); margin-bottom: 6px; }
+  .cheatsheet .comp-sub { text-align: center; color: var(--text-muted); font-size: 0.95rem; margin-bottom: 24px; }
+  .cheat-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px; align-items: start;
+  }
+  .cheat-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    transition: border-color 0.3s, transform 0.2s, box-shadow 0.3s; overflow: hidden;
+  }
+  .cheat-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .cheat-card.open { border-color: var(--green); box-shadow: 0 0 20px rgba(63,185,80,0.1); transform: none; }
+  .cheat-head {
+    padding: 16px 18px; cursor: pointer; display: flex; align-items: center; gap: 12px; user-select: none;
+  }
+  .cheat-head:hover { background: rgba(255,255,255,0.02); }
+  .cc-icon { font-size: 1.3rem; flex-shrink: 0; }
+  .cheat-info { flex: 1; min-width: 0; }
+  .cheat-title { font-size: 1rem; font-weight: 700; color: var(--text); }
+  .cheat-sub { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
+  .cheat-chev { font-size: 1rem; color: var(--text-muted); transition: transform 0.3s; flex-shrink: 0; }
+  .cheat-card.open .cheat-chev { transform: rotate(90deg); color: var(--green); }
+  .cheat-link {
+    font-size: 0.72rem; padding: 4px 10px; border-radius: 8px; font-weight: 700;
+    background: rgba(88,166,255,0.1); color: var(--accent); border: 1px solid rgba(88,166,255,0.2);
+    text-decoration: none; white-space: nowrap; transition: all 0.2s; flex-shrink: 0;
+  }
+  .cheat-link:hover { background: rgba(88,166,255,0.2); text-decoration: none; transform: scale(1.05); }
+  .cheat-body {
+    max-height: 0; overflow: hidden; transition: max-height 0.4s ease;
+    padding: 0 18px;
+  }
+  .cheat-card.open .cheat-body { max-height: 2000px; padding: 0 18px 18px; }
+  .shortcut-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .shortcut-row:last-child { border-bottom: none; }
+  .shortcut-desc { font-size: 0.85rem; color: var(--text-muted); flex: 1; }
+  kbd {
+    background: var(--bg); border: 1px solid var(--border); border-radius: 6px;
+    padding: 3px 10px; font-size: 0.78rem; font-family: 'Consolas','Monaco',monospace;
+    color: var(--accent); font-weight: 600; white-space: nowrap;
+    box-shadow: 0 2px 0 var(--border);
+  }
+  .cmd-row {
+    padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .cmd-row:last-child { border-bottom: none; }
+  .cmd-name {
+    font-family: 'Consolas','Monaco',monospace; font-size: 0.85rem;
+    color: var(--accent); font-weight: 600;
+  }
+  .cmd-desc { font-size: 0.82rem; color: var(--text-muted); margin-top: 2px; }
+  .tip-card {
+    background: rgba(88,166,255,0.04); border: 1px solid rgba(88,166,255,0.15);
+    border-radius: 10px; padding: 14px 16px; margin-bottom: 10px;
+  }
+  .tip-card .tip-label { font-size: 0.72rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .tip-card p { font-size: 0.85rem; color: var(--text-muted); margin: 0; line-height: 1.6; }
+  .tip-card code { background: var(--bg); padding: 2px 6px; border-radius: 4px; font-size: 0.82rem; color: var(--green); }
+
+  /* ===== SEARCH HIGHLIGHT ===== */
+  .search-highlight { background: rgba(210,153,34,0.3); border-radius: 2px; }
+  .search-hidden { display: none !important; }
+  .search-match { border-color: var(--yellow) !important; box-shadow: 0 0 16px rgba(210,153,34,0.15) !important; }
+
+  /* ===== QUICK LINKS ===== */
+  .quick-links {
+    margin-top: 32px; padding: 28px; background: var(--surface);
+    border: 1px solid var(--border); border-radius: var(--radius);
+  }
+  .quick-links h3 {
+    font-size: 1.1rem; font-weight: 700; color: var(--accent); margin-bottom: 16px; text-align: center;
+  }
+  .links-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px;
+  }
+  .link-card {
+    display: flex; align-items: center; gap: 12px; padding: 12px 16px;
+    border: 1px solid var(--border); border-radius: 10px;
+    background: var(--bg); text-decoration: none; transition: all 0.2s;
+  }
+  .link-card:hover { border-color: var(--accent); background: rgba(88,166,255,0.04); transform: translateX(4px); text-decoration: none; }
+  .lc-icon { font-size: 1.4rem; flex-shrink: 0; }
+  .lc-info { flex: 1; min-width: 0; }
+  .lc-info strong { display: block; font-size: 0.88rem; color: var(--text); font-weight: 600; }
+  .lc-info span { font-size: 0.76rem; color: var(--text-muted); }
+  .lc-arrow { color: var(--text-muted); font-size: 1.1rem; transition: transform 0.2s; }
+  .link-card:hover .lc-arrow { transform: translateX(4px); color: var(--accent); }
+</style>
+</head>
+<body>
+
+<!-- ============ SEARCH BAR + QUICK NAV ============ -->
+<div class="search-bar">
+  <input type="text" id="globalSearch" placeholder="🔍 Search features, shortcuts, commands..." autocomplete="off">
+  <div class="quick-nav">
+    <a href="#customization-guide">Customization</a>
+    <a href="#slash-commands">Slash Cmds</a>
+    <a href="#copilot-cheatsheet">Cheatsheet</a>
+    <a href="#evolution-flow">Evolution</a>
+    <a href="#version-reference">Versions</a>
+  </div>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <h1>VS Code &amp; Copilot: IDE → Agentic AI-First</h1>
+  <p class="subtitle">The complete guide to customizing and mastering GitHub Copilot in VS Code</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="stat-num">11</div><div class="stat-label">Releases</div></div>
+    <div class="hero-stat"><div class="stat-num">156+</div><div class="stat-label">Features</div></div>
+    <div class="hero-stat"><div class="stat-num">6</div><div class="stat-label">Months</div></div>
+    <div class="hero-stat"><div class="stat-num">4</div><div class="stat-label">Eras</div></div>
+  </div>
+</section>
+
+<main>
+
+<!-- ============ CUSTOMIZATION GUIDE (TOP SECTION) ============ -->
+<section class="guide-section" id="customization-guide">
+  <h2>📋 The Customization Stack — How It All Works</h2>
+  <p class="comp-sub">Instructions, Skills, Agents &amp; Hooks — explained with examples</p>
+
+  <div class="guide-grid">
+
+    <!-- Instructions -->
+    <div class="guide-card" style="--gc:#7ee787;">
+      <div class="guide-card-head" onclick="toggle(this)">
+        <span class="guide-icon">📋</span>
+        <div class="guide-card-info">
+          <div class="guide-card-title">Instructions</div>
+          <div class="guide-card-sub">Guide Copilot's behavior per project — always active</div>
+        </div>
+        <span class="guide-badge" style="background:var(--gc);">Always On</span>
+        <span class="guide-chev">▸</span>
+      </div>
+      <div class="guide-card-body">
+        <h4>What They Do</h4>
+        <ul>
+          <li>Shape Copilot's <strong>tone, style, coding conventions</strong></li>
+          <li>Scoped per <strong>project</strong>, <strong>workspace</strong>, or <strong>user</strong></li>
+          <li>Always included in every agent context automatically</li>
+          <li>Monorepo discovery — finds instructions in parent folders</li>
+        </ul>
+        <h4>Where They Live</h4>
+        <div class="guide-file-block">
+          <span class="gf-dir">📁 .github/</span><br>
+          &nbsp;&nbsp;<span class="gf-file">📄 copilot-instructions.md</span> <span class="gf-comment">← project-level</span><br>
+          <span class="gf-dir">📁 .vscode/</span><br>
+          &nbsp;&nbsp;<span class="gf-file">📄 instructions.md</span> <span class="gf-comment">← workspace-level</span><br>
+          <span class="gf-dir">📁 ~ (User home)</span><br>
+          &nbsp;&nbsp;<span class="gf-file">📄 copilot-instructions.md</span> <span class="gf-comment">← user-level (global)</span>
+        </div>
+        <div class="guide-tip">💡 Write instructions like you're onboarding a new developer — tech stack, conventions, what to avoid.</div>
+      </div>
+    </div>
+
+    <!-- Skills (Prompt Files) -->
+    <div class="guide-card" style="--gc:#d29922;">
+      <div class="guide-card-head" onclick="toggle(this)">
+        <span class="guide-icon">🛠️</span>
+        <div class="guide-card-info">
+          <div class="guide-card-title">Skills (Prompt Files)</div>
+          <div class="guide-card-sub">Reusable prompts as /slash commands</div>
+        </div>
+        <span class="guide-badge" style="background:var(--gc);">/command</span>
+        <span class="guide-chev">▸</span>
+      </div>
+      <div class="guide-card-body">
+        <h4>What Are They?</h4>
+        <ul>
+          <li>Reusable prompt templates saved as <code>.prompt.md</code></li>
+          <li>Appear as <strong>slash commands</strong> in chat: <code>/review</code>, <code>/test-gen</code></li>
+          <li>Can include <strong>variables</strong> and <strong>file references</strong></li>
+          <li>Shareable across the team via version control</li>
+        </ul>
+        <h4>File Structure</h4>
+        <div class="guide-file-block">
+          <span class="gf-dir">📁 .github/</span><br>
+          &nbsp;&nbsp;<span class="gf-dir">📁 prompts/</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="gf-file">📄 review.prompt.md</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="gf-file">📄 test-gen.prompt.md</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="gf-file">📄 refactor.prompt.md</span>
+        </div>
+        <h4>Example: review.prompt.md</h4>
+        <div class="guide-file-block">
+          <span class="gf-comment">---</span><br>
+          <span class="gf-file">description:</span> Review code for best practices<br>
+          <span class="gf-comment">---</span><br>
+          Review the selected code for:<br>
+          - Performance issues<br>
+          - Error handling gaps<br>
+          - Naming conventions<br>
+          Suggest improvements with code examples.
+        </div>
+      </div>
+    </div>
+
+    <!-- Agents -->
+    <div class="guide-card" style="--gc:#8957e5;">
+      <div class="guide-card-head" onclick="toggle(this)">
+        <span class="guide-icon">🤖</span>
+        <div class="guide-card-info">
+          <div class="guide-card-title">Custom Agents</div>
+          <div class="guide-card-sub">Specialized AI personas for domain tasks</div>
+        </div>
+        <span class="guide-badge" style="background:var(--gc);">@invoke</span>
+        <span class="guide-chev">▸</span>
+      </div>
+      <div class="guide-card-body">
+        <h4>How It Works</h4>
+        <div class="guide-flow">
+          <div class="gf-step">📝 Define<br><code>.agent.md</code></div>
+          <span class="gf-arrow">→</span>
+          <div class="gf-step" style="border-color:var(--accent);">🧠 Set instructions<br>&amp; allowed tools</div>
+          <span class="gf-arrow">→</span>
+          <div class="gf-step" style="border-color:var(--purple);">🪝 Attach hooks<br>(optional)</div>
+          <span class="gf-arrow">→</span>
+          <div class="gf-step">🚀 Invoke<br><code>@agent-name</code></div>
+        </div>
+        <h4>Example: .agent.md</h4>
+        <div class="guide-file-block">
+          <span class="gf-comment">---</span><br>
+          <span class="gf-file">name:</span> security-reviewer<br>
+          <span class="gf-file">description:</span> Reviews code for OWASP Top 10<br>
+          <span class="gf-file">tools:</span> ["codebase", "grep_search", "read_file"]<br>
+          <span class="gf-comment">---</span><br>
+          You are a security expert. Analyze for<br>
+          SQL injection, XSS, CSRF vulnerabilities.
+        </div>
+        <h4>Capabilities</h4>
+        <ul>
+          <li><strong>Custom tools</strong> — restrict which tools the agent can use</li>
+          <li><strong>Scoped instructions</strong> — agent-specific prompt, doesn't leak to other chats</li>
+          <li><strong>Hooks</strong> — attach pre/post scripts (see Hooks below)</li>
+          <li><strong>Nested subagents</strong> — agents can invoke other agents</li>
+          <li><strong>AI generation</strong> — describe in natural language → auto-generate</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Hooks -->
+    <div class="guide-card" style="--gc:#da3633;">
+      <div class="guide-card-head" onclick="toggle(this)">
+        <span class="guide-icon">🪝</span>
+        <div class="guide-card-info">
+          <div class="guide-card-title">Hooks</div>
+          <div class="guide-card-sub">Automated pre/post scripts around agent actions</div>
+        </div>
+        <span class="guide-badge" style="background:var(--gc);">Auto-run</span>
+        <span class="guide-chev">▸</span>
+      </div>
+      <div class="guide-card-body">
+        <h4>How Hooks Work</h4>
+        <div class="guide-flow">
+          <div class="gf-step" style="border-color:var(--purple);">🪝 Pre-hook<br><span style="font-size:0.85em">runs before</span></div>
+          <span class="gf-arrow">→</span>
+          <div class="gf-step" style="border-color:var(--accent);">🤖 Agent Action<br><span style="font-size:0.85em">tool call / edit</span></div>
+          <span class="gf-arrow">→</span>
+          <div class="gf-step" style="border-color:var(--purple);">🪝 Post-hook<br><span style="font-size:0.85em">runs after</span></div>
+        </div>
+        <h4>Hook Types</h4>
+        <table class="guide-table">
+          <tr><th>Hook</th><th>Fires When</th><th>Use Case</th></tr>
+          <tr><td><strong>preCommand</strong></td><td>Before terminal command</td><td>Lint, validate</td></tr>
+          <tr><td><strong>postCommand</strong></td><td>After terminal command</td><td>Log, notify, cleanup</td></tr>
+          <tr><td><strong>preEdit</strong></td><td>Before file edit</td><td>Backup, format check</td></tr>
+          <tr><td><strong>postEdit</strong></td><td>After file edit</td><td>Run tests, type-check</td></tr>
+        </table>
+        <h4>Example in .agent.md</h4>
+        <div class="guide-file-block">
+          <span class="gf-comment">---</span><br>
+          <span class="gf-file">name:</span> safe-deployer<br>
+          <span class="gf-file">hooks:</span><br>
+          &nbsp;&nbsp;<span class="gf-file">preCommand:</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;command: <span class="gf-file">"npm run lint"</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;description: <span class="gf-comment">"Lint before any terminal cmd"</span><br>
+          &nbsp;&nbsp;<span class="gf-file">postEdit:</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;command: <span class="gf-file">"npm test"</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;description: <span class="gf-comment">"Run tests after file edits"</span><br>
+          <span class="gf-comment">---</span>
+        </div>
+        <div class="guide-tip">🔑 Hooks only run when <strong>their agent is active</strong>. Enable via: <code>chat.useCustomAgentHooks</code></div>
+      </div>
+    </div>
+
+    <!-- Comparison Table (full width) -->
+    <div class="guide-card guide-card-wide" style="--gc:#58a6ff;">
+      <div class="guide-card-head" onclick="toggle(this)">
+        <span class="guide-icon">⚖️</span>
+        <div class="guide-card-info">
+          <div class="guide-card-title">Instructions vs Skills vs Agents — When to Use What</div>
+          <div class="guide-card-sub">Quick comparison</div>
+        </div>
+        <span class="guide-chev">▸</span>
+      </div>
+      <div class="guide-card-body">
+        <table class="guide-table">
+          <tr><th></th><th>📋 Instructions</th><th>🛠️ Skills</th><th>🤖 Agents</th></tr>
+          <tr><td><strong>Activation</strong></td><td>Always on</td><td>On-demand <code>/slash</code></td><td>On-demand <code>@name</code></td></tr>
+          <tr><td><strong>Scope</strong></td><td>All chats</td><td>Single prompt</td><td>Full session</td></tr>
+          <tr><td><strong>Has tools?</strong></td><td>❌</td><td>❌</td><td>✅ Yes</td></tr>
+          <tr><td><strong>Has hooks?</strong></td><td>❌</td><td>❌</td><td>✅ Yes</td></tr>
+          <tr><td><strong>File format</strong></td><td><code>.md</code></td><td><code>.prompt.md</code></td><td><code>.agent.md</code></td></tr>
+          <tr><td><strong>Best for</strong></td><td>Coding standards &amp; rules</td><td>Reusable prompts</td><td>Domain workflows</td></tr>
+        </table>
+        <h4 style="margin-top:16px;">Permission Modes</h4>
+        <div class="guide-modes">
+          <div class="guide-mode gm-green"><h5>🟢 Default</h5><p>Confirms every tool call. You approve each action.</p></div>
+          <div class="guide-mode gm-yellow"><h5>🟡 Bypass</h5><p>Auto-approves all tools. Retries on errors.</p></div>
+          <div class="guide-mode gm-red"><h5>🔴 Autopilot</h5><p>Full autonomy. Iterates until task is done.</p></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ SLASH COMMANDS & BUILT-IN FEATURES ============ -->
+<section class="guide-section" id="slash-commands">
+  <h2>⚡ Slash Commands &amp; Built-in Features</h2>
+  <p class="comp-sub">What you can do out of the box — no setup needed</p>
+
+  <div class="guide-grid-3col">
+    <div class="guide-card" style="--gc:#58a6ff;">
+      <div class="guide-card-head" onclick="toggle(this)">
+        <span class="guide-icon">⌨️</span>
+        <div class="guide-card-info">
+          <div class="guide-card-title">Built-in Slash Commands</div>
+          <div class="guide-card-sub">Type / in chat to see all available commands</div>
+        </div>
+        <span class="guide-badge" style="background:var(--gc);">/slash</span>
+        <span class="guide-chev">▸</span>
+      </div>
+      <div class="guide-card-body">
+        <h4>Setup &amp; Initialization</h4>
+        <table class="guide-table">
+          <tr><th>Command</th><th>What It Does</th></tr>
+          <tr><td><strong>/init</strong></td><td>Scans your project and auto-generates instructions, prompts &amp; agent files</td></tr>
+          <tr><td><strong>/create-prompt</strong></td><td>Generate a new <code>.prompt.md</code> file from a conversation</td></tr>
+          <tr><td><strong>/create-skill</strong></td><td>Generate a skill (prompt + tools) from a description</td></tr>
+          <tr><td><strong>/create-agent</strong></td><td>Generate a custom agent <code>.agent.md</code> from natural language</td></tr>
+        </table>
+        <h4>Session Management</h4>
+        <table class="guide-table">
+          <tr><th>Command</th><th>What It Does</th></tr>
+          <tr><td><strong>/compact</strong></td><td>Summarize conversation history to free up context window</td></tr>
+          <tr><td><strong>/fork</strong></td><td>Branch the current conversation into a new session</td></tr>
+          <tr><td><strong>/clear</strong></td><td>Clear the current chat session</td></tr>
+        </table>
+        <h4>Code Actions</h4>
+        <table class="guide-table">
+          <tr><th>Command</th><th>What It Does</th></tr>
+          <tr><td><strong>/explain</strong></td><td>Explain selected code or a concept</td></tr>
+          <tr><td><strong>/fix</strong></td><td>Fix errors in selected code</td></tr>
+          <tr><td><strong>/tests</strong></td><td>Generate unit tests for selected code</td></tr>
+          <tr><td><strong>/doc</strong></td><td>Generate documentation for selected code</td></tr>
+        </table>
+        <h4>Approval &amp; Autonomy</h4>
+        <table class="guide-table">
+          <tr><th>Command</th><th>What It Does</th></tr>
+          <tr><td><strong>/autoApprove</strong></td><td>Toggle auto-approve settings mid-session</td></tr>
+          <tr><td><strong>/yolo</strong></td><td>Switch to full Autopilot mode instantly</td></tr>
+          <tr><td><strong>/troubleshoot</strong></td><td>Debug why a session didn't work as expected</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- Built-in Tools -->
+    <div class="guide-card" style="--gc:#3fb950;">
+      <div class="guide-card-head" onclick="toggle(this)">
+        <span class="guide-icon">🔧</span>
+        <div class="guide-card-info">
+          <div class="guide-card-title">Built-in Agent Tools</div>
+          <div class="guide-card-sub">Tools agents use automatically — no configuration needed</div>
+        </div>
+        <span class="guide-badge" style="background:var(--gc);">Auto</span>
+        <span class="guide-chev">▸</span>
+      </div>
+      <div class="guide-card-body">
+        <h4>File &amp; Code Tools</h4>
+        <table class="guide-table">
+          <tr><th>Tool</th><th>What It Does</th></tr>
+          <tr><td><strong>read_file</strong></td><td>Read file contents</td></tr>
+          <tr><td><strong>create_file</strong></td><td>Create a new file</td></tr>
+          <tr><td><strong>replace_string_in_file</strong></td><td>Edit specific parts of a file</td></tr>
+          <tr><td><strong>list_dir</strong></td><td>List directory contents</td></tr>
+          <tr><td><strong>grep_search</strong></td><td>Search text across files</td></tr>
+          <tr><td><strong>semantic_search</strong></td><td>AI-powered code search using <code>#codebase</code></td></tr>
+          <tr><td><strong>vscode_listCodeUsages</strong></td><td>Find all references of a symbol</td></tr>
+          <tr><td><strong>vscode_renameSymbol</strong></td><td>Rename a symbol across the workspace</td></tr>
+        </table>
+        <h4>Execution &amp; Browser Tools</h4>
+        <table class="guide-table">
+          <tr><th>Tool</th><th>What It Does</th></tr>
+          <tr><td><strong>run_in_terminal</strong></td><td>Run commands in a persistent terminal</td></tr>
+          <tr><td><strong>send_to_terminal</strong></td><td>Send input to interactive terminal prompts</td></tr>
+          <tr><td><strong>open_browser_page</strong></td><td>Open a URL in the integrated browser</td></tr>
+          <tr><td><strong>screenshot_page</strong></td><td>Take screenshots of browser pages</td></tr>
+          <tr><td><strong>click_element</strong></td><td>Click elements in browser pages</td></tr>
+        </table>
+        <h4>Meta Tools</h4>
+        <table class="guide-table">
+          <tr><th>Tool</th><th>What It Does</th></tr>
+          <tr><td><strong>manage_todo_list</strong></td><td>Track multi-step task progress</td></tr>
+          <tr><td><strong>vscode_askQuestions</strong></td><td>Ask the user for clarification</td></tr>
+          <tr><td><strong>runSubagent</strong></td><td>Delegate complex sub-tasks to a specialized agent</td></tr>
+          <tr><td><strong>memory</strong></td><td>Persist notes across sessions (user/session/repo scoped)</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- Chat Context Variables -->
+    <div class="guide-card" style="--gc:#bc8cff;">
+      <div class="guide-card-head" onclick="toggle(this)">
+        <span class="guide-icon">#️⃣</span>
+        <div class="guide-card-info">
+          <div class="guide-card-title">Chat Context Variables</div>
+          <div class="guide-card-sub">Add context to your prompts with # references</div>
+        </div>
+        <span class="guide-badge" style="background:var(--gc);">#context</span>
+        <span class="guide-chev">▸</span>
+      </div>
+      <div class="guide-card-body">
+        <table class="guide-table">
+          <tr><th>Variable</th><th>What It Adds</th></tr>
+          <tr><td><strong>#file</strong></td><td>Contents of a specific file</td></tr>
+          <tr><td><strong>#codebase</strong></td><td>AI-powered semantic search across your project</td></tr>
+          <tr><td><strong>#selection</strong></td><td>Currently selected code in the editor</td></tr>
+          <tr><td><strong>#terminalLastCommand</strong></td><td>Last terminal command and its output</td></tr>
+          <tr><td><strong>#terminalSelection</strong></td><td>Selected text in the terminal</td></tr>
+          <tr><td><strong>#problems</strong></td><td>Current errors &amp; warnings from the Problems panel</td></tr>
+          <tr><td><strong>#changes</strong></td><td>Git diff of uncommitted changes</td></tr>
+          <tr><td><strong>#session</strong></td><td>Reference a previous chat session for context</td></tr>
+        </table>
+        <div class="guide-tip">💡 Combine them: <code>Look at #file:app.ts and fix the errors shown in #problems</code></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ COPILOT POWER-USER CHEATSHEET ============ -->
+<section class="cheatsheet" id="copilot-cheatsheet">
+  <h2>⚡ Copilot Power-User Cheatsheet</h2>
+  <p class="comp-sub">Essential shortcuts, commands &amp; tips — click any card to expand &bull; links open official docs</p>
+
+  <div class="cheat-grid">
+
+    <!-- Keyboard Shortcuts -->
+    <div class="cheat-card" data-cheat>
+      <div class="cheat-head" onclick="toggleCheat(this)">
+        <span class="cc-icon">⌨️</span>
+        <div class="cheat-info">
+          <div class="cheat-title">Keyboard Shortcuts</div>
+          <div class="cheat-sub">8 essential keybindings</div>
+        </div>
+        <a class="cheat-link" href="https://code.visualstudio.com/docs/copilot/copilot-chat" target="_blank" title="Official Docs" onclick="event.stopPropagation()">📖 Docs</a>
+        <span class="cheat-chev">▸</span>
+      </div>
+      <div class="cheat-body">
+        <div class="shortcut-row"><span class="shortcut-desc">Open Copilot Chat</span> <kbd>Ctrl+Alt+I</kbd></div>
+        <div class="shortcut-row"><span class="shortcut-desc">Inline Chat</span> <kbd>Ctrl+I</kbd></div>
+        <div class="shortcut-row"><span class="shortcut-desc">Accept Suggestion</span> <kbd>Tab</kbd></div>
+        <div class="shortcut-row"><span class="shortcut-desc">Next Suggestion</span> <kbd>Alt+]</kbd></div>
+        <div class="shortcut-row"><span class="shortcut-desc">Previous Suggestion</span> <kbd>Alt+[</kbd></div>
+        <div class="shortcut-row"><span class="shortcut-desc">Dismiss Suggestion</span> <kbd>Esc</kbd></div>
+        <div class="shortcut-row"><span class="shortcut-desc">Toggle Completions</span> <kbd>Ctrl+Shift+\</kbd></div>
+        <div class="shortcut-row"><span class="shortcut-desc">Accept Word</span> <kbd>Ctrl+→</kbd></div>
+      </div>
+    </div>
+
+    <!-- Chat Commands -->
+    <div class="cheat-card" data-cheat>
+      <div class="cheat-head" onclick="toggleCheat(this)">
+        <span class="cc-icon">💬</span>
+        <div class="cheat-info">
+          <div class="cheat-title">Chat Slash Commands</div>
+          <div class="cheat-sub">8 built-in /commands</div>
+        </div>
+        <a class="cheat-link" href="https://code.visualstudio.com/docs/copilot/copilot-chat#_slash-commands" target="_blank" title="Official Docs" onclick="event.stopPropagation()">📖 Docs</a>
+        <span class="cheat-chev">▸</span>
+      </div>
+      <div class="cheat-body">
+        <div class="cmd-row"><div class="cmd-name">/explain</div><div class="cmd-desc">Explain selected code in detail</div></div>
+        <div class="cmd-row"><div class="cmd-name">/fix</div><div class="cmd-desc">Propose a fix for problems in selection</div></div>
+        <div class="cmd-row"><div class="cmd-name">/tests</div><div class="cmd-desc">Generate unit tests for selection</div></div>
+        <div class="cmd-row"><div class="cmd-name">/doc</div><div class="cmd-desc">Add documentation comments</div></div>
+        <div class="cmd-row"><div class="cmd-name">/optimize</div><div class="cmd-desc">Analyze &amp; improve performance</div></div>
+        <div class="cmd-row"><div class="cmd-name">/new</div><div class="cmd-desc">Scaffold a new project from scratch</div></div>
+        <div class="cmd-row"><div class="cmd-name">/review</div><div class="cmd-desc">Code review with suggestions</div></div>
+        <div class="cmd-row"><div class="cmd-name">/setupTests</div><div class="cmd-desc">Set up test framework for your project</div></div>
+      </div>
+    </div>
+
+    <!-- Chat Participants -->
+    <div class="cheat-card" data-cheat>
+      <div class="cheat-head" onclick="toggleCheat(this)">
+        <span class="cc-icon">🤖</span>
+        <div class="cheat-info">
+          <div class="cheat-title">Chat Participants &amp; Variables</div>
+          <div class="cheat-sub">@agents and #context variables</div>
+        </div>
+        <a class="cheat-link" href="https://code.visualstudio.com/docs/copilot/copilot-chat#_chat-participants" target="_blank" title="Official Docs" onclick="event.stopPropagation()">📖 Docs</a>
+        <span class="cheat-chev">▸</span>
+      </div>
+      <div class="cheat-body">
+        <div class="cmd-row"><div class="cmd-name">@workspace</div><div class="cmd-desc">Ask about your entire codebase</div></div>
+        <div class="cmd-row"><div class="cmd-name">@vscode</div><div class="cmd-desc">VS Code settings, extensions &amp; API</div></div>
+        <div class="cmd-row"><div class="cmd-name">@terminal</div><div class="cmd-desc">Terminal commands &amp; shell help</div></div>
+        <div class="cmd-row"><div class="cmd-name">@github</div><div class="cmd-desc">Search repos, PRs, issues on GitHub</div></div>
+        <div class="cmd-row"><div class="cmd-name">#file</div><div class="cmd-desc">Attach a specific file as context</div></div>
+        <div class="cmd-row"><div class="cmd-name">#selection</div><div class="cmd-desc">Reference editor selection</div></div>
+        <div class="cmd-row"><div class="cmd-name">#codebase</div><div class="cmd-desc">Broad codebase-wide context</div></div>
+        <div class="cmd-row"><div class="cmd-name">#terminalLastCommand</div><div class="cmd-desc">Use last terminal output as context</div></div>
+      </div>
+    </div>
+
+    <!-- Agent Mode -->
+    <div class="cheat-card" data-cheat>
+      <div class="cheat-head" onclick="toggleCheat(this)">
+        <span class="cc-icon">🚀</span>
+        <div class="cheat-info">
+          <div class="cheat-title">Agent Mode Essentials</div>
+          <div class="cheat-sub">Autonomous coding with Copilot</div>
+        </div>
+        <a class="cheat-link" href="https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode" target="_blank" title="Official Docs" onclick="event.stopPropagation()">📖 Docs</a>
+        <span class="cheat-chev">▸</span>
+      </div>
+      <div class="cheat-body">
+        <div class="tip-card">
+          <div class="tip-label">How to Activate</div>
+          <p>In Chat panel, switch from <code>Ask</code> to <code>Agent</code> mode in the dropdown. Agent can edit files, run commands, and iterate autonomously.</p>
+        </div>
+        <div class="tip-card">
+          <div class="tip-label">Best Practices</div>
+          <p>Be specific: "Add input validation to <code>UserForm.tsx</code> with Zod schema" beats "fix the form". Agent works best with clear scope.</p>
+        </div>
+        <div class="tip-card">
+          <div class="tip-label">MCP Servers</div>
+          <p>Configure in <code>.vscode/mcp.json</code> to give Agent access to databases, APIs, Docker, and more. <a href="https://code.visualstudio.com/docs/copilot/chat/mcp-servers" target="_blank">MCP Docs →</a></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Context Tricks -->
+    <div class="cheat-card" data-cheat>
+      <div class="cheat-head" onclick="toggleCheat(this)">
+        <span class="cc-icon">🎯</span>
+        <div class="cheat-info">
+          <div class="cheat-title">Context &amp; Customization</div>
+          <div class="cheat-sub">Instructions, prompts &amp; vision</div>
+        </div>
+        <a class="cheat-link" href="https://code.visualstudio.com/docs/copilot/copilot-customization" target="_blank" title="Official Docs" onclick="event.stopPropagation()">📖 Docs</a>
+        <span class="cheat-chev">▸</span>
+      </div>
+      <div class="cheat-body">
+        <div class="tip-card">
+          <div class="tip-label">Drag &amp; Drop Files</div>
+          <p>Drag files from Explorer into chat to attach them as context. Works with images too!</p>
+        </div>
+        <div class="tip-card">
+          <div class="tip-label">Instructions File</div>
+          <p>Create <code>.github/copilot-instructions.md</code> to auto-load project rules into every chat. <a href="https://code.visualstudio.com/docs/copilot/copilot-customization#_instruction-files" target="_blank">Learn more →</a></p>
+        </div>
+        <div class="tip-card">
+          <div class="tip-label">Custom Prompt Files</div>
+          <p>Save <code>.prompt.md</code> files in <code>.github/prompts/</code> — they become reusable <code>/slash-commands</code>. <a href="https://code.visualstudio.com/docs/copilot/copilot-customization#_reusable-prompt-files" target="_blank">Prompt Files →</a></p>
+        </div>
+        <div class="tip-card">
+          <div class="tip-label">Vision — Image Context</div>
+          <p>Paste screenshots into chat. Copilot can read UI mockups and generate matching code.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Daily Workflow -->
+    <div class="cheat-card" data-cheat>
+      <div class="cheat-head" onclick="toggleCheat(this)">
+        <span class="cc-icon">📅</span>
+        <div class="cheat-info">
+          <div class="cheat-title">Daily Workflow Recipes</div>
+          <div class="cheat-sub">7 common patterns</div>
+        </div>
+        <a class="cheat-link" href="https://code.visualstudio.com/docs/copilot/getting-started-chat" target="_blank" title="Official Docs" onclick="event.stopPropagation()">📖 Docs</a>
+        <span class="cheat-chev">▸</span>
+      </div>
+      <div class="cheat-body">
+        <div class="cmd-row"><div class="cmd-name">PR Review</div><div class="cmd-desc">Select diff → <kbd>Ctrl+I</kbd> → "Review this change for bugs"</div></div>
+        <div class="cmd-row"><div class="cmd-name">Debug Help</div><div class="cmd-desc">Copy error → Chat → "Fix this error in #file"</div></div>
+        <div class="cmd-row"><div class="cmd-name">Write Tests</div><div class="cmd-desc">Open file → <code>/tests</code> → review → accept</div></div>
+        <div class="cmd-row"><div class="cmd-name">Refactor</div><div class="cmd-desc">Select code → <kbd>Ctrl+I</kbd> → "Extract to function"</div></div>
+        <div class="cmd-row"><div class="cmd-name">Docs</div><div class="cmd-desc">Select function → <code>/doc</code> → JSDoc/Javadoc auto-added</div></div>
+        <div class="cmd-row"><div class="cmd-name">Explore Repo</div><div class="cmd-desc"><code>@workspace</code> "How does auth work in this project?"</div></div>
+        <div class="cmd-row"><div class="cmd-name">Git Help</div><div class="cmd-desc"><code>@terminal</code> "Rebase my branch on main interactively"</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Quick Links Bar -->
+  <div class="quick-links">
+    <h3>🔗 Official Resources &amp; Docs</h3>
+    <div class="links-grid">
+      <a href="https://code.visualstudio.com/docs/copilot/overview" target="_blank" class="link-card">
+        <span class="lc-icon">📚</span>
+        <div class="lc-info"><strong>Copilot Overview</strong><span>Official getting started guide</span></div>
+        <span class="lc-arrow">→</span>
+      </a>
+      <a href="https://code.visualstudio.com/docs/copilot/copilot-chat" target="_blank" class="link-card">
+        <span class="lc-icon">💬</span>
+        <div class="lc-info"><strong>Copilot Chat Docs</strong><span>Slash commands, participants, context</span></div>
+        <span class="lc-arrow">→</span>
+      </a>
+      <a href="https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode" target="_blank" class="link-card">
+        <span class="lc-icon">🤖</span>
+        <div class="lc-info"><strong>Agent Mode</strong><span>Autonomous multi-step workflows</span></div>
+        <span class="lc-arrow">→</span>
+      </a>
+      <a href="https://code.visualstudio.com/docs/copilot/copilot-customization" target="_blank" class="link-card">
+        <span class="lc-icon">⚙️</span>
+        <div class="lc-info"><strong>Customization</strong><span>Instructions, skills, agents, hooks</span></div>
+        <span class="lc-arrow">→</span>
+      </a>
+      <a href="https://code.visualstudio.com/docs/copilot/chat/mcp-servers" target="_blank" class="link-card">
+        <span class="lc-icon">🔌</span>
+        <div class="lc-info"><strong>MCP Servers</strong><span>Connect external tools &amp; APIs</span></div>
+        <span class="lc-arrow">→</span>
+      </a>
+      <a href="https://code.visualstudio.com/updates" target="_blank" class="link-card">
+        <span class="lc-icon">📦</span>
+        <div class="lc-info"><strong>VS Code Release Notes</strong><span>Monthly updates &amp; changelogs</span></div>
+        <span class="lc-arrow">→</span>
+      </a>
+      <a href="https://github.com/features/copilot" target="_blank" class="link-card">
+        <span class="lc-icon">🐙</span>
+        <div class="lc-info"><strong>GitHub Copilot</strong><span>Plans, features &amp; pricing</span></div>
+        <span class="lc-arrow">→</span>
+      </a>
+      <a href="https://marketplace.visualstudio.com/items?itemName=GitHub.copilot" target="_blank" class="link-card">
+        <span class="lc-icon">🏪</span>
+        <div class="lc-info"><strong>Marketplace Extension</strong><span>Install &amp; changelog</span></div>
+        <span class="lc-arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EVOLUTION FLOW ============ -->
+<section class="guide-section" id="evolution-flow">
+  <h2>🔄 How Copilot Evolved — The Journey</h2>
+  <p class="comp-sub">From extension to built-in, from manual to autonomous</p>
+
+  <div class="guide-grid-3col">
+    <div class="guide-card guide-card-wide" style="--gc:#58a6ff;">
+      <div class="guide-card-head" onclick="toggle(this)">
+        <span class="guide-icon">🚀</span>
+        <div class="guide-card-info">
+          <div class="guide-card-title">The Transformation: 4 Eras in 11 Releases</div>
+          <div class="guide-card-sub">v1.106 (Nov 2025) → v1.116 (Apr 2026)</div>
+        </div>
+        <span class="guide-chev">▸</span>
+      </div>
+      <div class="guide-card-body">
+        <div class="guide-flow" style="flex-wrap:wrap;gap:10px;">
+          <div class="gf-step" style="flex:1;min-width:180px;">
+            <strong style="color:var(--accent);">🏗️ Foundation</strong><br>
+            <span style="font-size:0.85em;color:var(--text-muted);">v1.106</span><br>
+            <span style="font-size:0.85em">Agent HQ, custom agents, MCP enterprise, trusted tools</span>
+          </div>
+          <span class="gf-arrow">→</span>
+          <div class="gf-step" style="flex:1;min-width:180px;border-color:var(--green);">
+            <strong style="color:var(--green);">🔗 Sessions Era</strong><br>
+            <span style="font-size:0.85em;color:var(--text-muted);">v1.107–110</span><br>
+            <span style="font-size:0.85em">Multi-agent sessions, Skills GA, Hooks, browser tools, YOLO mode, subagents</span>
+          </div>
+          <span class="gf-arrow">→</span>
+          <div class="gf-step" style="flex:1;min-width:180px;border-color:var(--purple);">
+            <strong style="color:var(--purple);">🤖 Autonomy Era</strong><br>
+            <span style="font-size:0.85em;color:var(--text-muted);">v1.111–113</span><br>
+            <span style="font-size:0.85em">Autopilot mode, weekly releases, nested subagents, CLI autonomy, new default theme</span>
+          </div>
+          <span class="gf-arrow">→</span>
+          <div class="gf-step" style="flex:1;min-width:180px;border-color:var(--orange);">
+            <strong style="color:var(--orange);">✨ Polish &amp; Ship</strong><br>
+            <span style="font-size:0.85em;color:var(--text-muted);">v1.114–116</span><br>
+            <span style="font-size:0.85em">Agents App, Copilot built-in, TypeScript 6.0, semantic search overhaul</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Autonomy Evolution -->
+    <div class="guide-card" style="--gc:#f0883e;">
+      <div class="guide-card-head" onclick="toggle(this)">
+        <span class="guide-icon">🎛️</span>
+        <div class="guide-card-info">
+          <div class="guide-card-title">Autonomy: Manual → Autopilot</div>
+          <div class="guide-card-sub">How agent permissions evolved</div>
+        </div>
+        <span class="guide-chev">▸</span>
+      </div>
+      <div class="guide-card-body">
+        <table class="guide-table">
+          <tr><th>Era</th><th>What Changed</th></tr>
+          <tr><td><strong>v1.106</strong></td><td>Trusted tools — mark specific tools as safe</td></tr>
+          <tr><td><strong>v1.109</strong></td><td>Auto-commit after agent edits</td></tr>
+          <tr><td><strong>v1.110</strong></td><td><code>/yolo</code> command — full trust mid-session</td></tr>
+          <tr><td><strong>v1.111</strong></td><td><strong>Autopilot mode</strong> — full autonomy with 3-level picker</td></tr>
+          <tr><td><strong>v1.112</strong></td><td>CLI bypass — agents run commands without shell confirmation</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- Agent Evolution -->
+    <div class="guide-card" style="--gc:#bc8cff;">
+      <div class="guide-card-head" onclick="toggle(this)">
+        <span class="guide-icon">🤖</span>
+        <div class="guide-card-info">
+          <div class="guide-card-title">Agents: AGENTS.md → Built-in App</div>
+          <div class="guide-card-sub">How agent capabilities grew</div>
+        </div>
+        <span class="guide-chev">▸</span>
+      </div>
+      <div class="guide-card-body">
+        <table class="guide-table">
+          <tr><th>Era</th><th>What Changed</th></tr>
+          <tr><td><strong>v1.106</strong></td><td>Agent HQ — central management, <code>.agent.md</code> format</td></tr>
+          <tr><td><strong>v1.107</strong></td><td>Agent handoffs — agents delegate to other agents</td></tr>
+          <tr><td><strong>v1.108</strong></td><td>Skills experimental — prompt files with tool access</td></tr>
+          <tr><td><strong>v1.109</strong></td><td><strong>Skills GA</strong>, Hooks preview, org-wide agents</td></tr>
+          <tr><td><strong>v1.110</strong></td><td>Agent plugins, browser tools, subagents, <code>/init</code></td></tr>
+          <tr><td><strong>v1.113</strong></td><td>Nested subagents — agents invoking other agents</td></tr>
+          <tr><td><strong>v1.115</strong></td><td><strong>VS Code Agents App</strong> — standalone agent runtime</td></tr>
+          <tr><td><strong>v1.116</strong></td><td><strong>Copilot built-in</strong> — no extension needed</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- MCP Evolution -->
+    <div class="guide-card" style="--gc:#d29922;">
+      <div class="guide-card-head" onclick="toggle(this)">
+        <span class="guide-icon">🔌</span>
+        <div class="guide-card-info">
+          <div class="guide-card-title">MCP: Config File → Enterprise Platform</div>
+          <div class="guide-card-sub">How Model Context Protocol expanded</div>
+        </div>
+        <span class="guide-chev">▸</span>
+      </div>
+      <div class="guide-card-body">
+        <table class="guide-table">
+          <tr><th>Era</th><th>What Changed</th></tr>
+          <tr><td><strong>v1.106</strong></td><td><strong>Enterprise MCP</strong> — org-managed servers, discovery</td></tr>
+          <tr><td><strong>v1.107</strong></td><td>GitHub MCP server — issues, PRs, code search via MCP</td></tr>
+          <tr><td><strong>v1.108</strong></td><td>Org registry — centralized MCP server catalog</td></tr>
+          <tr><td><strong>v1.109</strong></td><td>MCP Apps — installable MCP bundles from marketplace</td></tr>
+          <tr><td><strong>v1.112</strong></td><td>MCP Sandbox — isolated execution for untrusted servers</td></tr>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ VERSION REFERENCE (collapsed at bottom) ============ -->
+<section class="guide-section" id="version-reference">
+  <h2>📚 Version-by-Version Reference</h2>
+  <p class="comp-sub">Detailed release notes for each version — click to expand</p>
+</section>
+
+<!-- ============ VERSION PICKER GRID ============ -->
+<section class="version-picker">
+  <h2>Select a Version</h2>
+  <div class="version-btns">
+    <div class="version-btn" data-target="v106">
+      <span class="vb-badge era1">Foundation</span>
+      <div class="vb-num">v1.106</div>
+      <div class="vb-date">Nov 2025</div>
+      <div class="vb-theme">Agent HQ &amp; MCP Enterprise</div>
+    </div>
+    <div class="version-btn" data-target="v107">
+      <span class="vb-badge era2">Sessions</span>
+      <div class="vb-num">v1.107</div>
+      <div class="vb-date">Dec 2025</div>
+      <div class="vb-theme">Agent Sessions &amp; Multi-Agent</div>
+    </div>
+    <div class="version-btn" data-target="v108">
+      <span class="vb-badge era2">Sessions</span>
+      <div class="vb-num">v1.108</div>
+      <div class="vb-date">Jan 2026</div>
+      <div class="vb-theme">Housekeeping &amp; Skills</div>
+    </div>
+    <div class="version-btn" data-target="v109">
+      <span class="vb-badge era2">Breakthrough</span>
+      <div class="vb-num">v1.109</div>
+      <div class="vb-date">Feb 2026</div>
+      <div class="vb-theme">Skills GA, Hooks, Claude</div>
+    </div>
+    <div class="version-btn" data-target="v110">
+      <span class="vb-badge era2">Breakthrough</span>
+      <div class="vb-num">v1.110</div>
+      <div class="vb-date">Mar 2026</div>
+      <div class="vb-theme">Plugins &amp; Browser Tools</div>
+    </div>
+    <div class="version-btn" data-target="v111">
+      <span class="vb-badge era3">Autonomy</span>
+      <div class="vb-num">v1.111</div>
+      <div class="vb-date">Mar 2026</div>
+      <div class="vb-theme">Autopilot &amp; Weekly Releases</div>
+    </div>
+    <div class="version-btn" data-target="v112">
+      <span class="vb-badge era3">Autonomy</span>
+      <div class="vb-num">v1.112</div>
+      <div class="vb-date">Mar 2026</div>
+      <div class="vb-theme">CLI Autonomy &amp; Image Support</div>
+    </div>
+    <div class="version-btn" data-target="v113">
+      <span class="vb-badge era3">Autonomy</span>
+      <div class="vb-num">v1.113</div>
+      <div class="vb-date">Mar 2026</div>
+      <div class="vb-theme">Nested Subagents &amp; Themes</div>
+    </div>
+    <div class="version-btn" data-target="v114">
+      <span class="vb-badge era4">Polish</span>
+      <div class="vb-num">v1.114</div>
+      <div class="vb-date">Apr 2026</div>
+      <div class="vb-theme">Semantic Search &amp; TS 6.0</div>
+    </div>
+    <div class="version-btn" data-target="v115">
+      <span class="vb-badge era4">Polish</span>
+      <div class="vb-num">v1.115</div>
+      <div class="vb-date">Apr 2026</div>
+      <div class="vb-theme">VS Code Agents App</div>
+    </div>
+    <div class="version-btn" data-target="v116">
+      <span class="vb-badge era4">Milestone</span>
+      <div class="vb-num">v1.116</div>
+      <div class="vb-date">Apr 2026</div>
+      <div class="vb-theme">Copilot Built-In</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VERSION DETAIL AREA ============ -->
+<div class="version-detail-area">
+  <div class="version-placeholder" id="vPlaceholder">
+    <div class="ph-icon">👆</div>
+    <p>Click any version above to see what changed</p>
+  </div>
+<!-- ============================================================= -->
+<!-- ===== v1.106 ===== -->
+<!-- ============================================================= -->
+<section class="version-section" id="v106">
+  <div class="version-header">
+    <div class="version-tag">v1.106</div>
+    <div class="version-meta">
+      <div class="date">October 2025 — Released November 12, 2025</div>
+      <div class="theme">Agent HQ: Custom Agents, Trust &amp; Security</div>
+    </div>
+  </div>
+  <div class="category-grid">
+    <div class="card" data-cat="agents">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon agents"></div>
+        <div class="card-title">Agents — The New Paradigm</div>
+        <div class="card-count">6 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>Agent Sessions View <span class="tag tag-ga">Default On</span></h4><p>Centralized command center for all active sessions — local VS Code, Copilot coding agent, CLI, OpenAI Codex.</p></div>
+        <div class="feature"><h4>Chat Modes  Custom Agents <span class="tag tag-breaking">Renamed</span></h4><p>"Chat modes" renamed to "Custom Agents". Files move from <code>.github/chatmodes/</code> to <code>.github/agents/</code> with <code>.agent.md</code> suffix.</p></div>
+        <div class="feature"><h4>Custom Agent Metadata <span class="tag tag-new">New</span></h4><p>Rich frontmatter: name, description, target (vscode/github-copilot), model, tools, argument-hint, handoffs.</p></div>
+        <div class="feature"><h4>Plan Agent <span class="tag tag-ga">GA</span></h4><p>Now available in stable. Generates detailed implementation plans with clarifying questions.</p></div>
+        <div class="feature"><h4>Save Conversation as Prompt <span class="tag tag-new">New</span></h4><p><code>/savePrompt</code> converts a chat conversation into a reusable <code>.prompt.md</code> file.</p></div>
+        <div class="feature"><h4>CLI Agent Integration</h4><p>Create and resume Copilot CLI sessions in chat editor or integrated terminal. Send messages, switch models, attach context.</p></div>
+      </div></div>
+    </div>
+    <div class="card" data-cat="mcp">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon mcp"></div>
+        <div class="card-title">MCP — Enterprise &amp; Auth</div>
+        <div class="card-count">4 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>Org-Level MCP Access Control <span class="tag tag-new">New</span></h4><p>Organizations configure custom MCP registry endpoints and restrict which servers can be installed.</p></div>
+        <div class="feature"><h4>Install to Workspace Config</h4><p>MCP servers install to <code>.vscode/mcp.json</code> (workspace-level) for team sharing.</p></div>
+        <div class="feature"><h4>OAuth: Client ID Metadata Document <span class="tag tag-new">New</span></h4><p>Supports CIMD auth flow — the future standard for OAuth in MCP.</p></div>
+        <div class="feature"><h4>OAuth: Scope Step Up</h4><p>Dynamic scope escalation via <code>WWW-Authenticate</code> header. Servers request additional permissions only when needed.</p></div>
+      </div></div>
+    </div>
+    <div class="card" data-cat="tools">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon tools"></div>
+        <div class="card-title">Tools, Approvals &amp; Trust</div>
+        <div class="card-count">4 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>Post-Approval for External Data <span class="tag tag-new">New</span></h4><p>Tools pulling external data support post-approval — review data before it enters chat. Protects against prompt injection.</p></div>
+        <div class="feature"><h4>Trust All Tools per Server</h4><p>Approve all tools from an MCP server or extension at once via "Allow" dropdown.</p></div>
+        <div class="feature"><h4>Tree-Sitter Terminal Parser <span class="tag tag-new">New</span></h4><p>Auto-approve uses Tree-Sitter parsers for reliable subcommand detection. Handles pipes inside strings.</p></div>
+        <div class="feature"><h4>File Write Detection <span class="tag tag-experimental">Experimental</span></h4><p>Detects file writes via redirection and blocks auto-approval for writes outside workspace.</p></div>
+      </div></div>
+    </div>
+    <div class="card" data-cat="models">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon models"></div>
+        <div class="card-title">Models &amp; Reasoning</div>
+        <div class="card-count">3 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>Reasoning Tokens Expanded <span class="tag tag-experimental">Experimental</span></h4><p>Chain of thought for GPT-5-Codex, GPT-5, GPT-5 mini, and Gemini 2.5 Pro. Three thinking styles: fixedScrolling, collapsed, hidden.</p></div>
+        <div class="feature"><h4>Language Models Editor <span class="tag tag-preview">Preview</span></h4><p>Centralized editor for all models. Filter by provider, capability (tools/vision/agent). Toggle model visibility in chat picker.</p></div>
+        <div class="feature"><h4>Extension Unification</h4><p>Inline suggestions merged into <code>vscode-copilot-chat</code>. Copilot + Copilot Chat consolidating into one extension.</p></div>
+      </div></div>
+    </div>
+    <div class="card" data-cat="custom">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon custom"></div>
+        <div class="card-title">Customization</div>
+        <div class="card-count">2 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>Inline Chat v2 <span class="tag tag-preview">Preview</span></h4><p>Modernized inline chat: single prompt, single file, code changes only. Auto-upgrades to Chat view for complex tasks.</p></div>
+        <div class="feature"><h4>Edit Welcome Prompts</h4><p>Right-click suggested prompts in Chat welcome view to open the corresponding prompt file directly.</p></div>
+      </div></div>
+    </div>
+    <div class="card" data-cat="editor">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon editor"></div>
+        <div class="card-title">Editor &amp; Terminal</div>
+        <div class="card-count">3 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>Terminal IntelliSense <span class="tag tag-ga">GA</span></h4><p>After 1.5 years in preview, terminal IntelliSense removes the preview tag. Supports PowerShell, bash, zsh, fish.</p></div>
+        <div class="feature"><h4>Refreshed Iconography</h4><p>Entire codicon icon set refined with curves, modern designs, and better legibility.</p></div>
+        <div class="feature"><h4>Attach Terminal Commands to Chat <span class="tag tag-new">New</span></h4><p>Right-click command decoration in terminal to share command line, output, and exit code with chat.</p></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================= -->
+<!-- ===== v1.107 ===== -->
+<!-- ============================================================= -->
+<section class="version-section" id="v107">
+  <div class="version-header">
+    <div class="version-tag">v1.107</div>
+    <div class="version-meta">
+      <div class="date">November 2025 — Released December 10, 2025</div>
+      <div class="theme">Multi-Agent Orchestration &amp; Background Agents</div>
+    </div>
+  </div>
+  <div class="category-grid">
+    <div class="card" data-cat="agents">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon agents"></div>
+        <div class="card-title">Agent Sessions &amp; Orchestration</div>
+        <div class="card-count">7 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>Agent Sessions in Chat View <span class="tag tag-new">New</span></h4><p>Agent sessions integrated directly into Chat. Switch between compact list and side-by-side layout. Sessions remain active when closed.</p></div>
+        <div class="feature"><h4>Continue in Background/Cloud <span class="tag tag-new">New</span></h4><p>Continue tasks in background agents or cloud agents. Tasks persist even when VS Code is closed.</p></div>
+        <div class="feature"><h4>Git Worktrees for Background Agents</h4><p>Background agents use Git worktrees for isolation — work on multiple tasks without conflicts in your main workspace.</p></div>
+        <div class="feature"><h4>Custom Agents Across Org</h4><p>Share custom agents across your organization. Agents defined in shared repos are available to all org members.</p></div>
+        <div class="feature"><h4>Subagents <span class="tag tag-experimental">Experimental</span></h4><p>Agents can spawn subagents for parallel work. Each subagent gets its own context window and tool access.</p></div>
+        <div class="feature"><h4>Claude Skills Reuse</h4><p>Reuse Claude's SKILL.md files for specialized domain knowledge in agent sessions.</p></div>
+        <div class="feature"><h4>Collapsible Reasoning Output</h4><p>Model reasoning/thinking output now collapsible in chat — less visual clutter while keeping transparency.</p></div>
+      </div></div>
+    </div>
+    <div class="card" data-cat="mcp">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon mcp"></div>
+        <div class="card-title">MCP Updates</div>
+        <div class="card-count">2 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>MCP Spec 2025-11-25 Support <span class="tag tag-new">New</span></h4><p>Updated to latest MCP specification with improved tool definitions and server capabilities.</p></div>
+        <div class="feature"><h4>GitHub MCP Server <span class="tag tag-preview">Preview</span></h4><p>Official GitHub MCP Server for accessing GitHub APIs — issues, PRs, repos, and more — directly from chat.</p></div>
+      </div></div>
+    </div>
+    <div class="card" data-cat="tools">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon tools"></div>
+        <div class="card-title">Tools &amp; Fetch</div>
+        <div class="card-count">3 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>URL/Domain Auto-Approval</h4><p>Configure trusted URLs and domains for automatic approval. No more repeated confirmations for known endpoints.</p></div>
+        <div class="feature"><h4>Robust Fetch Tool</h4><p>Improved <code>#fetch</code> tool with better error handling and dynamic content retrieval.</p></div>
+        <div class="feature"><h4>Rich Terminal Output</h4><p>Terminal tool output now includes structured formatting for better readability in chat responses.</p></div>
+      </div></div>
+    </div>
+    <div class="card" data-cat="models">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon models"></div>
+        <div class="card-title">Models</div>
+        <div class="card-count">2 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>Language Models Editor Improvements</h4><p>Enhanced editor for managing all available models with better filtering and visibility controls.</p></div>
+        <div class="feature"><h4>Anthropic Thinking Support</h4><p>Native support for Anthropic's thinking/reasoning tokens in chat responses.</p></div>
+      </div></div>
+    </div>
+    <div class="card" data-cat="editor">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon editor"></div>
+        <div class="card-title">Editor</div>
+        <div class="card-count">2 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>Rename Suggestions for TypeScript</h4><p>AI-powered rename suggestions when refactoring TypeScript symbols. Smart contextual name proposals.</p></div>
+        <div class="feature"><h4>Next Edit Suggestions (NES) Improvements</h4><p>New NES model with better prediction accuracy for what you'll edit next.</p></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================= -->
+<!-- ===== v1.108 ===== -->
+<!-- ============================================================= -->
+<section class="version-section" id="v108">
+  <div class="version-header">
+    <div class="version-tag">v1.108</div>
+    <div class="version-meta">
+      <div class="date">December 2025 — Released January 8, 2026</div>
+      <div class="theme">Housekeeping, Skills &amp; Polish</div>
+    </div>
+  </div>
+  <div class="category-grid">
+    <div class="card" data-cat="agents">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon agents"></div>
+        <div class="card-title">Agent Skills</div>
+        <div class="card-count">4 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>Agent Skills <span class="tag tag-experimental">Experimental</span></h4><p>New <code>SKILL.md</code> files provide specialized domain knowledge and workflows to agents. Skills are loaded automatically when relevant tasks are detected.</p></div>
+        <div class="feature"><h4>Improved Agent Sessions View</h4><p>Better session management with improved search, filtering, and status indicators.</p></div>
+        <div class="feature"><h4>Chat Picker via Agent Sessions</h4><p>Start new chats directly from the Agent Sessions view. Quick access to recent and active sessions.</p></div>
+        <div class="feature"><h4>Terminal History Prevention</h4><p>Terminal tool prevents commands from appearing in your shell history — keeps AI-generated commands separate.</p></div>
+      </div></div>
+    </div>
+    <div class="card" data-cat="tools">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon tools"></div>
+        <div class="card-title">Terminal &amp; Auto-Approve</div>
+        <div class="card-count">3 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>Expanded Auto-Approve List <span class="tag tag-new">New</span></h4><p>Auto-approve now covers git ls-files, rg, sed, and npm scripts — less clicking for common safe commands.</p></div>
+        <div class="feature"><h4>Session &amp; Workspace Command Rules <span class="tag tag-new">New</span></h4><p>Configure auto-approve rules per session or per workspace so trusted projects get streamlined approval.</p></div>
+        <div class="feature"><h4>Shell History Prevention <span class="tag tag-new">New</span></h4><p>Terminal tool prevents AI-generated commands from polluting your shell history.</p></div>
+      </div></div>
+    </div>
+    <div class="card" data-cat="editor">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon editor"></div>
+        <div class="card-title">Editor &amp; Terminal</div>
+        <div class="card-count">5 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>Terminal IntelliSense Rework <span class="tag tag-new">New</span></h4><p>Ctrl+Space now triggers terminal IntelliSense with a refreshed UX for command and argument completions.</p></div>
+        <div class="feature"><h4>Breadcrumbs Copy Path <span class="tag tag-new">New</span></h4><p>Right-click breadcrumbs to copy relative or absolute file paths directly.</p></div>
+        <div class="feature"><h4>Custom Glyphs Expanded <span class="tag tag-new">New</span></h4><p>Custom GPU-rendered glyphs expanded to ~800 characters for crisper terminal rendering.</p></div>
+        <div class="feature"><h4>Curly Underline Rendering <span class="tag tag-new">New</span></h4><p>Improved curly underline rendering in the editor for sharper diagnostic squiggles.</p></div>
+        <div class="feature"><h4>Terminal Resize Overlay <span class="tag tag-new">New</span></h4><p>A transient overlay now shows terminal dimensions when resizing the panel.</p></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== v1.109 ===== -->
+<section class="version-section" id="v109">
+  <div class="version-header">
+    <div class="version-tag">v1.109</div>
+    <div class="version-meta">
+      <div class="date">January 2026 — Released Feb 4, 2026</div>
+      <div class="theme">The Agentic AI-First OS: Skills GA, Hooks, Orchestration</div>
+    </div>
+  </div>
+  <div class="category-grid">
+    <div class="card" data-cat="agents">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon agents"></div>
+        <div class="card-title">Agents &amp; Orchestration</div>
+        <div class="card-count">5 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>Message Steering &amp; Queueing <span class="tag tag-new">New</span></h4><p>Send follow-up messages while the agent is still running — they queue and steer the current task.</p></div>
+        <div class="feature"><h4>Plan Agent 4-Phase Workflow <span class="tag tag-new">New</span></h4><p>Plan agent now follows Analyze → Plan → Implement → Verify for structured multi-step tasks.</p></div>
+        <div class="feature"><h4>Subagents Run in Parallel <span class="tag tag-new">New</span></h4><p>Independent subagent tasks execute concurrently for faster complex workflows.</p></div>
+        <div class="feature"><h4>Cloud Agents <span class="tag tag-preview">Preview</span></h4><p>Run agents in the cloud with model selection, 3rd-party agent support, and background execution.</p></div>
+        <div class="feature"><h4>Background Agents <span class="tag tag-preview">Preview</span></h4><p>Custom agents, image attachments, /slash commands, and auto-commit — all running in the background.</p></div>
+      </div></div>
+    </div>
+    <div class="card" data-cat="mcp">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon mcp"></div>
+        <div class="card-title">MCP Ecosystem</div>
+        <div class="card-count">3 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>MCP Apps <span class="tag tag-new">New</span></h4><p>MCP servers can now present interactive UI to users — not just tool calls behind the scenes.</p></div>
+        <div class="feature"><h4>Custom Registry Base URLs <span class="tag tag-new">New</span></h4><p>Point MCP registries at custom base URLs for enterprise or self-hosted server catalogs.</p></div>
+        <div class="feature"><h4>Latest MCP Spec Features <span class="tag tag-new">New</span></h4><p>Support for the newest MCP specification features including improved protocol negotiation.</p></div>
+      </div></div>
+    </div>
+    <div class="card" data-cat="tools">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon tools"></div>
+        <div class="card-title">Agent Hooks &amp; Skills</div>
+        <div class="card-count">4 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>Agent Hooks <span class="tag tag-preview">Preview</span></h4><p>PreToolUse, PostToolUse, SessionStart, and SessionStop lifecycle hooks let you inject custom logic around agent actions.</p></div>
+        <div class="feature"><h4>Skills as Slash Commands <span class="tag tag-new">New</span></h4><p>Invoke skills directly with /slash commands for quick, targeted agent capabilities.</p></div>
+        <div class="feature"><h4>/init for Workspace Setup <span class="tag tag-new">New</span></h4><p>Run /init to have the agent scaffold a workspace with appropriate skills and customizations.</p></div>
+        <div class="feature"><h4>Agent-Scoped Hooks <span class="tag tag-new">New</span></h4><p>Define hooks that only apply to specific agent types for fine-grained lifecycle control.</p></div>
+      </div></div>
+    </div>
+    <div class="card" data-cat="models">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon models"></div>
+        <div class="card-title">Claude Agent</div>
+        <div class="card-count">4 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>Claude Agent <span class="tag tag-preview">Preview</span></h4><p>Anthropic agent SDK integration brings Claude as a first-class agent inside VS Code.</p></div>
+        <div class="feature"><h4>Interleaved Thinking <span class="tag tag-new">New</span></h4><p>Anthropic Messages API with interleaved thinking exposes Claude's chain-of-thought reasoning.</p></div>
+        <div class="feature"><h4>Tool Search Tool <span class="tag tag-new">New</span></h4><p>Agents can now dynamically discover and load tools at runtime via search.</p></div>
+        <div class="feature"><h4>Context Editing <span class="tag tag-new">New</span></h4><p>Edit context items attached to a conversation — remove, reorder, or refine what the model sees.</p></div>
+      </div></div>
+    </div>
+    <div class="card" data-cat="custom">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon custom"></div>
+        <div class="card-title">Agent Skills GA</div>
+        <div class="card-count">5 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>Skills Enabled by Default <span class="tag tag-ga">GA</span></h4><p>Agent Skills graduate to GA — SKILL.md files are now recognized and loaded automatically.</p></div>
+        <div class="feature"><h4>Extension chatSkills Contribution <span class="tag tag-new">New</span></h4><p>Extensions can contribute skills via the chatSkills contribution point for ecosystem-wide reuse.</p></div>
+        <div class="feature"><h4>Org-Wide Instructions <span class="tag tag-new">New</span></h4><p>Define instructions that apply across your entire organization's VS Code installations.</p></div>
+        <div class="feature"><h4>Control Agent Invocation <span class="tag tag-new">New</span></h4><p>Mark agents as user-invocable only or disable model invocation to prevent unintended triggers.</p></div>
+        <div class="feature"><h4>Multiple Model Fallback <span class="tag tag-new">New</span></h4><p>Configure fallback model chains so agents gracefully degrade if a model is unavailable.</p></div>
+      </div></div>
+    </div>
+    <div class="card" data-cat="editor">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon editor"></div>
+        <div class="card-title">Editor &amp; Platform</div>
+        <div class="card-count">4 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>Copilot Extension Deprecated <span class="tag tag-breaking">Breaking</span></h4><p>The standalone Copilot extension is deprecated — its functionality is merged into GitHub Copilot Chat.</p></div>
+        <div class="feature"><h4>Integrated Browser <span class="tag tag-preview">Preview</span></h4><p>A built-in browser panel for previewing web apps without leaving VS Code.</p></div>
+        <div class="feature"><h4>Terminal Sandboxing <span class="tag tag-experimental">Experimental</span></h4><p>Run terminal commands in a sandboxed environment for safer agent-driven execution.</p></div>
+        <div class="feature"><h4>Copilot Memory <span class="tag tag-preview">Preview</span></h4><p>Copilot remembers preferences and context across sessions with persistent memory files.</p></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== v1.110 ===== -->
+<section class="version-section" id="v110">
+  <div class="version-header">
+    <div class="version-tag">v1.110</div>
+    <div class="version-meta">
+      <div class="date">February 2026 — Released Mar 4, 2026</div>
+      <div class="theme">Plugins, Browser Tools &amp; Smarter Sessions</div>
+    </div>
+  </div>
+  <div class="category-grid">
+    <div class="card" data-cat="agents">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon agents"></div>
+        <div class="card-title">Agent Plugins &amp; Browser</div>
+        <div class="card-count">4 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>Agent Plugins <span class="tag tag-experimental">Experimental</span></h4><p>Installable plugin bundles appear in the Extensions view — add new agent capabilities on demand.</p></div>
+        <div class="feature"><h4>Agentic Browser Tools <span class="tag tag-experimental">Experimental</span></h4><p>Agents can drive the integrated browser — click, type, read pages, and take screenshots autonomously.</p></div>
+        <div class="feature"><h4>Create Customizations from Chat <span class="tag tag-new">New</span></h4><p>Use /create-prompt, /create-skill, etc. to generate customization files directly from a conversation.</p></div>
+        <div class="feature"><h4>Tools for Usages &amp; Rename <span class="tag tag-new">New</span></h4><p>Agents get language-server-powered tools for finding usages and renaming symbols across the workspace.</p></div>
+      </div></div>
+    </div>
+    <div class="card" data-cat="mcp">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon mcp"></div>
+        <div class="card-title">Background &amp; Claude Agents</div>
+        <div class="card-count">3 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>Background Agent Improvements <span class="tag tag-new">New</span></h4><p>/compact command, /slash commands, and session renaming for background agents.</p></div>
+        <div class="feature"><h4>Claude Agent Expand <span class="tag tag-new">New</span></h4><p>Claude agents gain message steering, session renaming, and /compact for context management.</p></div>
+        <div class="feature"><h4>Ask Questions Tool in Core <span class="tag tag-new">New</span></h4><p>The Ask Questions tool moves from experimental to core — agents can prompt users for clarification natively.</p></div>
+      </div></div>
+    </div>
+    <div class="card" data-cat="tools">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon tools"></div>
+        <div class="card-title">Debug &amp; Approval</div>
+        <div class="card-count">3 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>Agent Debug Panel <span class="tag tag-preview">Preview</span></h4><p>Real-time event log with chart view shows every tool call, token count, and timing for agent sessions.</p></div>
+        <div class="feature"><h4>/autoApprove &amp; /yolo Commands <span class="tag tag-new">New</span></h4><p>Slash commands to toggle auto-approve settings or go full YOLO mode mid-session.</p></div>
+        <div class="feature"><h4>Explore Subagent <span class="tag tag-new">New</span></h4><p>A dedicated subagent for codebase research — explores and summarizes before the main agent acts.</p></div>
+      </div></div>
+    </div>
+    <div class="card" data-cat="custom">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon custom"></div>
+        <div class="card-title">Sessions &amp; Memory</div>
+        <div class="card-count">4 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>Session Memory for Plans <span class="tag tag-new">New</span></h4><p>Agents persist plans in session memory so context survives across conversation turns.</p></div>
+        <div class="feature"><h4>Context Compaction <span class="tag tag-new">New</span></h4><p>Manual /compact command summarizes conversation history to free up context window space.</p></div>
+        <div class="feature"><h4>Fork Chat Sessions <span class="tag tag-new">New</span></h4><p>Branch a conversation into a new session to explore alternatives without losing the original thread.</p></div>
+        <div class="feature"><h4>Inline Chat Syncs <span class="tag tag-new">New</span></h4><p>Inline chat edits now sync with the main agent session for a unified conversation flow.</p></div>
+      </div></div>
+    </div>
+    <div class="card" data-cat="editor">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon editor"></div>
+        <div class="card-title">Editor &amp; Terminal</div>
+        <div class="card-count">4 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>Modal Editors <span class="tag tag-experimental">Experimental</span></h4><p>Experimental Vim/modal editing support built directly into the editor core.</p></div>
+        <div class="feature"><h4>Configurable Notification Position <span class="tag tag-new">New</span></h4><p>Move the notification toast to top-right, bottom-right, or bottom-left to suit your workflow.</p></div>
+        <div class="feature"><h4>AI Co-Author Attribution <span class="tag tag-new">New</span></h4><p>Git commits automatically attribute Copilot as a co-author when AI-generated code is included.</p></div>
+        <div class="feature"><h4>Kitty Graphics Protocol <span class="tag tag-new">New</span></h4><p>Terminal now supports the Kitty graphics protocol for inline image rendering.</p></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== v1.111 ===== -->
+<section class="version-section" id="v111">
+  <div class="version-header">
+    <div class="version-tag">v1.111</div>
+    <div class="version-meta">
+      <div class="date">March 2026 — Released Mar 9, 2026</div>
+      <div class="theme">Autopilot &amp; Weekly Releases Begin</div>
+    </div>
+  </div>
+  <div class="category-grid">
+    <div class="card" data-cat="agents">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon agents"></div>
+        <div class="card-title">Autopilot Mode</div>
+        <div class="card-count">3 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>Autopilot <span class="tag tag-preview">Preview</span></h4><p>Fully autonomous agent mode — the agent plans, executes, and iterates without manual approval.</p></div>
+        <div class="feature"><h4>Permission Levels Picker <span class="tag tag-new">New</span></h4><p>Choose Default, Bypass, or Autopilot permission levels per session from a unified picker.</p></div>
+        <div class="feature"><h4>Agent-Scoped Hooks in Frontmatter <span class="tag tag-preview">Preview</span></h4><p>Define hooks directly in .agent.md frontmatter for per-agent lifecycle customization.</p></div>
+      </div></div>
+    </div>
+    <div class="card" data-cat="tools">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon tools"></div>
+        <div class="card-title">Debug &amp; Chat Tools</div>
+        <div class="card-count">3 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>#debugEventsSnapshot <span class="tag tag-new">New</span></h4><p>Attach a debug events snapshot as chat context to help agents diagnose runtime issues.</p></div>
+        <div class="feature"><h4>Chat Tips Redesigned <span class="tag tag-new">New</span></h4><p>Contextual tips surface relevant slash commands and features as you chat.</p></div>
+        <div class="feature"><h4>AI CLI Profile Group <span class="tag tag-new">New</span></h4><p>A dedicated AI CLI profile group appears in the terminal dropdown for quick agent terminal access.</p></div>
+      </div></div>
+    </div>
+    <div class="card" data-cat="editor">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon editor"></div>
+        <div class="card-title">Weekly Releases</div>
+        <div class="card-count">2 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>First Weekly Stable Release <span class="tag tag-breaking">Breaking</span></h4><p>VS Code shifts to weekly stable releases — faster feature delivery starting with v1.111.</p></div>
+        <div class="feature"><h4>/init &amp; /fork Improvements <span class="tag tag-new">New</span></h4><p>Refined /init scaffolding and /fork tips help users discover workspace setup and session branching.</p></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== v1.112 ===== -->
+<section class="version-section" id="v112">
+  <div class="version-header">
+    <div class="version-tag">v1.112</div>
+    <div class="version-meta">
+      <div class="date">March 2026 — Released Mar 18, 2026</div>
+      <div class="theme">CLI Autonomy &amp; Image Support</div>
+    </div>
+  </div>
+  <div class="category-grid">
+    <div class="card" data-cat="agents">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon agents"></div>
+        <div class="card-title">Copilot CLI &amp; Troubleshoot</div>
+        <div class="card-count">5 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>CLI Steering &amp; Queueing <span class="tag tag-new">New</span></h4><p>Copilot CLI gains message steering and queueing — redirect tasks while the CLI agent is running.</p></div>
+        <div class="feature"><h4>Preview Changes Before CLI Delegation <span class="tag tag-new">New</span></h4><p>Review proposed changes before the CLI agent applies them to your workspace.</p></div>
+        <div class="feature"><h4>CLI Permission Levels <span class="tag tag-new">New</span></h4><p>Default, Bypass, and Autopilot permission levels now available for the Copilot CLI agent.</p></div>
+        <div class="feature"><h4>Clickable File Links in CLI <span class="tag tag-new">New</span></h4><p>File paths in CLI output become clickable links that open directly in the editor.</p></div>
+        <div class="feature"><h4>/troubleshoot Skill <span class="tag tag-preview">Preview</span></h4><p>A built-in skill that diagnoses common workspace and environment issues automatically.</p></div>
+      </div></div>
+    </div>
+    <div class="card" data-cat="tools">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon tools"></div>
+        <div class="card-title">Images &amp; Symbols</div>
+        <div class="card-count">2 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>Image &amp; Binary File Support <span class="tag tag-new">New</span></h4><p>Agents can now read and process images and binary files attached to conversations.</p></div>
+        <div class="feature"><h4>Automatic Symbol References <span class="tag tag-new">New</span></h4><p>Copy code and paste it as #sym:Name references — agents get precise symbol context automatically.</p></div>
+      </div></div>
+    </div>
+    <div class="card" data-cat="mcp">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon mcp"></div>
+        <div class="card-title">MCP Sandboxing</div>
+        <div class="card-count">3 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>Sandbox Local MCP Servers <span class="tag tag-new">New</span></h4><p>Run locally installed MCP servers in a sandbox on macOS/Linux for safer execution.</p></div>
+        <div class="feature"><h4>Improved Elicitation UI <span class="tag tag-new">New</span></h4><p>MCP server prompts now display with a cleaner, more informative elicitation interface.</p></div>
+        <div class="feature"><h4>Enable/Disable Plugins &amp; MCP <span class="tag tag-new">New</span></h4><p>Toggle individual plugins and MCP servers on or off without uninstalling them.</p></div>
+      </div></div>
+    </div>
+    <div class="card" data-cat="editor">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon editor"></div>
+        <div class="card-title">Integrated Browser</div>
+        <div class="card-count">3 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>Browser Debugging <span class="tag tag-new">New</span></h4><p>New editor-browser debug type lets you debug web apps running in the integrated browser.</p></div>
+        <div class="feature"><h4>Browser Context Menus &amp; Zoom <span class="tag tag-new">New</span></h4><p>Right-click context menus and independent zoom levels for the integrated browser panel.</p></div>
+        <div class="feature"><h4>Monorepo Customization Discovery <span class="tag tag-new">New</span></h4><p>Automatic discovery of customization files across monorepo sub-packages.</p></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== v1.113 ===== -->
+<section class="version-section" id="v113">
+  <div class="version-header">
+    <div class="version-tag">v1.113</div>
+    <div class="version-meta">
+      <div class="date">March 2026 — Released Mar 25, 2026</div>
+      <div class="theme">Unified Customizations &amp; Nested Subagents</div>
+    </div>
+  </div>
+  <div class="category-grid">
+    <div class="card" data-cat="agents">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon agents"></div>
+        <div class="card-title">CLI, Claude &amp; Subagents</div>
+        <div class="card-count">4 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>MCP in CLI &amp; Claude Agents <span class="tag tag-new">New</span></h4><p>Copilot CLI and Claude agents now support MCP tools — the same server ecosystem everywhere.</p></div>
+        <div class="feature"><h4>Fork Sessions in CLI &amp; Claude <span class="tag tag-new">New</span></h4><p>Branch conversations in CLI and Claude agents just like in the main chat panel.</p></div>
+        <div class="feature"><h4>Nested Subagents <span class="tag tag-new">New</span></h4><p>Subagents can spawn their own subagents — enabling deeply hierarchical task decomposition.</p></div>
+        <div class="feature"><h4>Claude Session Listing <span class="tag tag-new">New</span></h4><p>List and resume Claude agent sessions via the Anthropic SDK integration.</p></div>
+      </div></div>
+    </div>
+    <div class="card" data-cat="tools">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon tools"></div>
+        <div class="card-title">Plugin Marketplace</div>
+        <div class="card-count">2 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>Plugin Marketplace Management <span class="tag tag-new">New</span></h4><p>Browse, install, and manage agent plugins from a dedicated marketplace interface.</p></div>
+        <div class="feature"><h4>URL Handlers for Plugin Install <span class="tag tag-new">New</span></h4><p>Share plugin install links — clicking a URL opens VS Code and installs the plugin automatically.</p></div>
+      </div></div>
+    </div>
+    <div class="card" data-cat="custom">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon custom"></div>
+        <div class="card-title">Customizations Editor</div>
+        <div class="card-count">2 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>Chat Customizations Editor <span class="tag tag-preview">Preview</span></h4><p>A unified UI to manage all chat customizations — instructions, skills, agents, and prompts in one place.</p></div>
+        <div class="feature"><h4>Configurable Thinking Effort <span class="tag tag-new">New</span></h4><p>Adjust model thinking effort directly from the model picker — balance speed vs. quality per request.</p></div>
+      </div></div>
+    </div>
+    <div class="card" data-cat="editor">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon editor"></div>
+        <div class="card-title">Themes &amp; Browser</div>
+        <div class="card-count">4 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>New Default Themes <span class="tag tag-new">New</span></h4><p>"VS Code Light" and "VS Code Dark" replace the old defaults with a refreshed color palette.</p></div>
+        <div class="feature"><h4>Self-Signed Certs in Browser <span class="tag tag-new">New</span></h4><p>The integrated browser now accepts self-signed certificates for local HTTPS development.</p></div>
+        <div class="feature"><h4>Browser Tab Management <span class="tag tag-new">New</span></h4><p>Open multiple tabs in the integrated browser with proper tab management and navigation.</p></div>
+        <div class="feature"><h4>Image Preview for Attachments <span class="tag tag-new">New</span></h4><p>Chat image attachments now show inline previews before sending to the model.</p></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== v1.114 ===== -->
+<section class="version-section" id="v114">
+  <div class="version-header">
+    <div class="version-tag">v1.114</div>
+    <div class="version-meta">
+      <div class="date">April 2026 — Released Apr 1, 2026</div>
+      <div class="theme">Simplified Search &amp; TypeScript 6.0</div>
+    </div>
+  </div>
+  <div class="category-grid">
+    <div class="card" data-cat="agents">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon agents"></div>
+        <div class="card-title">Session Tools</div>
+        <div class="card-count">3 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>Troubleshoot Previous Sessions <span class="tag tag-new">New</span></h4><p>Use #session to reference and troubleshoot issues from previous chat sessions.</p></div>
+        <div class="feature"><h4>Copy Final Response <span class="tag tag-new">New</span></h4><p>A dedicated command to copy the agent's final response to clipboard with one click.</p></div>
+        <div class="feature"><h4>Video Preview in Carousel <span class="tag tag-new">New</span></h4><p>Image carousels now support video previews for richer multimedia agent interactions.</p></div>
+      </div></div>
+    </div>
+    <div class="card" data-cat="tools">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon tools"></div>
+        <div class="card-title">Workspace Search</div>
+        <div class="card-count">2 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>Simplified #codebase Search <span class="tag tag-new">New</span></h4><p>#codebase is now purely semantic — a single unified index replaces the previous multi-strategy approach.</p></div>
+        <div class="feature"><h4>Single Index State <span class="tag tag-new">New</span></h4><p>One index status indicator replaces multiple — simpler to understand and troubleshoot.</p></div>
+      </div></div>
+    </div>
+    <div class="card" data-cat="models">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon models"></div>
+        <div class="card-title">TypeScript 6.0 &amp; APIs</div>
+        <div class="card-count">2 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>TypeScript 6.0 Support <span class="tag tag-new">New</span></h4><p>Full language support for TypeScript 6.0 including new syntax, type-checking, and IntelliSense.</p></div>
+        <div class="feature"><h4>Fine-Grained Tool Approval API <span class="tag tag-new">New</span></h4><p>Extensions can register custom approval logic for specific tools via a new API surface.</p></div>
+      </div></div>
+    </div>
+    <div class="card" data-cat="editor">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon editor"></div>
+        <div class="card-title">Enterprise &amp; Python</div>
+        <div class="card-count">2 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>Enterprise Claude Agent Policy <span class="tag tag-new">New</span></h4><p>Admins can control Claude agent availability and permissions via enterprise policy settings.</p></div>
+        <div class="feature"><h4>Python Environments Improvements <span class="tag tag-new">New</span></h4><p>Better discovery, switching, and management of Python virtual environments and conda envs.</p></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== v1.115 ===== -->
+<section class="version-section" id="v115">
+  <div class="version-header">
+    <div class="version-tag">v1.115</div>
+    <div class="version-meta">
+      <div class="date">April 2026 — Released Apr 8, 2026</div>
+      <div class="theme">VS Code Agents App &amp; Terminal Tools</div>
+    </div>
+  </div>
+  <div class="category-grid">
+    <div class="card" data-cat="agents">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon agents"></div>
+        <div class="card-title">VS Code Agents App</div>
+        <div class="card-count">2 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>VS Code Agents App <span class="tag tag-preview">Preview</span></h4><p>A companion app purpose-built for agent-native development — lightweight, focused, and fast.</p></div>
+        <div class="feature"><h4>Parallelize Tasks Across Repos <span class="tag tag-new">New</span></h4><p>Run agent tasks across multiple repositories simultaneously from the Agents app.</p></div>
+      </div></div>
+    </div>
+    <div class="card" data-cat="tools">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon tools"></div>
+        <div class="card-title">Terminal Tools</div>
+        <div class="card-count">2 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>send_to_terminal <span class="tag tag-new">New</span></h4><p>Agents can send input to background terminals — interact with running processes like servers and REPLs.</p></div>
+        <div class="feature"><h4>Background Terminal Notifications <span class="tag tag-experimental">Experimental</span></h4><p>Get notified when background terminal commands complete or need input.</p></div>
+      </div></div>
+    </div>
+    <div class="card" data-cat="editor">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon editor"></div>
+        <div class="card-title">Browser Improvements</div>
+        <div class="card-count">3 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>Better Agent Tool Labels <span class="tag tag-new">New</span></h4><p>Integrated browser tool invocations now display clearer, more descriptive labels in the chat.</p></div>
+        <div class="feature"><h4>Long-Running Playwright Support <span class="tag tag-new">New</span></h4><p>Playwright scripts can run for extended durations without timeout — ideal for complex test flows.</p></div>
+        <div class="feature"><h4>Pinch-to-Zoom on macOS <span class="tag tag-new">New</span></h4><p>Native pinch-to-zoom gesture support in the integrated browser on macOS trackpads.</p></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== v1.116 ===== -->
+<section class="version-section" id="v116">
+  <div class="version-header">
+    <div class="version-tag">v1.116</div>
+    <div class="version-meta">
+      <div class="date">April 2026 — Released Apr 15, 2026</div>
+      <div class="theme">Copilot Built-In &amp; Full Circle</div>
+    </div>
+  </div>
+  <div class="category-grid">
+    <div class="card" data-cat="agents">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon agents"></div>
+        <div class="card-title">Agent Sessions &amp; CLI</div>
+        <div class="card-count">5 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>Debug Previous Sessions <span class="tag tag-new">New</span></h4><p>Persistent agent debug logs let you replay and inspect any previous agent session.</p></div>
+        <div class="feature"><h4>Thinking Effort in CLI <span class="tag tag-new">New</span></h4><p>Configure model thinking effort directly in the Copilot CLI for speed vs. quality tradeoffs.</p></div>
+        <div class="feature"><h4>Customizations Welcome Page <span class="tag tag-new">New</span></h4><p>A guided welcome page helps new users discover and set up agent customizations.</p></div>
+        <div class="feature"><h4>Tool Confirmation Carousel <span class="tag tag-experimental">Experimental</span></h4><p>Batch tool confirmations into a visual carousel for faster approval of multiple actions.</p></div>
+        <div class="feature"><h4>VS Code Agents App Updates <span class="tag tag-new">New</span></h4><p>Continued improvements to the companion Agents app with better multi-repo task management.</p></div>
+      </div></div>
+    </div>
+    <div class="card" data-cat="tools">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon tools"></div>
+        <div class="card-title">Terminal &amp; Notifications</div>
+        <div class="card-count">3 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>Foreground Terminal Support <span class="tag tag-new">New</span></h4><p>Agent tools can now interact with foreground terminals — not just background sessions.</p></div>
+        <div class="feature"><h4>Terminal Input Improvements <span class="tag tag-new">New</span></h4><p>Deterministic input detection replaces LLM-based heuristics for more reliable terminal interaction.</p></div>
+        <div class="feature"><h4>Background Notifications Default On <span class="tag tag-ga">GA</span></h4><p>Background terminal notifications are now enabled by default — no more missed completions.</p></div>
+      </div></div>
+    </div>
+    <div class="card" data-cat="custom">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon custom"></div>
+        <div class="card-title">Chat UX Improvements</div>
+        <div class="card-count">3 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>Diffs in Top Level <span class="tag tag-new">New</span></h4><p>Code diffs now render at the top level of chat responses for immediate visibility.</p></div>
+        <div class="feature"><h4>Rendering Performance <span class="tag tag-new">New</span></h4><p>Significant chat rendering performance improvements — smoother scrolling and faster message display.</p></div>
+        <div class="feature"><h4>Subagent Progress <span class="tag tag-new">New</span></h4><p>Live progress indicators show what each subagent is working on in real time.</p></div>
+      </div></div>
+    </div>
+    <div class="card" data-cat="editor">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon editor"></div>
+        <div class="card-title">Copilot Built-In</div>
+        <div class="card-count">3 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>GitHub Copilot Built-In <span class="tag tag-ga">GA</span></h4><p>GitHub Copilot is now built into VS Code — no extension install needed. The journey comes full circle.</p></div>
+        <div class="feature"><h4>JS/TS Chat Features Extension <span class="tag tag-preview">Preview</span></h4><p>A dedicated extension surfaces JavaScript and TypeScript-specific chat capabilities.</p></div>
+        <div class="feature"><h4>Integrated Browser Entry Points <span class="tag tag-new">New</span></h4><p>Open the browser from View &gt; Browser or Ctrl+Alt+/ — multiple convenient entry points.</p></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- close version-detail-area -->
+</div>
+
+<!-- ============ COMPARISON & EVOLUTION CHART ============ -->
+<section class="comparison-section">
+  <h2>Evolution at a Glance</h2>
+  <p class="comp-sub">How key capabilities grew across 11 releases</p>
+
+  <!-- Bar chart: Feature count per version -->
+  <div class="evo-chart">
+    <h3>Features per Release</h3>
+    <div class="evo-bars">
+      <div class="evo-bar" style="height:52%" title="v1.106: 21 features"><div class="bar-val">21</div><div class="bar-label">106</div></div>
+      <div class="evo-bar" style="height:45%" title="v1.107: 16 features"><div class="bar-val">16</div><div class="bar-label">107</div></div>
+      <div class="evo-bar" style="height:40%" title="v1.108: 12 features"><div class="bar-val">12</div><div class="bar-label">108</div></div>
+      <div class="evo-bar" style="height:100%" title="v1.109: 30+ features"><div class="bar-val">30+</div><div class="bar-label">109</div></div>
+      <div class="evo-bar" style="height:85%" title="v1.110: 26 features"><div class="bar-val">26</div><div class="bar-label">110</div></div>
+      <div class="evo-bar" style="height:30%" title="v1.111: 8 features"><div class="bar-val">8</div><div class="bar-label">111</div></div>
+      <div class="evo-bar" style="height:48%" title="v1.112: 14 features"><div class="bar-val">14</div><div class="bar-label">112</div></div>
+      <div class="evo-bar" style="height:50%" title="v1.113: 16 features"><div class="bar-val">16</div><div class="bar-label">113</div></div>
+      <div class="evo-bar" style="height:35%" title="v1.114: 10 features"><div class="bar-val">10</div><div class="bar-label">114</div></div>
+      <div class="evo-bar" style="height:28%" title="v1.115: 7 features"><div class="bar-val">7</div><div class="bar-label">115</div></div>
+      <div class="evo-bar" style="height:42%" title="v1.116: 13 features"><div class="bar-val">13</div><div class="bar-label">116</div></div>
+    </div>
+    <div class="evo-legend">
+      <span><span class="leg-dot" style="background:var(--accent)"></span> Foundation (106)</span>
+      <span><span class="leg-dot" style="background:var(--green)"></span> Sessions Era (107–110)</span>
+      <span><span class="leg-dot" style="background:var(--purple)"></span> Autonomy Era (111–113)</span>
+      <span><span class="leg-dot" style="background:var(--orange)"></span> Polish &amp; Ship (114–116)</span>
+    </div>
+  </div>
+
+  <!-- Capability comparison table -->
+  <div class="compare-table">
+    <table>
+      <thead>
+        <tr>
+          <th>Capability</th>
+          <th>106</th><th>107</th><th>108</th>
+          <th>109</th><th>110</th><th>111</th><th>112</th><th>113</th>
+          <th>114</th><th>115</th><th>116</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Agent Mode</td>
+          <td>Agent HQ</td><td>Sessions</td><td>Skills exp</td>
+          <td class="cell-ga">Skills GA</td><td>Plugins exp</td><td class="cell-ga">Autopilot</td><td>CLI perms</td><td>Nested sub</td>
+          <td>Troubleshoot</td><td class="cell-ga">Agents App</td><td class="cell-ga">Built-in</td>
+        </tr>
+        <tr>
+          <td>MCP</td>
+          <td class="cell-new">Enterprise</td><td>GitHub MCP</td><td>Org registry</td>
+          <td>MCP Apps</td><td>Browser tools</td><td class="cell-empty">—</td><td class="cell-new">Sandbox</td><td>CLI+Claude</td>
+          <td class="cell-empty">—</td><td class="cell-empty">—</td><td class="cell-empty">—</td>
+        </tr>
+        <tr>
+          <td>Custom Agents</td>
+          <td class="cell-new">Renamed</td><td>Handoffs</td><td class="cell-empty">—</td>
+          <td>Org-wide</td><td>Subagents</td><td>Scoped hooks</td><td class="cell-empty">—</td><td class="cell-ga">Editor UI</td>
+          <td class="cell-empty">—</td><td class="cell-empty">—</td><td>Welcome pg</td>
+        </tr>
+        <tr>
+          <td>Skills</td>
+          <td class="cell-empty">—</td><td class="cell-empty">—</td><td class="cell-new">Experimental</td>
+          <td class="cell-ga">GA + /slash</td><td>/init, /fork</td><td class="cell-empty">—</td><td class="cell-empty">—</td><td class="cell-empty">—</td>
+          <td class="cell-empty">—</td><td class="cell-empty">—</td><td>JS/TS skill</td>
+        </tr>
+        <tr>
+          <td>Hooks</td>
+          <td class="cell-empty">—</td><td class="cell-empty">—</td><td class="cell-empty">—</td>
+          <td class="cell-new">Preview</td><td>Lifecycle</td><td>Agent-scoped</td><td class="cell-empty">—</td><td class="cell-empty">—</td>
+          <td class="cell-empty">—</td><td class="cell-empty">—</td><td class="cell-empty">—</td>
+        </tr>
+        <tr>
+          <td>Autonomy</td>
+          <td>Trust tools</td><td>URL approve</td><td>Session rules</td>
+          <td>Auto-commit</td><td class="cell-new">YOLO mode</td><td class="cell-ga">Autopilot</td><td>CLI bypass</td><td class="cell-empty">—</td>
+          <td class="cell-empty">—</td><td>BG notify</td><td class="cell-ga">Carousel</td>
+        </tr>
+        <tr>
+          <td>Copilot Status</td>
+          <td>Extension</td><td>Extension</td><td>Unifying</td>
+          <td class="cell-new">Ext deprecated</td><td>Chat merging</td><td class="cell-empty">—</td><td class="cell-empty">—</td><td class="cell-empty">—</td>
+          <td class="cell-empty">—</td><td class="cell-empty">—</td><td class="cell-ga">Built-in!</td>
+        </tr>
+        <tr>
+          <td>Browser</td>
+          <td class="cell-empty">—</td><td class="cell-empty">—</td><td class="cell-empty">—</td>
+          <td class="cell-new">Preview</td><td>Agent tools</td><td class="cell-empty">—</td><td class="cell-ga">Debugging</td><td>Self-sign certs</td>
+          <td class="cell-empty">—</td><td>Pinch zoom</td><td>View menu</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>Built for the <strong>Advanced Features of VS Code &amp; GitHub Copilot</strong> session &bull; Data sourced from official <a href="https://code.visualstudio.com/updates" target="_blank">VS Code Release Notes</a></p>
+  <div class="author-sign">
+    <div class="name">Tatsat Pandey</div>
+    <div class="role">Advanced VS Code &amp; GitHub Copilot Session</div>
+  </div>
+</footer>
+
+<script>
+/* ===== Card accordion ===== */
+function toggle(el) {
+  const card = el.parentElement;
+  const isOpening = !card.classList.contains('open');
+  // Close sibling cards in the same grid (accordion)
+  const grid = card.parentElement;
+  if (grid && isOpening) {
+    grid.querySelectorAll('.guide-card.open').forEach(c => {
+      if (c !== card) c.classList.remove('open');
+    });
+  }
+  card.classList.toggle('open');
+}
+
+/* ===== Cheatsheet accordion ===== */
+function toggleCheat(el) {
+  const card = el.parentElement;
+  const isOpening = !card.classList.contains('open');
+  const grid = card.parentElement;
+  if (grid && isOpening) {
+    grid.querySelectorAll('.cheat-card.open').forEach(c => {
+      if (c !== card) c.classList.remove('open');
+    });
+  }
+  card.classList.toggle('open');
+}
+
+/* ===== Version Picker ===== */
+const vBtns = document.querySelectorAll('.version-btn');
+const vSections = document.querySelectorAll('.version-section');
+const placeholder = document.getElementById('vPlaceholder');
+
+function showVersion(id) {
+  const wasActive = document.getElementById(id)?.classList.contains('active');
+  vSections.forEach(s => s.classList.remove('active'));
+  vBtns.forEach(b => b.classList.remove('active'));
+  if (wasActive) {
+    if (placeholder) placeholder.style.display = '';
+    return;
+  }
+  _activateVersion(id);
+}
+
+function _activateVersion(id) {
+  vSections.forEach(s => s.classList.remove('active'));
+  vBtns.forEach(b => b.classList.remove('active'));
+  const section = document.getElementById(id);
+  const btn = document.querySelector(`.version-btn[data-target="${id}"]`);
+  if (section) {
+    section.classList.add('active');
+    if (placeholder) placeholder.style.display = 'none';
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  if (btn) btn.classList.add('active');
+}
+
+vBtns.forEach(btn => {
+  btn.addEventListener('click', () => showVersion(btn.dataset.target));
+});
+
+const vIds = ['v106','v107','v108','v109','v110','v111','v112','v113','v114','v115','v116'];
+
+/* ===== Keyboard nav: left/right arrows to switch versions ===== */
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+  const active = document.querySelector('.version-section.active');
+  if (!active) return;
+  const idx = vIds.indexOf(active.id);
+  if (e.key === 'ArrowRight' && idx < vIds.length - 1) { e.preventDefault(); showVersion(vIds[idx + 1]); }
+  if (e.key === 'ArrowLeft' && idx > 0) { e.preventDefault(); showVersion(vIds[idx - 1]); }
+});
+
+/* ===== Auto-show v1.106 on load ===== */
+showVersion('v106');
+
+/* ===== Global Search ===== */
+const searchInput = document.getElementById('globalSearch');
+let searchTimeout;
+searchInput.addEventListener('input', () => {
+  clearTimeout(searchTimeout);
+  searchTimeout = setTimeout(() => performSearch(searchInput.value.trim()), 200);
+});
+
+function performSearch(query) {
+  // Clear previous highlights
+  document.querySelectorAll('.search-highlight').forEach(el => {
+    el.outerHTML = el.textContent;
+  });
+  document.querySelectorAll('.search-match').forEach(el => el.classList.remove('search-match'));
+  document.querySelectorAll('.search-hidden').forEach(el => el.classList.remove('search-hidden'));
+
+  if (!query || query.length < 2) return;
+
+  const lowerQ = query.toLowerCase();
+  const escapedQ = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const re = new RegExp(`(${escapedQ})`, 'gi');
+
+  // Search guide cards
+  document.querySelectorAll('.guide-card, .cheat-card').forEach(card => {
+    const text = card.textContent.toLowerCase();
+    if (text.includes(lowerQ)) {
+      card.classList.add('search-match');
+      // Highlight text in card body
+      highlightInElement(card, re);
+    }
+  });
+
+  // Search version cards
+  document.querySelectorAll('.card').forEach(card => {
+    const text = card.textContent.toLowerCase();
+    if (text.includes(lowerQ)) {
+      card.classList.add('search-match');
+      highlightInElement(card, re);
+    }
+  });
+
+  // Scroll to first match
+  const firstMatch = document.querySelector('.search-match');
+  if (firstMatch) {
+    firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    // If it's inside a hidden version section, show that version
+    const vSection = firstMatch.closest('.version-section');
+    if (vSection && !vSection.classList.contains('active')) {
+      showVersion(vSection.id);
+    }
+  }
+}
+
+function highlightInElement(container, regex) {
+  const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, null, false);
+  const textNodes = [];
+  while (walker.nextNode()) textNodes.push(walker.currentNode);
+  textNodes.forEach(node => {
+    if (node.parentElement.tagName === 'SCRIPT' || node.parentElement.tagName === 'STYLE') return;
+    if (regex.test(node.textContent)) {
+      const span = document.createElement('span');
+      span.innerHTML = node.textContent.replace(regex, '<mark class="search-highlight">$1</mark>');
+      node.parentNode.replaceChild(span, node);
+    }
+  });
+}
+
+// Clear search on Escape
+searchInput.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    searchInput.value = '';
+    performSearch('');
+    searchInput.blur();
+  }
+});
+</script>
+</body></html>

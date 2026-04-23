@@ -1,0 +1,209 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Resources" activeNav="resources">
+
+<main class="container">
+  <section class="page-section">
+    <div class="section-header">
+      <h2>⚡ Resources & Cheatsheets</h2>
+      <p>Curated tools, shortcuts, reference cards, and documentation links</p>
+    </div>
+
+    <!-- Copilot Cheatsheet -->
+    <div style="margin-bottom:40px;">
+      <h3 style="font-size:1.15rem;font-weight:700;color:var(--text);margin-bottom:16px;">🤖 GitHub Copilot Power-User Cheatsheet</h3>
+
+      <div class="dropdown-card" id="dd-shortcuts">
+        <div class="dropdown-head" onclick="toggleDD('dd-shortcuts')">
+          <span class="dropdown-icon">⌨️</span>
+          <div class="dropdown-info">
+            <div class="dropdown-title">Keyboard Shortcuts</div>
+            <div class="dropdown-sub">Essential shortcuts for Copilot in VS Code (Windows/Linux)</div>
+          </div>
+          <a class="dropdown-badge" href="https://code.visualstudio.com/docs/copilot/reference/copilot-shortcuts" target="_blank">Docs ↗</a>
+          <span class="dropdown-chev">▸</span>
+        </div>
+        <div class="dropdown-body">
+          <div class="shortcut-row"><span class="shortcut-desc">Open Copilot Chat panel</span><kbd>Ctrl+Alt+I</kbd></div>
+          <div class="shortcut-row"><span class="shortcut-desc">Inline Chat (edit in place)</span><kbd>Ctrl+I</kbd></div>
+          <div class="shortcut-row"><span class="shortcut-desc">Accept inline suggestion</span><kbd>Tab</kbd></div>
+          <div class="shortcut-row"><span class="shortcut-desc">Next suggestion</span><kbd>Alt+]</kbd></div>
+          <div class="shortcut-row"><span class="shortcut-desc">Previous suggestion</span><kbd>Alt+[</kbd></div>
+          <div class="shortcut-row"><span class="shortcut-desc">Dismiss suggestion</span><kbd>Esc</kbd></div>
+          <div class="shortcut-row"><span class="shortcut-desc">Trigger suggestion manually</span><kbd>Alt+\</kbd></div>
+          <div class="shortcut-row"><span class="shortcut-desc">Quick Chat (floating)</span><kbd>Ctrl+Shift+Alt+L</kbd></div>
+          <div class="shortcut-row"><span class="shortcut-desc">Accept word-by-word</span><kbd>Ctrl+→</kbd></div>
+          <div class="shortcut-row"><span class="shortcut-desc">Toggle completions on/off</span><kbd>Ctrl+Shift+Alt+I</kbd></div>
+        </div>
+      </div>
+
+      <div class="dropdown-card" style="margin-top:10px;" id="dd-commands">
+        <div class="dropdown-head" onclick="toggleDD('dd-commands')">
+          <span class="dropdown-icon">🔧</span>
+          <div class="dropdown-info">
+            <div class="dropdown-title">Slash Commands & Context Variables</div>
+            <div class="dropdown-sub">Built-in chat commands, #-references, and @-participants</div>
+          </div>
+          <a class="dropdown-badge" href="https://code.visualstudio.com/docs/copilot/copilot-chat" target="_blank">Docs ↗</a>
+          <span class="dropdown-chev">▸</span>
+        </div>
+        <div class="dropdown-body">
+          <div class="cmd-row"><div class="cmd-name">/explain</div><div class="cmd-desc">Explain selected code or a concept in plain English</div></div>
+          <div class="cmd-row"><div class="cmd-name">/fix</div><div class="cmd-desc">Suggest a fix for errors or problems in the selection</div></div>
+          <div class="cmd-row"><div class="cmd-name">/tests</div><div class="cmd-desc">Generate unit tests for the selected code</div></div>
+          <div class="cmd-row"><div class="cmd-name">/doc</div><div class="cmd-desc">Generate documentation comments (JSDoc, docstring, etc.)</div></div>
+          <div class="cmd-row"><div class="cmd-name">/optimize</div><div class="cmd-desc">Analyze and optimize selected code for performance</div></div>
+          <div class="cmd-row"><div class="cmd-name">/new</div><div class="cmd-desc">Scaffold a new project or file from a description</div></div>
+          <div style="margin:12px 0 8px;font-size:0.78rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.5px;">Context Variables</div>
+          <div class="cmd-row"><div class="cmd-name">#file</div><div class="cmd-desc">Attach a specific file as context for the chat</div></div>
+          <div class="cmd-row"><div class="cmd-name">#selection</div><div class="cmd-desc">Reference the current editor selection</div></div>
+          <div class="cmd-row"><div class="cmd-name">#codebase</div><div class="cmd-desc">Let Copilot search across your entire workspace</div></div>
+          <div class="cmd-row"><div class="cmd-name">#terminalLastCommand</div><div class="cmd-desc">Include last terminal command + output as context</div></div>
+          <div class="cmd-row"><div class="cmd-name">#problems</div><div class="cmd-desc">Include current Problems panel diagnostics</div></div>
+        </div>
+      </div>
+
+      <div class="dropdown-card" style="margin-top:10px;" id="dd-customization">
+        <div class="dropdown-head" onclick="toggleDD('dd-customization')">
+          <span class="dropdown-icon">🎛️</span>
+          <div class="dropdown-info">
+            <div class="dropdown-title">Customization Stack</div>
+            <div class="dropdown-sub">Instructions, Skills, Agents, and Hooks</div>
+          </div>
+          <a class="dropdown-badge" href="https://code.visualstudio.com/docs/copilot/copilot-customization" target="_blank">Docs ↗</a>
+          <span class="dropdown-chev">▸</span>
+        </div>
+        <div class="dropdown-body">
+          <div class="cmd-row"><div class="cmd-name">.github/copilot-instructions.md</div><div class="cmd-desc">Project-wide instructions applied to all Copilot responses (coding standards, preferred patterns)</div></div>
+          <div class="cmd-row"><div class="cmd-name">.instructions.md</div><div class="cmd-desc">Scoped instruction files with applyTo glob patterns — target specific file types or folders</div></div>
+          <div class="cmd-row"><div class="cmd-name">SKILL.md</div><div class="cmd-desc">Reusable domain-specific skills with tool restrictions and activation triggers</div></div>
+          <div class="cmd-row"><div class="cmd-name">AGENTS.md / .agent.md</div><div class="cmd-desc">Custom agent modes with specialized personas, tools, and workflows</div></div>
+          <div class="cmd-row"><div class="cmd-name">.vscode/mcp.json</div><div class="cmd-desc">MCP server configuration — connect external tools (GitHub, databases, APIs)</div></div>
+          <div class="cmd-row"><div class="cmd-name">.vscode/hooks/</div><div class="cmd-desc">Pre/post action hooks — run scripts before saves, validate edits, enforce rules</div></div>
+        </div>
+      </div>
+
+      <div class="dropdown-card" style="margin-top:10px;" id="dd-tips">
+        <div class="dropdown-head" onclick="toggleDD('dd-tips')">
+          <span class="dropdown-icon">💡</span>
+          <div class="dropdown-info">
+            <div class="dropdown-title">Pro Tips & Daily Workflows</div>
+            <div class="dropdown-sub">Practical recipes for common development tasks</div>
+          </div>
+          <span class="dropdown-chev">▸</span>
+        </div>
+        <div class="dropdown-body">
+          <div class="tip-card">
+            <div class="tip-label">🔄 Inline Code Review</div>
+            <p>Select code → <code>Ctrl+I</code> → "Review this for bugs, security issues, and performance" → Copilot annotates inline</p>
+          </div>
+          <div class="tip-card">
+            <div class="tip-label">🧪 Test-Driven with Copilot</div>
+            <p>Write test file with descriptive test names → place cursor in empty test body → Copilot generates the assertion logic matching the name</p>
+          </div>
+          <div class="tip-card">
+            <div class="tip-label">📝 Custom Instructions</div>
+            <p>Create <code>.github/copilot-instructions.md</code> with rules like "Use TypeScript strict mode, prefer functional patterns, always handle errors" — applied to every response</p>
+          </div>
+          <div class="tip-card">
+            <div class="tip-label">🤖 Agent Mode Multi-Step Tasks</div>
+            <p>Switch to Agent mode → describe a complex task like "Add input validation to all API endpoints" → Copilot plans, edits files, runs tests, self-heals errors</p>
+          </div>
+          <div class="tip-card">
+            <div class="tip-label">🔌 MCP for External Data</div>
+            <p>Add MCP servers in <code>.vscode/mcp.json</code> to give Copilot access to your database, Jira board, or internal APIs during chat</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Essential Documentation Links -->
+    <h3 style="font-size:1.15rem;font-weight:700;color:var(--text);margin-bottom:16px;">📘 Official Documentation</h3>
+    <div class="cards-grid cards-grid-3">
+      <a href="https://code.visualstudio.com/docs/copilot/overview" target="_blank" class="link-card">
+        <span class="lc-icon">📘</span>
+        <div class="lc-info"><strong>VS Code Copilot Docs</strong><span>code.visualstudio.com</span></div>
+        <span class="lc-arrow">→</span>
+      </a>
+      <a href="https://docs.github.com/en/copilot" target="_blank" class="link-card">
+        <span class="lc-icon">🐙</span>
+        <div class="lc-info"><strong>GitHub Copilot Docs</strong><span>docs.github.com</span></div>
+        <span class="lc-arrow">→</span>
+      </a>
+      <a href="https://spec.modelcontextprotocol.io" target="_blank" class="link-card">
+        <span class="lc-icon">🔌</span>
+        <div class="lc-info"><strong>MCP Specification</strong><span>spec.modelcontextprotocol.io</span></div>
+        <span class="lc-arrow">→</span>
+      </a>
+      <a href="https://docs.anthropic.com" target="_blank" class="link-card">
+        <span class="lc-icon">🤖</span>
+        <div class="lc-info"><strong>Anthropic API Docs</strong><span>docs.anthropic.com</span></div>
+        <span class="lc-arrow">→</span>
+      </a>
+      <a href="https://platform.openai.com/docs" target="_blank" class="link-card">
+        <span class="lc-icon">🧠</span>
+        <div class="lc-info"><strong>OpenAI API Docs</strong><span>platform.openai.com</span></div>
+        <span class="lc-arrow">→</span>
+      </a>
+      <a href="https://ai.google.dev/docs" target="_blank" class="link-card">
+        <span class="lc-icon">💎</span>
+        <div class="lc-info"><strong>Gemini API Docs</strong><span>ai.google.dev</span></div>
+        <span class="lc-arrow">→</span>
+      </a>
+    </div>
+
+    <!-- Research & Community -->
+    <h3 style="font-size:1.15rem;font-weight:700;color:var(--text);margin:32px 0 16px;">🔬 Research & Community</h3>
+    <div class="cards-grid cards-grid-3">
+      <a href="https://huggingface.co/papers" target="_blank" class="link-card">
+        <span class="lc-icon">🤗</span>
+        <div class="lc-info"><strong>HF Daily Papers</strong><span>huggingface.co/papers</span></div>
+        <span class="lc-arrow">→</span>
+      </a>
+      <a href="https://arxiv.org/list/cs.AI/recent" target="_blank" class="link-card">
+        <span class="lc-icon">📄</span>
+        <div class="lc-info"><strong>ArXiv cs.AI</strong><span>arxiv.org</span></div>
+        <span class="lc-arrow">→</span>
+      </a>
+      <a href="https://huggingface.co/spaces/open-llm-leaderboard/open_llm_leaderboard" target="_blank" class="link-card">
+        <span class="lc-icon">🏆</span>
+        <div class="lc-info"><strong>Open LLM Leaderboard</strong><span>huggingface.co</span></div>
+        <span class="lc-arrow">→</span>
+      </a>
+      <a href="https://lmarena.ai/" target="_blank" class="link-card">
+        <span class="lc-icon">⚔️</span>
+        <div class="lc-info"><strong>LMArena (Chatbot Arena)</strong><span>lmarena.ai</span></div>
+        <span class="lc-arrow">→</span>
+      </a>
+      <a href="https://github.com/trending" target="_blank" class="link-card">
+        <span class="lc-icon">📈</span>
+        <div class="lc-info"><strong>GitHub Trending</strong><span>github.com/trending</span></div>
+        <span class="lc-arrow">→</span>
+      </a>
+      <a href="https://www.swebench.com/" target="_blank" class="link-card">
+        <span class="lc-icon">🧪</span>
+        <div class="lc-info"><strong>SWE-bench</strong><span>swebench.com</span></div>
+        <span class="lc-arrow">→</span>
+      </a>
+    </div>
+
+    <!-- Subscribe -->
+    <div style="margin-top:40px;padding:24px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);text-align:center;">
+      <p style="font-size:0.95rem;font-weight:600;color:var(--text);margin-bottom:8px;">📡 Subscribe to the TechRadar feed</p>
+      <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:16px;">Get daily AI digest updates via RSS — works with any feed reader.</p>
+      <a href="/rss.xml" target="_blank" style="display:inline-block;padding:10px 24px;background:rgba(88,166,255,0.12);border:1px solid var(--accent);border-radius:8px;color:var(--accent);font-weight:600;font-size:0.88rem;text-decoration:none;">Subscribe via RSS ↗</a>
+    </div>
+
+  </section>
+</main>
+
+<script>
+  function toggleDD(id) {
+    const card = document.getElementById(id);
+    card.classList.toggle('open');
+  }
+  window.toggleDD = toggleDD;
+</script>
+
+</BaseLayout>
