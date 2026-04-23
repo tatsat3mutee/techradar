@@ -48,11 +48,13 @@ async function getLatestFromRSS() {
     const itemMatch = xml.match(/<item>([\s\S]*?)<\/item>/);
     if (!itemMatch) return null;
     const item = itemMatch[1];
+    const rawDesc = extractTag(item, 'description');
+    const cleanDesc = rawDesc.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&nbsp;/g, ' ').trim().slice(0, 300);
     return {
       title: extractTag(item, 'title'),
       link: extractTag(item, 'link'),
       date: extractTag(item, 'pubDate'),
-      description: extractTag(item, 'description').replace(/<[^>]+>/g, '').slice(0, 300),
+      description: cleanDesc,
     };
   } catch (e) {
     console.warn('RSS fetch failed, falling back to GitHub API:', e.message);

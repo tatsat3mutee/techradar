@@ -1,7 +1,7 @@
 ---
-title: "Advanced VS Code & GitHub Copilot — v1.106 to v1.116"
-description: "Deep-dive into customizing GitHub Copilot in VS Code: custom instructions, agent mode, MCP servers, skills, hooks, and the full evolution from v1.106 to v1.116."
-date: "2026-04-20"
+title: "Advanced VS Code & GitHub Copilot — v1.106 to v1.117"
+description: "Deep-dive into customizing GitHub Copilot in VS Code: custom instructions, agent mode, MCP servers, skills, hooks, and the full evolution from v1.106 to v1.117."
+date: "2026-04-23"
 author: "Tatsat Pandey"
 tags: ["VS Code", "GitHub Copilot", "Agent Mode", "MCP", "Custom Instructions"]
 bannerGradient: "linear-gradient(135deg, #007acc, #58a6ff)"
