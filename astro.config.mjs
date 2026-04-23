@@ -4,6 +4,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://techradar.tatsat.dev',
+  site: 'https://tatsat3mutee.github.io',
+  base: '/techradar',
   integrations: [sitemap()],
 });
