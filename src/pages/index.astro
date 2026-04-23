@@ -12,12 +12,12 @@ const uniqueSources = new Set(allFeeds.flatMap(f => f.data.entries.map(e => e.so
 
 const categories = ['all', 'models', 'agents', 'tools', 'research', 'releases', 'video'];
 
-const base = import.meta.env.BASE_URL;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const pathCards = [
-  { icon: '🚀', title: 'New here?', desc: 'Start with the Daily Feed — curated AI news from 9+ sources, zero noise.', link: `${base}feed`, cta: 'Read today\'s digest →', color: 'var(--accent)' },
-  { icon: '🎓', title: 'Learn & Build', desc: 'Deep-dive sessions on agents, RAG pipelines, MCP servers, and Copilot mastery.', link: `${base}sessions`, cta: 'Browse sessions →', color: 'var(--green)' },
-  { icon: '🧠', title: 'Compare Models', desc: '16 frontier models tracked — Claude Opus 4.7, GPT-5.4, Gemini 3.1 Pro, Llama 4, DeepSeek-R1.', link: `${base}models`, cta: 'Open tracker →', color: 'var(--purple)' },
-  { icon: '⚡', title: 'Power User', desc: 'Copilot cheatsheet, slash commands, customization stack, MCP config — all in one place.', link: `${base}resources`, cta: 'View resources →', color: 'var(--orange)' },
+  { icon: '🚀', title: 'New here?', desc: 'Start with the Daily Feed — curated AI news from 9+ sources, zero noise.', link: `${base}/feed`, cta: 'Read today\'s digest →', color: 'var(--accent)' },
+  { icon: '🎓', title: 'Learn & Build', desc: 'Deep-dive sessions on agents, RAG pipelines, MCP servers, and Copilot mastery.', link: `${base}/sessions`, cta: 'Browse sessions →', color: 'var(--green)' },
+  { icon: '🧠', title: 'Compare Models', desc: '16 frontier models tracked — Claude Opus 4.7, GPT-5.4, Gemini 3.1 Pro, Llama 4, DeepSeek-R1.', link: `${base}/models`, cta: 'Open tracker →', color: 'var(--purple)' },
+  { icon: '⚡', title: 'Power User', desc: 'Copilot cheatsheet, slash commands, customization stack, MCP config — all in one place.', link: `${base}/resources`, cta: 'View resources →', color: 'var(--orange)' },
 ];
 ---
 <BaseLayout title="Home" activeNav="home">
@@ -91,7 +91,7 @@ const pathCards = [
     </div>
 
     <div style="text-align:center;margin-top:24px;">
-      <a href={`${base}feed`} style="color:var(--accent);font-weight:600;font-size:0.9rem;">View full feed archive →</a>
+      <a href={`${base}/feed`} style="color:var(--accent);font-weight:600;font-size:0.9rem;">View full feed archive →</a>
     </div>
   </section>
   )}
@@ -104,7 +104,7 @@ const pathCards = [
     </div>
     <div class="poster-grid">
       {featuredSessions.map(session => (
-        <a href={session.data.link ? `${base}${session.data.link.replace(/^\//, '')}` : `${base}sessions/${session.id}`} class="poster-card">
+        <a href={session.data.link ? `${base}${session.data.link.startsWith('/') ? session.data.link : '/' + session.data.link}` : `${base}/sessions/${session.id}`} class="poster-card">
           <div class="poster-banner" style={`background:${session.data.bannerGradient || 'linear-gradient(135deg, var(--accent), var(--purple))'}`}>
             <div class="poster-label">Session · Hands-on</div>
           </div>
@@ -126,7 +126,7 @@ const pathCards = [
       ))}
     </div>
     <div style="text-align:center;margin-top:24px;">
-      <a href={`${base}sessions`} style="color:var(--accent);font-weight:600;font-size:0.9rem;">View all {allSessions.length} sessions →</a>
+      <a href={`${base}/sessions`} style="color:var(--accent);font-weight:600;font-size:0.9rem;">View all {allSessions.length} sessions →</a>
     </div>
   </section>
 
@@ -163,8 +163,8 @@ const pathCards = [
       </div>
       <div class="about-links">
         <a href="https://github.com/tatsat3mutee/techradar" target="_blank">GitHub ↗</a>
-        <a href={`${base}sessions`}>Sessions ↗</a>
-        <a href={`${base}rss.xml`} target="_blank">RSS Feed ↗</a>
+        <a href={`${base}/sessions`}>Sessions ↗</a>
+        <a href={`${base}/rss.xml`} target="_blank">RSS Feed ↗</a>
       </div>
     </div>
   </section>
@@ -176,17 +176,17 @@ const pathCards = [
       <p>Jump straight to what matters</p>
     </div>
     <div class="cards-grid cards-grid-3">
-      <a href={`${base}resources`} class="link-card">
+      <a href={`${base}/resources`} class="link-card">
         <span class="lc-icon">⚡</span>
         <div class="lc-info"><strong>Copilot Cheatsheet</strong><span>Shortcuts, commands & tips</span></div>
         <span class="lc-arrow">→</span>
       </a>
-      <a href={`${base}models`} class="link-card">
+      <a href={`${base}/models`} class="link-card">
         <span class="lc-icon">🧠</span>
         <div class="lc-info"><strong>Model Tracker</strong><span>16 frontier models compared</span></div>
         <span class="lc-arrow">→</span>
       </a>
-      <a href={`${base}feed`} class="link-card">
+      <a href={`${base}/feed`} class="link-card">
         <span class="lc-icon">📡</span>
         <div class="lc-info"><strong>Feed Archive</strong><span>Browse daily digests</span></div>
         <span class="lc-arrow">→</span>
@@ -201,7 +201,7 @@ const pathCards = [
         <div class="lc-info"><strong>LMArena</strong><span>Chatbot Arena leaderboard</span></div>
         <span class="lc-arrow">→</span>
       </a>
-      <a href={`${base}rss.xml`} target="_blank" class="link-card">
+      <a href={`${base}/rss.xml`} target="_blank" class="link-card">
         <span class="lc-icon">📡</span>
         <div class="lc-info"><strong>Subscribe via RSS</strong><span>Add to your feed reader</span></div>
         <span class="lc-arrow">→</span>
