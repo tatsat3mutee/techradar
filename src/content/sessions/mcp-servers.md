@@ -144,6 +144,58 @@ For production, use Streamable HTTP with OAuth 2.1 authentication so your MCP se
 - **Playwright Server** — Browser automation from AI chat
 - **Fetch Server** — HTTP requests to any API
 
+## 🏋️ LevelUP MCP — Team Exercise Guide
+
+This hands-on exercise walks your team through installing and using the **LevelUP MCP** server directly inside VS Code Copilot.
+
+### Pre-requisite
+
+Make sure everyone has **VS Code 1.110.0 or higher** installed. Check via **Help → About** in VS Code.
+
+### Step 1: Log in to LevelUP Hub
+
+1. Open your browser and navigate to **[https://levelup.web.att.com/genai-marketplace](https://levelup.web.att.com/genai-marketplace)**
+2. Log in with your AT&T credentials if prompted
+3. You should land on the LevelUP Hub GenAI Marketplace showing a list of tools
+
+### Step 2: Find and Install LevelUP MCP
+
+1. On the marketplace page, find the card titled **"LevelUP MCP"** (it has an **MCP** tag)
+2. Use the **Filters** to narrow by type if needed
+3. Click the **"Install"** button on the LevelUP MCP card
+4. This automatically triggers installation into VS Code — make sure VS Code is open in the background
+5. Wait for the installation to complete. You may see a confirmation prompt in VS Code
+
+### Step 3: Verify the Installation
+
+1. Switch to VS Code
+2. Open the **GitHub Copilot chat panel** (`Ctrl+Alt+I` or via `Ctrl+Shift+P` → "Copilot Chat")
+3. Confirm LevelUP MCP tools are available — you should be able to invoke MCP tools from within Copilot
+
+### Step 4: Try the MCP Tools
+
+Test these prompts inside **VS Code GitHub Copilot Chat**:
+
+**Test 1 — Your open work items:**
+```
+#get_my_open_work_items
+```
+Returns a list of your currently open work items if anything is assigned to you.
+
+**Test 2 — PR status:**
+```
+#get_pr_status
+```
+Returns the status of your pull requests.
+
+### Step 5: Explore Further
+
+- Type `#` in Copilot Chat to browse all available MCP tool suggestions
+- Try **combining tools** — check a work item, then check if there's a related PR
+- Note down tools that are useful for your day-to-day workflow
+
+---
+
 ## Key Takeaways
 
 1. MCP is becoming the standard for AI-tool integration — learn it now
