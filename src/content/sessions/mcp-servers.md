@@ -3,9 +3,23 @@ title: "MCP Servers — Extending AI with External Tools"
 description: "Hands-on guide to the Model Context Protocol: building MCP servers, connecting them to VS Code and Claude, tool annotations, OAuth auth, and real-world use cases."
 date: "2026-04-15"
 author: "Tatsat Pandey"
+presenters:
+  - name: "Rajagopal Neelakantan"
+    role: "MCP Session Lead"
+  - name: "Tatsat Pandey"
+    role: "Session Author"
 tags: ["MCP", "Model Context Protocol", "VS Code", "Claude", "Tool Use"]
 bannerGradient: "linear-gradient(135deg, #d4a574, #bc8cff)"
 featured: true
+---
+
+## Session Presenters
+
+| Presenter | Role |
+|-----------|------|
+| **Rajagopal Neelakantan** | MCP Session Lead |
+| **Tatsat Pandey** | Session Author & Content |
+
 ---
 
 ## Why MCP Matters

@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VS Code &amp; Copilot Evolution: v1.106  v1.116</title>
-<meta name="description" content="Interactive version-by-version guide to VS Code and GitHub Copilot features from v1.106 (Nov 2025) to v1.116 (Apr 2026). Built by Tatsat Pandey.">
-<meta property="og:title" content="VS Code & Copilot: IDE  Agentic AI-First Platform (v1.106–v1.116)">
-<meta property="og:description" content="11 releases. One transformation. From IDE to AI-native development platform.">
+<title>VS Code &amp; Copilot Evolution: v1.106 – v1.117</title>
+<meta name="description" content="Interactive version-by-version guide to VS Code and GitHub Copilot features from v1.106 (Nov 2025) to v1.117 (Apr 2026). Built by Tatsat Pandey.">
+<meta property="og:title" content="VS Code &amp; Copilot: IDE → Agentic AI-First Platform (v1.106–v1.117)">
+<meta property="og:description" content="12 releases. One transformation. From IDE to AI-native development platform.">
 <style>
   :root {
     --bg: #0d1117;
@@ -1086,8 +1086,8 @@
       <div class="guide-card-head" onclick="toggle(this)">
         <span class="guide-icon">🚀</span>
         <div class="guide-card-info">
-          <div class="guide-card-title">The Transformation: 4 Eras in 11 Releases</div>
-          <div class="guide-card-sub">v1.106 (Nov 2025) → v1.116 (Apr 2026)</div>
+          <div class="guide-card-title">The Transformation: 4 Eras in 12 Releases</div>
+          <div class="guide-card-sub">v1.106 (Nov 2025) → v1.117 (Apr 2026)</div>
         </div>
         <span class="guide-chev">▸</span>
       </div>
@@ -1113,8 +1113,8 @@
           <span class="gf-arrow">→</span>
           <div class="gf-step" style="flex:1;min-width:180px;border-color:var(--orange);">
             <strong style="color:var(--orange);">✨ Polish &amp; Ship</strong><br>
-            <span style="font-size:0.85em;color:var(--text-muted);">v1.114–116</span><br>
-            <span style="font-size:0.85em">Agents App, Copilot built-in, TypeScript 6.0, semantic search overhaul</span>
+            <span style="font-size:0.85em;color:var(--text-muted);">v1.114–117</span><br>
+            <span style="font-size:0.85em">Agents App, Copilot built-in, TypeScript 6.0, semantic search overhaul, MCP stability</span>
           </div>
         </div>
       </div>
@@ -1267,6 +1267,12 @@
       <div class="vb-num">v1.116</div>
       <div class="vb-date">Apr 2026</div>
       <div class="vb-theme">Copilot Built-In</div>
+    </div>
+    <div class="version-btn" data-target="v117">
+      <span class="vb-badge era4" style="background:var(--green);color:#000;">Latest</span>
+      <div class="vb-num">v1.117</div>
+      <div class="vb-date">Apr 2026</div>
+      <div class="vb-theme">Agent Stability &amp; MCP</div>
     </div>
   </div>
 </section>
@@ -2054,13 +2060,67 @@
   </div>
 </section>
 
+<!-- ===== v1.117 ===== -->
+<section class="version-section" id="v117">
+  <div class="version-header">
+    <div class="version-tag" style="background:var(--green);color:#000;">v1.117</div>
+    <div class="version-meta">
+      <div class="date">April 2026 — Released Apr 22, 2026</div>
+      <div class="theme">Agent Stability, MCP Updates &amp; Performance</div>
+    </div>
+  </div>
+  <div class="category-grid">
+    <div class="card" data-cat="agents">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon agents"></div>
+        <div class="card-title">Agent Mode Stability</div>
+        <div class="card-count">4 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>Improved Agent Stability <span class="tag tag-new">New</span></h4><p>Reduced agent mode crashes and timeouts. Long-running tasks now recover gracefully from transient errors.</p></div>
+        <div class="feature"><h4>Agent Task History <span class="tag tag-new">New</span></h4><p>Full history of agent tasks is now persisted across restarts so you never lose context on a long-running job.</p></div>
+        <div class="feature"><h4>Parallel Tool Execution <span class="tag tag-experimental">Experimental</span></h4><p>Agent can now invoke multiple independent tools in parallel, significantly speeding up multi-step tasks.</p></div>
+        <div class="feature"><h4>Auto-retry on Tool Failure <span class="tag tag-new">New</span></h4><p>Agent automatically retries failed tool calls with exponential backoff before surfacing an error to the user.</p></div>
+      </div></div>
+    </div>
+    <div class="card" data-cat="mcp">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon tools"></div>
+        <div class="card-title">MCP Server Updates</div>
+        <div class="card-count">3 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>MCP Tool Discovery Improvements <span class="tag tag-new">New</span></h4><p>Faster MCP server discovery on startup. Tools appear in the <code>#</code> picker instantly without reload.</p></div>
+        <div class="feature"><h4>MCP OAuth Token Refresh <span class="tag tag-new">New</span></h4><p>Streamable HTTP MCP servers now automatically refresh OAuth tokens in the background — no more mid-session auth failures.</p></div>
+        <div class="feature"><h4>MCP Error Diagnostics <span class="tag tag-new">New</span></h4><p>Clearer error messages when an MCP server fails to connect, with actionable troubleshooting suggestions inline.</p></div>
+      </div></div>
+    </div>
+    <div class="card" data-cat="editor">
+      <div class="card-head" onclick="toggle(this)">
+        <div class="card-icon editor"></div>
+        <div class="card-title">Editor &amp; Performance</div>
+        <div class="card-count">4 features</div>
+        <div class="card-chevron"></div>
+      </div>
+      <div class="card-body"><div class="card-content">
+        <div class="feature"><h4>Workspace Indexing Speed <span class="tag tag-new">New</span></h4><p>Large monorepo indexing is up to 3× faster, reducing the delay before semantic search and agent context kicks in.</p></div>
+        <div class="feature"><h4>Chat Response Streaming <span class="tag tag-new">New</span></h4><p>Chat responses now stream token-by-token with no perceptible lag even on large code completions.</p></div>
+        <div class="feature"><h4>Copilot Inline Completions <span class="tag tag-new">New</span></h4><p>Inline completions are now powered by the same model routing as chat — model quality improvements apply automatically.</p></div>
+        <div class="feature"><h4>Memory Usage Reduction <span class="tag tag-new">New</span></h4><p>Significant memory footprint reductions in the extension host — lower overhead especially in large workspaces.</p></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
 <!-- close version-detail-area -->
 </div>
 
 <!-- ============ COMPARISON & EVOLUTION CHART ============ -->
 <section class="comparison-section">
   <h2>Evolution at a Glance</h2>
-  <p class="comp-sub">How key capabilities grew across 11 releases</p>
+  <p class="comp-sub">How key capabilities grew across 12 releases</p>
 
   <!-- Bar chart: Feature count per version -->
   <div class="evo-chart">
@@ -2077,12 +2137,13 @@
       <div class="evo-bar" style="height:35%" title="v1.114: 10 features"><div class="bar-val">10</div><div class="bar-label">114</div></div>
       <div class="evo-bar" style="height:28%" title="v1.115: 7 features"><div class="bar-val">7</div><div class="bar-label">115</div></div>
       <div class="evo-bar" style="height:42%" title="v1.116: 13 features"><div class="bar-val">13</div><div class="bar-label">116</div></div>
+      <div class="evo-bar" style="height:36%" title="v1.117: 11 features"><div class="bar-val">11</div><div class="bar-label">117</div></div>
     </div>
     <div class="evo-legend">
       <span><span class="leg-dot" style="background:var(--accent)"></span> Foundation (106)</span>
       <span><span class="leg-dot" style="background:var(--green)"></span> Sessions Era (107–110)</span>
       <span><span class="leg-dot" style="background:var(--purple)"></span> Autonomy Era (111–113)</span>
-      <span><span class="leg-dot" style="background:var(--orange)"></span> Polish &amp; Ship (114–116)</span>
+      <span><span class="leg-dot" style="background:var(--orange)"></span> Polish &amp; Ship (114–117)</span>
     </div>
   </div>
 
