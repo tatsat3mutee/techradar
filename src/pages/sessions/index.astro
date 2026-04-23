@@ -6,6 +6,7 @@ const sessions = await getCollection('sessions');
 const sorted = sessions.sort((a, b) => b.data.date.localeCompare(a.data.date));
 const featured = sorted.filter(s => s.data.featured);
 const rest = sorted.filter(s => !s.data.featured);
+const base = import.meta.env.BASE_URL;
 ---
 <BaseLayout title="Sessions" activeNav="sessions">
 
@@ -18,7 +19,7 @@ const rest = sorted.filter(s => !s.data.featured);
 
     <div class="poster-grid">
       {sorted.map(session => (
-        <a href={session.data.link || `/sessions/${session.id}`} class="poster-card">
+        <a href={session.data.link ? `${base}${session.data.link.replace(/^\//, '')}` : `${base}sessions/${session.id}`} class="poster-card">
           <div class="poster-banner" style={`background:${session.data.bannerGradient || 'linear-gradient(135deg, var(--accent), var(--purple))'}`}>
             <div class="poster-label">{session.data.featured ? 'Featured · Hands-on' : 'Session'}</div>
           </div>

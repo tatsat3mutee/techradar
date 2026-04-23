@@ -8,6 +8,7 @@ interface Props {
 }
 
 const { title, description = 'One-stop AI & tech intelligence hub — daily aggregated news, model releases, SOTA research, sessions & more. By Tatsat Pandey.', activeNav = '' } = Astro.props;
+const base = import.meta.env.BASE_URL;
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -18,23 +19,23 @@ const { title, description = 'One-stop AI & tech intelligence hub — daily aggr
   <meta name="description" content={description}>
   <meta property="og:title" content={`${title} | TechRadar by Tatsat`}>
   <meta property="og:description" content={description}>
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`}>
 </head>
 <body>
 
 <!-- ===== NAV ===== -->
 <nav class="site-nav">
-  <a href="/" class="nav-brand">
+  <a href={base} class="nav-brand">
     <span class="brand-icon">⚡</span>
     TechRadar
   </a>
   <div class="nav-links">
-    <a href="/" class:list={[{ active: activeNav === 'home' }]}>Home</a>
-    <a href="/feed" class:list={[{ active: activeNav === 'feed' }]}>Daily Feed</a>
-    <a href="/sessions" class:list={[{ active: activeNav === 'sessions' }]}>Sessions</a>
-    <a href="/resources" class:list={[{ active: activeNav === 'resources' }]}>Resources</a>
-    <a href="/models" class:list={[{ active: activeNav === 'models' }]}>Models</a>
-    <a href="/knowledge" class:list={[{ active: activeNav === 'knowledge' }]}>Dev Knowledge</a>
+    <a href={base} class:list={[{ active: activeNav === 'home' }]}>Home</a>
+    <a href={`${base}feed`} class:list={[{ active: activeNav === 'feed' }]}>Daily Feed</a>
+    <a href={`${base}sessions`} class:list={[{ active: activeNav === 'sessions' }]}>Sessions</a>
+    <a href={`${base}resources`} class:list={[{ active: activeNav === 'resources' }]}>Resources</a>
+    <a href={`${base}models`} class:list={[{ active: activeNav === 'models' }]}>Models</a>
+    <a href={`${base}knowledge`} class:list={[{ active: activeNav === 'knowledge' }]}>Dev Knowledge</a>
   </div>
   <div class="nav-search">
     <input type="text" placeholder="Search..." id="globalSearch" autocomplete="off">
@@ -49,12 +50,12 @@ const { title, description = 'One-stop AI & tech intelligence hub — daily aggr
   <div class="footer-brand">TechRadar by Tatsat</div>
   <p style="margin-top:6px;">AI engineer's intelligence hub — auto-aggregated daily from 9+ sources</p>
   <div class="footer-links">
-    <a href="/">Home</a>
-    <a href="/feed">Feed</a>
-    <a href="/sessions">Sessions</a>
-    <a href="/resources">Resources</a>
-    <a href="/models">Models</a>
-    <a href="/rss.xml" target="_blank">RSS</a>
+    <a href={base}>Home</a>
+    <a href={`${base}feed`}>Feed</a>
+    <a href={`${base}sessions`}>Sessions</a>
+    <a href={`${base}resources`}>Resources</a>
+    <a href={`${base}models`}>Models</a>
+    <a href={`${base}rss.xml`} target="_blank">RSS</a>
     <a href="https://github.com/tatsat3mutee/techradar" target="_blank">GitHub</a>
   </div>
   <p style="margin-top:16px;font-size:0.72rem;color:var(--text-muted);">Built with Astro · Updated daily via GitHub Actions · No API keys required</p>
