@@ -17,7 +17,7 @@ export async function GET(context) {
   );
 
   return rss({
-    title: 'TechRadar by Tatsat — Daily AI Feed',
+    title: 'TechRadar — Daily AI Feed',
     description: 'Aggregated AI & tech news from OpenAI, Anthropic, Google DeepMind, Meta AI, Hugging Face, ArXiv, GitHub, and more.',
     site: context.site,
     items,

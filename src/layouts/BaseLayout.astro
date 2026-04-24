@@ -7,7 +7,7 @@ interface Props {
   activeNav?: string;
 }
 
-const { title, description = 'One-stop AI & tech intelligence hub — daily aggregated news, model releases, SOTA research, sessions & more. By Tatsat Pandey.', activeNav = '' } = Astro.props;
+const { title, description = 'One-stop AI & tech intelligence hub — daily aggregated news, model releases, SOTA research, sessions, and developer workflows.', activeNav = '' } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 <!DOCTYPE html>
@@ -15,9 +15,9 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{title} | TechRadar by Tatsat</title>
+  <title>{title} | TechRadar</title>
   <meta name="description" content={description}>
-  <meta property="og:title" content={`${title} | TechRadar by Tatsat`}>
+  <meta property="og:title" content={`${title} | TechRadar`}>
   <meta property="og:description" content={description}>
   <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`}>
 </head>
@@ -47,8 +47,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 <!-- ===== FOOTER ===== -->
 <footer class="site-footer">
-  <div class="footer-brand">TechRadar by Tatsat</div>
-  <p style="margin-top:6px;">AI engineer's intelligence hub — auto-aggregated daily from 9+ sources</p>
+  <div class="footer-brand">TechRadar</div>
+  <p style="margin-top:6px;">Agentic AI intelligence hub — curated signal for developers and builders</p>
   <div class="footer-links">
     <a href={base || '/'}>Home</a>
     <a href={`${base}/feed`}>Feed</a>
@@ -58,7 +58,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     <a href={`${base}/rss.xml`} target="_blank">RSS</a>
     <a href="https://github.com/tatsat3mutee/techradar" target="_blank">GitHub</a>
   </div>
-  <p style="margin-top:16px;font-size:0.72rem;color:var(--text-muted);">Built with Astro · Updated daily via GitHub Actions · No API keys required</p>
+  <p style="margin-top:16px;font-size:0.72rem;color:var(--text-muted);">Updated daily via GitHub Actions · Signal &gt; noise · ✦ TP</p>
 </footer>
 
 </body>

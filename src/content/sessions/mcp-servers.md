@@ -2,24 +2,13 @@
 title: "MCP Servers — Extending AI with External Tools"
 description: "Enterprise-safe MCP overview focused on the approved LevelUP MCP workflow in VS Code Copilot."
 date: "2026-04-15"
-author: "Tatsat Pandey"
+author: "Rajagopal Neelakantan"
 presenters:
   - name: "Rajagopal Neelakantan"
     role: "MCP Session Lead"
-  - name: "Tatsat Pandey"
-    role: "Session Author"
 tags: ["MCP", "Model Context Protocol", "VS Code", "Claude", "Tool Use"]
 bannerGradient: "linear-gradient(135deg, #d4a574, #bc8cff)"
 featured: true
----
-
-## Session Presenters
-
-| Presenter | Role |
-|-----------|------|
-| **Rajagopal Neelakantan** | MCP Session Lead |
-| **Tatsat Pandey** | Session Author & Content |
-
 ---
 
 ## Basic MCP Overview
