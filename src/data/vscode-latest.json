@@ -1,8 +1,8 @@
 {
-  "version": "1.117.0",
-  "date": "2026-04-22",
-  "link": "https://github.com/microsoft/vscode/releases/tag/1.117.0",
-  "description": "https://code.visualstudio.com/updates/v1_117",
-  "fetchedAt": "2026-04-22T20:16:37.462Z",
+  "version": "0.45.1",
+  "date": "2026-04-23",
+  "link": "https://github.com/microsoft/vscode/releases/tag/v0.45.1",
+  "description": "\r\n## Changes:\r\n\r\n* #312049: bump copilot version\r\n* #312048: Remove upgrade and plan branching\r\n* #312000: [cherry-pick] Add option to switch to Auto in weekly limit messaging\r\n* #311991: Updating labels\r\n\r\nThis list of changes was [auto generated](https://dev.azure.com/monacotools/Monaco/_build/res",
+  "fetchedAt": "2026-04-24T08:15:42.459Z",
   "source": "github"
 }
