@@ -13,9 +13,10 @@ link: "/sessions/vscode-copilot/"
 
 - **The Customization Stack** — `.github/copilot-instructions.md`, `.instructions.md`, SKILL.md, AGENTS.md, `.hooks/`
 - **Agent Mode** — From Ask to Agent: how autonomous coding works in VS Code
-- **MCP Servers** — Connecting external tools via the Model Context Protocol
+- **Approved MCP Usage** — LevelUP MCP and enterprise-safe workflows in VS Code
+- **Awesome Copilot** — Community agents, instructions, skills, hooks, plugins, workflows, and the Learning Hub
 - **Slash Commands** — `/explain`, `/fix`, `/tests`, `/doc` and context variables like `#file`, `#codebase`, `#terminalLastCommand`
-- **Version-by-Version Changelog** — What shipped in each VS Code release from 1.96 to 1.100
+- **Version-by-Version Changelog** — What shipped in each VS Code release from 1.106 to 1.117
 
 ## Interactive Guide
 

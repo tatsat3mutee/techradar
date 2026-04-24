@@ -24,6 +24,10 @@ const sessions = defineCollection({
     description: z.string(),
     date: z.string(),
     author: z.string().default('Tatsat Pandey'),
+    presenters: z.array(z.object({
+      name: z.string(),
+      role: z.string().optional(),
+    })).optional(),
     tags: z.array(z.string()),
     bannerGradient: z.string().optional(),
     featured: z.boolean().default(false),

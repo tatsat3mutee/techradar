@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 <BaseLayout title="Resources" activeNav="resources">
 
@@ -79,7 +80,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <div class="cmd-row"><div class="cmd-name">.instructions.md</div><div class="cmd-desc">Scoped instruction files with applyTo glob patterns — target specific file types or folders</div></div>
           <div class="cmd-row"><div class="cmd-name">SKILL.md</div><div class="cmd-desc">Reusable domain-specific skills with tool restrictions and activation triggers</div></div>
           <div class="cmd-row"><div class="cmd-name">AGENTS.md / .agent.md</div><div class="cmd-desc">Custom agent modes with specialized personas, tools, and workflows</div></div>
-          <div class="cmd-row"><div class="cmd-name">.vscode/mcp.json</div><div class="cmd-desc">MCP server configuration — connect external tools (GitHub, databases, APIs)</div></div>
+          <div class="cmd-row"><div class="cmd-name">.vscode/mcp.json</div><div class="cmd-desc">MCP server configuration for approved internal tools such as LevelUP MCP</div></div>
           <div class="cmd-row"><div class="cmd-name">.vscode/hooks/</div><div class="cmd-desc">Pre/post action hooks — run scripts before saves, validate edits, enforce rules</div></div>
         </div>
       </div>
@@ -111,11 +112,36 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <p>Switch to Agent mode → describe a complex task like "Add input validation to all API endpoints" → Copilot plans, edits files, runs tests, self-heals errors</p>
           </div>
           <div class="tip-card">
-            <div class="tip-label">🔌 MCP for External Data</div>
-            <p>Add MCP servers in <code>.vscode/mcp.json</code> to give Copilot access to your database, Jira board, or internal APIs during chat</p>
+            <div class="tip-label">🔌 Approved MCP Usage</div>
+            <p>Use approved internal MCP tools such as LevelUP MCP in Copilot chat. Avoid adding unapproved public MCP servers to your workspace.</p>
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- Developer Quick Access -->
+    <h3 style="font-size:1.15rem;font-weight:700;color:var(--text);margin:32px 0 16px;">🧑‍💻 Developer Quick Access</h3>
+    <div style="margin-bottom:16px;padding:18px 20px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);">
+      <p style="font-size:0.88rem;color:var(--text-muted);margin:0;">
+        For developers who want ready-made Copilot assets, <strong style="color:var(--text);">Awesome Copilot</strong> is the fastest place to browse curated agents, instructions, skills, hooks, plugins, workflows, tools, and the Learning Hub in one searchable collection.
+      </p>
+    </div>
+    <div class="cards-grid cards-grid-3" style="margin-bottom:32px;">
+      <a href="https://github.com/github/awesome-copilot" target="_blank" class="link-card">
+        <span class="lc-icon">🤖</span>
+        <div class="lc-info"><strong>Awesome Copilot Repo</strong><span>Community collection of agents, skills, hooks, workflows, and plugins</span></div>
+        <span class="lc-arrow">→</span>
+      </a>
+      <a href="https://awesome-copilot.github.com/learning-hub" target="_blank" class="link-card">
+        <span class="lc-icon">📚</span>
+        <div class="lc-info"><strong>Learning Hub</strong><span>Walkthroughs for instructions, hooks, workflows, MCP, and coding agents</span></div>
+        <span class="lc-arrow">→</span>
+      </a>
+      <a href="https://awesome-copilot.github.com/tools" target="_blank" class="link-card">
+        <span class="lc-icon">🛠️</span>
+        <div class="lc-info"><strong>Tools Catalog</strong><span>Developer tooling, integrations, and installable options with search</span></div>
+        <span class="lc-arrow">→</span>
+      </a>
     </div>
 
     <!-- Essential Documentation Links -->
@@ -192,7 +218,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div style="margin-top:40px;padding:24px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);text-align:center;">
       <p style="font-size:0.95rem;font-weight:600;color:var(--text);margin-bottom:8px;">📡 Subscribe to the TechRadar feed</p>
       <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:16px;">Get daily AI digest updates via RSS — works with any feed reader.</p>
-      <a href="/rss.xml" target="_blank" style="display:inline-block;padding:10px 24px;background:rgba(88,166,255,0.12);border:1px solid var(--accent);border-radius:8px;color:var(--accent);font-weight:600;font-size:0.88rem;text-decoration:none;">Subscribe via RSS ↗</a>
+      <a href={`${base}/rss.xml`} target="_blank" style="display:inline-block;padding:10px 24px;background:rgba(88,166,255,0.12);border:1px solid var(--accent);border-radius:8px;color:var(--accent);font-weight:600;font-size:0.88rem;text-decoration:none;">Subscribe via RSS ↗</a>
     </div>
 
   </section>

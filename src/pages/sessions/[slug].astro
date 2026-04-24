@@ -14,6 +14,7 @@ export async function getStaticPaths() {
 
 const { session } = Astro.props;
 const { Content } = await render(session);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 <BaseLayout title={session.data.title} activeNav="sessions">
 
@@ -22,13 +23,22 @@ const { Content } = await render(session);
 
     <!-- Banner -->
     <div style={`padding:48px 32px;border-radius:var(--radius);margin-bottom:32px;background:${session.data.bannerGradient || 'linear-gradient(135deg, var(--accent), var(--purple))'};`}>
-      <a href="/sessions" style="color:rgba(255,255,255,0.7);text-decoration:none;font-size:0.85rem;display:inline-block;margin-bottom:12px;">← Back to Sessions</a>
+      <a href={`${base}/sessions`} style="color:rgba(255,255,255,0.7);text-decoration:none;font-size:0.85rem;display:inline-block;margin-bottom:12px;">← Back to Sessions</a>
       <h1 style="font-size:1.8rem;font-weight:800;color:#fff;margin:0 0 12px;">{session.data.title}</h1>
       <p style="color:rgba(255,255,255,0.85);font-size:1rem;margin:0 0 16px;max-width:700px;">{session.data.description}</p>
       <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:0.85rem;color:rgba(255,255,255,0.7);">
         <span>📅 {session.data.date}</span>
         <span>👤 {session.data.author}</span>
       </div>
+      {session.data.presenters?.length ? (
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;">
+          {session.data.presenters.map(presenter => (
+            <span style="padding:6px 12px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);border-radius:999px;font-size:0.78rem;color:#fff;backdrop-filter:blur(4px);">
+              🎤 {presenter.name}{presenter.role ? ` · ${presenter.role}` : ''}
+            </span>
+          ))}
+        </div>
+      ) : null}
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;">
         {session.data.tags.map(tag => (
           <span style="padding:4px 12px;background:rgba(255,255,255,0.15);border-radius:20px;font-size:0.78rem;color:#fff;backdrop-filter:blur(4px);">{tag}</span>
@@ -43,8 +53,8 @@ const { Content } = await render(session);
 
     <!-- Bottom nav -->
     <div style="margin-top:48px;padding-top:24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;">
-      <a href="/sessions" style="color:var(--accent);text-decoration:none;font-size:0.9rem;">← All Sessions</a>
-      <a href="/feed" style="color:var(--accent);text-decoration:none;font-size:0.9rem;">Latest Feed →</a>
+      <a href={`${base}/sessions`} style="color:var(--accent);text-decoration:none;font-size:0.9rem;">← All Sessions</a>
+      <a href={`${base}/feed`} style="color:var(--accent);text-decoration:none;font-size:0.9rem;">Latest Feed →</a>
     </div>
 
   </section>
