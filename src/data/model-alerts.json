@@ -1,5 +1,13 @@
 [
   {
+    "model": "DeepSeek-V4",
+    "source": "Hugging Face",
+    "title": "DeepSeek-V4: a million-token context that agents can actually use",
+    "url": "https://huggingface.co/blog/deepseekv4",
+    "date": "Fri, 24 Apr 2026 00:00:00 GMT",
+    "detectedAt": "2026-04-25T07:39:56.152Z"
+  },
+  {
     "model": "ChatGPT Images 2.0 ChatGPT Images 2.0 introduces a state-of-the-art image generation model with improved text rendering",
     "source": "OpenAI",
     "title": "Introducing ChatGPT Images 2.0",
