@@ -1,8 +1,8 @@
 {
-  "version": "1.118.0",
-  "date": "2026-04-29",
-  "link": "https://github.com/microsoft/vscode/releases/tag/1.118.0",
-  "description": "https://code.visualstudio.com/updates/v1_118",
-  "fetchedAt": "2026-04-30T08:32:01.065Z",
+  "version": "1.118.1",
+  "date": "2026-04-30",
+  "link": "https://github.com/microsoft/vscode/releases/tag/1.118.1",
+  "description": "Fixed GitHub Copilot CLI not working from VS Code.\r\n\r\nhttps://code.visualstudio.com/updates/v1_118\r\n",
+  "fetchedAt": "2026-05-01T08:22:06.647Z",
   "source": "github"
 }
