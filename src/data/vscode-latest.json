@@ -1,8 +1,8 @@
 {
-  "version": "1.122.0",
-  "date": "2026-05-28",
-  "link": "https://github.com/microsoft/vscode/releases/tag/1.122.0",
-  "description": "https://code.visualstudio.com/updates/v1_122\r\n",
-  "fetchedAt": "2026-05-28T10:18:15.830Z",
+  "version": "1.122.1",
+  "date": "2026-05-29",
+  "link": "https://github.com/microsoft/vscode/releases/tag/1.122.1",
+  "description": "The update addresses these [issues](https://github.com/Microsoft/vscode/issues?q=is%3Aissue%20milestone%3A1.122.1%20is%3Aclosed)\r\n\r\nhttps://code.visualstudio.com/updates/v1_122",
+  "fetchedAt": "2026-05-30T08:35:54.412Z",
   "source": "github"
 }
