@@ -30,13 +30,5 @@
     "url": "https://techcrunch.com/2026/05/13/introducing-the-6-stages-of-techcrunch-disrupt-2026-built-for-todays-tougher-startup-market/",
     "date": "Wed, 13 May 2026 14:00:00 +0000",
     "detectedAt": "2026-05-14T08:46:39.720Z"
-  },
-  {
-    "model": "NVIDIA Nemotron 3 Nano Omni",
-    "source": "Hugging Face",
-    "title": "Introducing NVIDIA Nemotron 3 Nano Omni: Long-Context Multimodal Intelligence for Documents, Audio and Video Agents",
-    "url": "https://huggingface.co/blog/nvidia/nemotron-3-nano-omni-multimodal-intelligence",
-    "date": "Tue, 28 Apr 2026 15:58:57 GMT",
-    "detectedAt": "2026-05-01T08:22:07.437Z"
   }
 ]
