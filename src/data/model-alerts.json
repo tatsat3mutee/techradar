@@ -1,5 +1,13 @@
 [
   {
+    "model": "Mellum2",
+    "source": "Hugging Face",
+    "title": "Introducing Mellum2: A 12B Mixture-of-Experts Model by JetBrains",
+    "url": "https://huggingface.co/blog/JetBrains/mellum2-launch",
+    "date": "Mon, 01 Jun 2026 15:45:17 GMT",
+    "detectedAt": "2026-06-02T10:48:41.990Z"
+  },
+  {
     "model": "the new desktop app as a research preview in more than 20 markets.",
     "source": "TechCrunch AI",
     "title": "Spotify takes on Google&#8217;s NotebookLM with its new app",
