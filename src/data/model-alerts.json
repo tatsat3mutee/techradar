@@ -1,5 +1,37 @@
 [
   {
+    "model": "Gemini 3.5 Live Translate Gemini 3.5 Live Translate brings near real",
+    "source": "Google DeepMind",
+    "title": "Fluid, natural voice translation with Gemini 3.5 Live Translate",
+    "url": "https://deepmind.google/blog/fluid-natural-voice-translation-with-gemini-35-live-translate/",
+    "date": "Tue, 09 Jun 2026 15:16:25 +0000",
+    "detectedAt": "2026-06-10T10:15:14.885Z"
+  },
+  {
+    "model": "Gemma 4 12B",
+    "source": "Google DeepMind",
+    "title": "Introducing Gemma 4 12B: a unified, encoder-free multimodal model",
+    "url": "https://deepmind.google/blog/introducing-gemma-4-12b-a-unified-encoder-free-multimodal-model/",
+    "date": "Tue, 09 Jun 2026 14:10:19 +0000",
+    "detectedAt": "2026-06-10T10:15:14.886Z"
+  },
+  {
+    "model": "Claude Fable 5",
+    "source": "TechCrunch AI",
+    "title": "Anthropic&#8217;s Fable 5 can make weirdly fun video games with the click of a button",
+    "url": "https://techcrunch.com/2026/06/09/anthropics-fable-5-can-make-weirdly-fun-video-games-with-the-click-of-a-button/",
+    "date": "Tue, 09 Jun 2026 20:37:49 +0000",
+    "detectedAt": "2026-06-10T10:15:15.507Z"
+  },
+  {
+    "model": "Claude Fable 5 is a version of Mythos the public can access today Anthropic is releasing Claude Fable 5",
+    "source": "TechCrunch AI",
+    "title": "Anthropic&#8217;s Claude Fable 5 is a version of Mythos the public can access today",
+    "url": "https://techcrunch.com/2026/06/09/anthropics-claude-fable-5-is-a-version-of-mythos-the-public-can-access-today/",
+    "date": "Tue, 09 Jun 2026 17:00:00 +0000",
+    "detectedAt": "2026-06-10T10:15:15.507Z"
+  },
+  {
     "model": "Mellum2",
     "source": "Hugging Face",
     "title": "Introducing Mellum2: A 12B Mixture-of-Experts Model by JetBrains",
