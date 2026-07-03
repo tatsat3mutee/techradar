@@ -134,13 +134,5 @@
     "url": "https://huggingface.co/blog/JetBrains/mellum2-launch",
     "date": "Mon, 01 Jun 2026 15:45:17 GMT",
     "detectedAt": "2026-06-03T11:16:26.252Z"
-  },
-  {
-    "model": "Mellum2",
-    "source": "Hugging Face",
-    "title": "Introducing Mellum2: A 12B Mixture-of-Experts Model by JetBrains",
-    "url": "https://huggingface.co/blog/JetBrains/mellum2-launch",
-    "date": "Mon, 01 Jun 2026 15:45:17 GMT",
-    "detectedAt": "2026-06-02T10:48:41.990Z"
   }
 ]
