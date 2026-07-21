@@ -1,5 +1,13 @@
 [
   {
+    "model": "Cosmos 3 Edge",
+    "source": "Hugging Face",
+    "title": "Introducing Cosmos 3 Edge",
+    "url": "https://huggingface.co/blog/nvidia/cosmos3edge",
+    "date": "Mon, 20 Jul 2026 15:58:51 GMT",
+    "detectedAt": "2026-07-21T08:39:13.778Z"
+  },
+  {
     "model": "Grok 4.5",
     "source": "TechCrunch AI",
     "title": "SpaceXAI releases Grok 4.5, which Elon describes as an &#8216;Opus-class model&#8217;",
