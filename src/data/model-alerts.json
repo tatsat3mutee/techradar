@@ -1,5 +1,13 @@
 [
   {
+    "model": "Gemini 3.6 Flash",
+    "source": "Google DeepMind",
+    "title": "Introducing Gemini 3.6 Flash, 3.5 Flash-Lite, and 3.5 Flash Cyber",
+    "url": "https://deepmind.google/blog/introducing-gemini-36-flash-35-flash-lite-and-35-flash-cyber/",
+    "date": "Tue, 21 Jul 2026 15:16:30 +0000",
+    "detectedAt": "2026-07-22T08:38:31.659Z"
+  },
+  {
     "model": "Cosmos 3 Edge",
     "source": "Hugging Face",
     "title": "Introducing Cosmos 3 Edge",
