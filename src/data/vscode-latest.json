@@ -1,8 +1,8 @@
 {
-  "version": "1.129.1",
-  "date": "2026-07-17",
-  "link": "https://github.com/microsoft/vscode/releases/tag/1.129.1",
-  "description": "https://code.visualstudio.com/updates/v1_129",
-  "fetchedAt": "2026-07-18T08:02:49.117Z",
+  "version": "1.130.0",
+  "date": "2026-07-22",
+  "link": "https://github.com/microsoft/vscode/releases/tag/1.130.0",
+  "description": "https://code.visualstudio.com/updates/v1_130",
+  "fetchedAt": "2026-07-23T08:40:34.256Z",
   "source": "github"
 }
