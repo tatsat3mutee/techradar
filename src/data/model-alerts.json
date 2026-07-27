@@ -46,37 +46,5 @@
     "url": "https://techcrunch.com/2026/06/30/anthropic-launches-claude-sonnet-5-as-a-cheaper-way-to-run-agents/",
     "date": "Tue, 30 Jun 2026 18:00:00 +0000",
     "detectedAt": "2026-07-01T10:02:56.195Z"
-  },
-  {
-    "model": "computer use in Gemini 3.5 Flash",
-    "source": "Google DeepMind",
-    "title": "Introducing computer use in Gemini 3.5 Flash",
-    "url": "https://deepmind.google/blog/introducing-computer-use-in-gemini-3-5-flash/",
-    "date": "Wed, 24 Jun 2026 16:30:01 +0000",
-    "detectedAt": "2026-06-27T08:45:39.440Z"
-  },
-  {
-    "model": "Gemini 3.5 Flash",
-    "source": "Google DeepMind",
-    "title": "Introducing computer use in Gemini 3.5 Flash",
-    "url": "https://deepmind.google/blog/introducing-computer-use-in-gemini-3-5-flash/",
-    "date": "Wed, 24 Jun 2026 16:30:01 +0000",
-    "detectedAt": "2026-06-27T08:45:39.440Z"
-  },
-  {
-    "model": "computer use in Gemini 3.5 Flash",
-    "source": "Google DeepMind",
-    "title": "Introducing computer use in Gemini 3.5 Flash",
-    "url": "https://deepmind.google/blog/introducing-computer-use-in-gemini-3-5-flash/",
-    "date": "Wed, 24 Jun 2026 16:30:01 +0000",
-    "detectedAt": "2026-06-26T09:41:00.907Z"
-  },
-  {
-    "model": "Gemini 3.5 Flash",
-    "source": "Google DeepMind",
-    "title": "Introducing computer use in Gemini 3.5 Flash",
-    "url": "https://deepmind.google/blog/introducing-computer-use-in-gemini-3-5-flash/",
-    "date": "Wed, 24 Jun 2026 16:30:01 +0000",
-    "detectedAt": "2026-06-26T09:41:00.907Z"
   }
 ]
