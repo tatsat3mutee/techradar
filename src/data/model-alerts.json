@@ -5,6 +5,14 @@
     "title": "We’re launching Lyria 3.5 in Google Flow Music, with advances across musicality, lyrics, vocals, and creative control",
     "url": "https://deepmind.google/blog/were-launching-lyria-35-in-google-flow-music-with-advances-across-musicality-lyrics-vocals-and-creative-control/",
     "date": "Wed, 29 Jul 2026 16:02:10 +0000",
+    "detectedAt": "2026-08-01T08:29:34.264Z"
+  },
+  {
+    "model": "Lyria 3.5 in Google Flow Music",
+    "source": "Google DeepMind",
+    "title": "We’re launching Lyria 3.5 in Google Flow Music, with advances across musicality, lyrics, vocals, and creative control",
+    "url": "https://deepmind.google/blog/were-launching-lyria-35-in-google-flow-music-with-advances-across-musicality-lyrics-vocals-and-creative-control/",
+    "date": "Wed, 29 Jul 2026 16:02:10 +0000",
     "detectedAt": "2026-07-31T09:11:01.566Z"
   },
   {
@@ -62,13 +70,5 @@
     "url": "https://techcrunch.com/2026/07/08/spacexai-releases-grok-4-5-which-elon-describes-as-an-opus-class-model/",
     "date": "Wed, 08 Jul 2026 19:30:16 +0000",
     "detectedAt": "2026-07-09T09:51:57.303Z"
-  },
-  {
-    "model": "Claude Sonnet 5",
-    "source": "TechCrunch AI",
-    "title": "Anthropic launches Claude Sonnet 5 as a cheaper way to run agents",
-    "url": "https://techcrunch.com/2026/06/30/anthropic-launches-claude-sonnet-5-as-a-cheaper-way-to-run-agents/",
-    "date": "Tue, 30 Jun 2026 18:00:00 +0000",
-    "detectedAt": "2026-07-01T10:02:56.195Z"
   }
 ]
