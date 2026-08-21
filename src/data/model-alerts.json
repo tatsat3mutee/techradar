@@ -78,13 +78,5 @@
     "url": "https://deepmind.google/blog/introducing-gemini-36-flash-35-flash-lite-and-35-flash-cyber/",
     "date": "Tue, 21 Jul 2026 15:16:30 +0000",
     "detectedAt": "2026-07-22T08:38:31.659Z"
-  },
-  {
-    "model": "Cosmos 3 Edge",
-    "source": "Hugging Face",
-    "title": "Introducing Cosmos 3 Edge",
-    "url": "https://huggingface.co/blog/nvidia/cosmos3edge",
-    "date": "Mon, 20 Jul 2026 15:58:51 GMT",
-    "detectedAt": "2026-07-21T08:39:13.778Z"
   }
 ]
