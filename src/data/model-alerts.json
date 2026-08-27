@@ -1,5 +1,13 @@
 [
   {
+    "model": "Gemini 3.5 Transcribe Now you can get more intelligent speech",
+    "source": "Google DeepMind",
+    "title": "Intelligent transcription with Gemini 3.5 Transcribe",
+    "url": "https://deepmind.google/blog/intelligent-transcription-with-gemini-3-5-transcribe/",
+    "date": "Wed, 26 Aug 2026 17:01:00 +0000",
+    "detectedAt": "2026-08-27T17:32:51.278Z"
+  },
+  {
     "model": "Gemini 3.7 Flash",
     "source": "Google DeepMind",
     "title": "Introducing Gemini 3.7 Flash",
