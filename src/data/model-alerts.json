@@ -1,5 +1,13 @@
 [
   {
+    "model": "Gemini 3.8 Flash and 3.8 Flash Cyber",
+    "source": "Google DeepMind",
+    "title": "Introducing Gemini 3.8 Flash and 3.8 Flash Cyber",
+    "url": "https://deepmind.google/blog/introducing-gemini-3-8-flash-and-38-flash-cyber/",
+    "date": "Wed, 02 Sep 2026 16:18:31 +0000",
+    "detectedAt": "2026-09-03T11:01:29.995Z"
+  },
+  {
     "model": "Gemini 3.5 Transcribe Now you can get more intelligent speech",
     "source": "Google DeepMind",
     "title": "Intelligent transcription with Gemini 3.5 Transcribe",
