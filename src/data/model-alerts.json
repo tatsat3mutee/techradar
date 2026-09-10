@@ -1,5 +1,21 @@
 [
   {
+    "model": "GPT-6",
+    "source": "OpenAI",
+    "title": "GPT-6 Astra: The next generation in intelligence for work",
+    "url": "https://openai.com/index/gpt-6-astra-next-generation-work",
+    "date": "Wed, 09 Sep 2026 11:00:00 GMT",
+    "detectedAt": "2026-09-10T11:03:26.364Z"
+  },
+  {
+    "model": "ChatGPT Images 2.5 ChatGPT Images 2.5 helps turn your ideas",
+    "source": "OpenAI",
+    "title": "Introducing ChatGPT Images 2.5",
+    "url": "https://openai.com/index/introducing-chatgpt-images-2-5",
+    "date": "Tue, 08 Sep 2026 11:30:00 GMT",
+    "detectedAt": "2026-09-10T11:03:26.365Z"
+  },
+  {
     "model": "ChatGPT Images 2.5 ChatGPT Images 2.5 helps turn your ideas",
     "source": "OpenAI",
     "title": "Introducing ChatGPT Images 2.5",
