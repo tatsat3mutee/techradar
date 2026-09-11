@@ -2,6 +2,14 @@
   {
     "model": "GPT-6",
     "source": "OpenAI",
+    "title": "Introducing ChatGPT for Financial Services",
+    "url": "https://openai.com/index/introducing-chatgpt-financial-services",
+    "date": "Thu, 10 Sep 2026 07:00:00 GMT",
+    "detectedAt": "2026-09-11T11:01:53.642Z"
+  },
+  {
+    "model": "GPT-6",
+    "source": "OpenAI",
     "title": "GPT-6 Astra: The next generation in intelligence for work",
     "url": "https://openai.com/index/gpt-6-astra-next-generation-work",
     "date": "Wed, 09 Sep 2026 11:00:00 GMT",
