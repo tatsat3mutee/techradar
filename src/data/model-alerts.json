@@ -2,6 +2,14 @@
   {
     "model": "GPT-6",
     "source": "OpenAI",
+    "title": "Perplexity trusts GPT-6 Astra with end-to-end systems",
+    "url": "https://openai.com/index/perplexity-improving-accuracy-with-astra",
+    "date": "Mon, 14 Sep 2026 00:00:00 GMT",
+    "detectedAt": "2026-09-12T10:30:48.871Z"
+  },
+  {
+    "model": "GPT-6",
+    "source": "OpenAI",
     "title": "Introducing ChatGPT for Financial Services",
     "url": "https://openai.com/index/introducing-chatgpt-financial-services",
     "date": "Thu, 10 Sep 2026 07:00:00 GMT",
