@@ -5,6 +5,14 @@
     "title": "Perplexity trusts GPT-6 Astra with end-to-end systems",
     "url": "https://openai.com/index/perplexity-improving-accuracy-with-astra",
     "date": "Mon, 14 Sep 2026 00:00:00 GMT",
+    "detectedAt": "2026-09-13T11:33:53.371Z"
+  },
+  {
+    "model": "GPT-6",
+    "source": "OpenAI",
+    "title": "Perplexity trusts GPT-6 Astra with end-to-end systems",
+    "url": "https://openai.com/index/perplexity-improving-accuracy-with-astra",
+    "date": "Mon, 14 Sep 2026 00:00:00 GMT",
     "detectedAt": "2026-09-12T10:30:48.871Z"
   },
   {
@@ -166,13 +174,5 @@
     "url": "https://deepmind.google/blog/introducing-gemini-3-7-flash/",
     "date": "Thu, 13 Aug 2026 17:04:18 +0000",
     "detectedAt": "2026-08-15T06:48:51.381Z"
-  },
-  {
-    "model": "Gemini 3.7 Flash",
-    "source": "Google DeepMind",
-    "title": "Introducing Gemini 3.7 Flash",
-    "url": "https://deepmind.google/blog/introducing-gemini-3-7-flash/",
-    "date": "Thu, 13 Aug 2026 17:04:18 +0000",
-    "detectedAt": "2026-08-14T07:41:21.891Z"
   }
 ]
