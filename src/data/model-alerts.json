@@ -1,5 +1,13 @@
 [
   {
+    "model": "GPT-6",
+    "source": "OpenAI",
+    "title": "Hex turns complex analysis into visual reports with GPT‑6 Astra",
+    "url": "https://openai.com/index/hex-gpt-6-astra",
+    "date": "Wed, 16 Sep 2026 12:00:00 GMT",
+    "detectedAt": "2026-09-19T10:43:10.820Z"
+  },
+  {
     "model": "Gemini 3.8 Live and 3.8 Live Extended Thinking",
     "source": "Google DeepMind",
     "title": "Introducing Gemini 3.8 Live and 3.8 Live Extended Thinking",
