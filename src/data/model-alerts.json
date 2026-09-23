@@ -2,6 +2,22 @@
   {
     "model": "GPT-6",
     "source": "OpenAI",
+    "title": "Better prompt caching for GPT-6",
+    "url": "https://openai.com/index/better-prompt-caching-for-gpt-6",
+    "date": "Tue, 22 Sep 2026 21:00:00 GMT",
+    "detectedAt": "2026-09-23T11:17:24.454Z"
+  },
+  {
+    "model": "GPT-6 Sol and Luna Meet GPT-6 Sol and Luna",
+    "source": "OpenAI",
+    "title": "Introducing GPT-6 Sol and Luna",
+    "url": "https://openai.com/index/introducing-gpt-6-sol-and-luna",
+    "date": "Tue, 22 Sep 2026 18:00:00 GMT",
+    "detectedAt": "2026-09-23T11:17:24.454Z"
+  },
+  {
+    "model": "GPT-6",
+    "source": "OpenAI",
     "title": "Higgsfield AI ships new video features in a day with GPT-6 Astra",
     "url": "https://openai.com/index/higgsfield-from-prompt-to-production-with-astra",
     "date": "Mon, 21 Sep 2026 12:00:00 GMT",
