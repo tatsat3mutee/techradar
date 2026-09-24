@@ -2,6 +2,22 @@
   {
     "model": "GPT-6",
     "source": "OpenAI",
+    "title": "Harvey turns legal context into stronger drafts with GPT-6 Astra",
+    "url": "https://openai.com/index/harvey-from-context-to-confidence-with-astra",
+    "date": "Wed, 23 Sep 2026 12:00:00 GMT",
+    "detectedAt": "2026-09-24T11:31:05.658Z"
+  },
+  {
+    "model": "Gemini 3.8 text",
+    "source": "Google DeepMind",
+    "title": "Gemini 3.8 text-to-speech says hello",
+    "url": "https://deepmind.google/blog/say-hello-to-gemini-38-text-to-speech/",
+    "date": "Wed, 23 Sep 2026 15:25:14 +0000",
+    "detectedAt": "2026-09-24T11:31:05.728Z"
+  },
+  {
+    "model": "GPT-6",
+    "source": "OpenAI",
     "title": "Better prompt caching for GPT-6",
     "url": "https://openai.com/index/better-prompt-caching-for-gpt-6",
     "date": "Tue, 22 Sep 2026 21:00:00 GMT",
