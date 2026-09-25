@@ -5,6 +5,30 @@
     "title": "Harvey turns legal context into stronger drafts with GPT-6 Astra",
     "url": "https://openai.com/index/harvey-from-context-to-confidence-with-astra",
     "date": "Wed, 23 Sep 2026 12:00:00 GMT",
+    "detectedAt": "2026-09-25T11:37:20.384Z"
+  },
+  {
+    "model": "Gemini 3.8 Live with Live Avatar",
+    "source": "Google DeepMind",
+    "title": "Introducing Gemini 3.8 Live with Live Avatar",
+    "url": "https://deepmind.google/blog/introducing-gemini-38-live-with-live-avatar/",
+    "date": "Thu, 24 Sep 2026 16:20:39 +0000",
+    "detectedAt": "2026-09-25T11:37:20.639Z"
+  },
+  {
+    "model": "Gemini 3.8 text",
+    "source": "Google DeepMind",
+    "title": "Gemini 3.8 text-to-speech says hello",
+    "url": "https://deepmind.google/blog/say-hello-to-gemini-38-text-to-speech/",
+    "date": "Wed, 23 Sep 2026 15:25:14 +0000",
+    "detectedAt": "2026-09-25T11:37:20.639Z"
+  },
+  {
+    "model": "GPT-6",
+    "source": "OpenAI",
+    "title": "Harvey turns legal context into stronger drafts with GPT-6 Astra",
+    "url": "https://openai.com/index/harvey-from-context-to-confidence-with-astra",
+    "date": "Wed, 23 Sep 2026 12:00:00 GMT",
     "detectedAt": "2026-09-24T11:31:05.658Z"
   },
   {
