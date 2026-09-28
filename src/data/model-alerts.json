@@ -5,6 +5,14 @@
     "title": "Proaction boosts sales 60% and saves 75+ hours with Codex",
     "url": "https://openai.com/index/proaction",
     "date": "Fri, 25 Sep 2026 19:00:00 GMT",
+    "detectedAt": "2026-09-28T13:33:41.677Z"
+  },
+  {
+    "model": "GPT-6",
+    "source": "OpenAI",
+    "title": "Proaction boosts sales 60% and saves 75+ hours with Codex",
+    "url": "https://openai.com/index/proaction",
+    "date": "Fri, 25 Sep 2026 19:00:00 GMT",
     "detectedAt": "2026-09-27T11:49:53.628Z"
   },
   {
@@ -294,21 +302,5 @@
     "url": "https://deepmind.google/blog/introducing-gemini-3-8-flash-and-38-flash-cyber/",
     "date": "Wed, 02 Sep 2026 16:18:31 +0000",
     "detectedAt": "2026-09-03T11:01:29.995Z"
-  },
-  {
-    "model": "Gemini 3.5 Transcribe Now you can get more intelligent speech",
-    "source": "Google DeepMind",
-    "title": "Intelligent transcription with Gemini 3.5 Transcribe",
-    "url": "https://deepmind.google/blog/intelligent-transcription-with-gemini-3-5-transcribe/",
-    "date": "Wed, 26 Aug 2026 17:01:00 +0000",
-    "detectedAt": "2026-08-29T12:35:33.929Z"
-  },
-  {
-    "model": "Gemini 3.5 Transcribe Now you can get more intelligent speech",
-    "source": "Google DeepMind",
-    "title": "Intelligent transcription with Gemini 3.5 Transcribe",
-    "url": "https://deepmind.google/blog/intelligent-transcription-with-gemini-3-5-transcribe/",
-    "date": "Wed, 26 Aug 2026 17:01:00 +0000",
-    "detectedAt": "2026-08-28T18:29:27.702Z"
   }
 ]
