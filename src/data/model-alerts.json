@@ -2,6 +2,14 @@
   {
     "model": "GPT-6",
     "source": "OpenAI",
+    "title": "Basis completes a tax workbook 2x faster with GPT-6 Astra",
+    "url": "https://openai.com/index/basis-tax-workbook-with-astra",
+    "date": "Mon, 28 Sep 2026 00:00:00 GMT",
+    "detectedAt": "2026-09-29T12:34:59.418Z"
+  },
+  {
+    "model": "GPT-6",
+    "source": "OpenAI",
     "title": "Proaction boosts sales 60% and saves 75+ hours with Codex",
     "url": "https://openai.com/index/proaction",
     "date": "Fri, 25 Sep 2026 19:00:00 GMT",
