@@ -1,5 +1,21 @@
 [
   {
+    "model": "Gemini 4 Argon",
+    "source": "Google DeepMind",
+    "title": "Gemini 4 Argon: our next era of frontier intelligence",
+    "url": "https://deepmind.google/blog/gemini-4-argon-our-next-era-of-frontier-intelligence/",
+    "date": "Wed, 30 Sep 2026 20:01:45 +0000",
+    "detectedAt": "2026-10-02T12:18:21.319Z"
+  },
+  {
+    "model": "Olmo-core 3",
+    "source": "Hugging Face",
+    "title": "Introducing Olmo-core 3: Open, scalable training infrastructure for large MoEs",
+    "url": "https://huggingface.co/blog/allenai/olmocore3",
+    "date": "Thu, 01 Oct 2026 15:01:43 GMT",
+    "detectedAt": "2026-10-02T12:18:21.396Z"
+  },
+  {
     "model": "GPT-6.1 Sol Meet GPT-6.1 Sol",
     "source": "OpenAI",
     "title": "Introducing GPT-6.1 Sol",
