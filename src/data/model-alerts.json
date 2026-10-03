@@ -1,5 +1,21 @@
 [
   {
+    "model": "GPT-6",
+    "source": "OpenAI",
+    "title": "A model guide for the GPT-6 family",
+    "url": "https://openai.com/index/practical-guide-building-gpt-6",
+    "date": "Fri, 02 Oct 2026 16:15:00 GMT",
+    "detectedAt": "2026-10-03T11:28:11.999Z"
+  },
+  {
+    "model": "Gemini 4 Argon",
+    "source": "Google DeepMind",
+    "title": "Gemini 4 Argon: our next era of frontier intelligence",
+    "url": "https://deepmind.google/blog/gemini-4-argon-our-next-era-of-frontier-intelligence/",
+    "date": "Wed, 30 Sep 2026 20:01:45 +0000",
+    "detectedAt": "2026-10-03T11:28:12.034Z"
+  },
+  {
     "model": "Gemini 4 Argon",
     "source": "Google DeepMind",
     "title": "Gemini 4 Argon: our next era of frontier intelligence",
@@ -374,13 +390,5 @@
     "url": "https://deepmind.google/blog/introducing-gemini-3-8-flash-and-38-flash-cyber/",
     "date": "Wed, 02 Sep 2026 16:18:31 +0000",
     "detectedAt": "2026-09-04T11:09:25.983Z"
-  },
-  {
-    "model": "Gemini 3.8 Flash and 3.8 Flash Cyber",
-    "source": "Google DeepMind",
-    "title": "Introducing Gemini 3.8 Flash and 3.8 Flash Cyber",
-    "url": "https://deepmind.google/blog/introducing-gemini-3-8-flash-and-38-flash-cyber/",
-    "date": "Wed, 02 Sep 2026 16:18:31 +0000",
-    "detectedAt": "2026-09-03T11:01:29.995Z"
   }
 ]
