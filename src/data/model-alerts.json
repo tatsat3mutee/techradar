@@ -5,6 +5,14 @@
     "title": "A model guide for the GPT-6 family",
     "url": "https://openai.com/index/practical-guide-building-gpt-6",
     "date": "Fri, 02 Oct 2026 16:15:00 GMT",
+    "detectedAt": "2026-10-04T12:09:30.525Z"
+  },
+  {
+    "model": "GPT-6",
+    "source": "OpenAI",
+    "title": "A model guide for the GPT-6 family",
+    "url": "https://openai.com/index/practical-guide-building-gpt-6",
+    "date": "Fri, 02 Oct 2026 16:15:00 GMT",
     "detectedAt": "2026-10-03T11:28:11.999Z"
   },
   {
@@ -366,29 +374,5 @@
     "url": "https://deepmind.google/blog/introducing-gemini-3-8-flash-and-38-flash-cyber/",
     "date": "Wed, 02 Sep 2026 16:18:31 +0000",
     "detectedAt": "2026-09-05T10:24:14.753Z"
-  },
-  {
-    "model": "GPT-6",
-    "source": "OpenAI",
-    "title": "Legora reviewed 41 documents in minutes with GPT-6 Astra",
-    "url": "https://openai.com/index/legora-financial-statement-review-with-astra",
-    "date": "Thu, 03 Sep 2026 12:00:00 GMT",
-    "detectedAt": "2026-09-04T11:09:25.809Z"
-  },
-  {
-    "model": "WeatherNext 3",
-    "source": "Google DeepMind",
-    "title": "Introducing WeatherNext 3, our most advanced and accurate global weather AI model",
-    "url": "https://deepmind.google/blog/introducing-weathernext-3-our-most-advanced-and-accurate-global-weather-ai-model/",
-    "date": "Thu, 03 Sep 2026 15:02:08 +0000",
-    "detectedAt": "2026-09-04T11:09:25.983Z"
-  },
-  {
-    "model": "Gemini 3.8 Flash and 3.8 Flash Cyber",
-    "source": "Google DeepMind",
-    "title": "Introducing Gemini 3.8 Flash and 3.8 Flash Cyber",
-    "url": "https://deepmind.google/blog/introducing-gemini-3-8-flash-and-38-flash-cyber/",
-    "date": "Wed, 02 Sep 2026 16:18:31 +0000",
-    "detectedAt": "2026-09-04T11:09:25.983Z"
   }
 ]
