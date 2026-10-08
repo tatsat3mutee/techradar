@@ -1,5 +1,13 @@
 [
   {
+    "model": "GPT-6",
+    "source": "OpenAI",
+    "title": "GPT-6 and Intelligent UI for everyone",
+    "url": "https://openai.com/index/gpt-6-for-everyone",
+    "date": "Wed, 07 Oct 2026 00:00:00 GMT",
+    "detectedAt": "2026-10-08T13:13:14.444Z"
+  },
+  {
     "model": "Mistral AI has released Mistral Large 4",
     "source": "TechCrunch AI",
     "title": "Mistral’s new 1T model aims to leapfrog closed and open rivals",
