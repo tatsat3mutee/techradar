@@ -1,5 +1,37 @@
 [
   {
+    "model": "GPT-6",
+    "source": "OpenAI",
+    "title": "Higgsfield takes AI video from 1 minute to over 10",
+    "url": "https://openai.com/index/higgsfield-longer-videos-voice",
+    "date": "Tue, 13 Oct 2026 12:00:00 GMT",
+    "detectedAt": "2026-10-14T11:35:45.845Z"
+  },
+  {
+    "model": "Gemini 4 Argon responsibly and safely",
+    "source": "Google DeepMind",
+    "title": "Developing Gemini 4 Argon responsibly and safely",
+    "url": "https://deepmind.google/blog/developing-gemini-4-argon-responsibly-and-safely/",
+    "date": "Tue, 13 Oct 2026 19:43:07 +0000",
+    "detectedAt": "2026-10-14T11:35:45.964Z"
+  },
+  {
+    "model": "Gemini 4 Argon for Robotics",
+    "source": "Google DeepMind",
+    "title": "Gemini 4 Argon for Robotics",
+    "url": "https://deepmind.google/blog/gemini-4-argon-for-robotics/",
+    "date": "Tue, 13 Oct 2026 16:01:58 +0000",
+    "detectedAt": "2026-10-14T11:35:45.964Z"
+  },
+  {
+    "model": "Gemini 4 Argon",
+    "source": "Google DeepMind",
+    "title": "Gemini 4 Argon: Built to solve your hardest problems",
+    "url": "https://deepmind.google/blog/introducing-gemini-4-argon/",
+    "date": "Tue, 13 Oct 2026 16:01:52 +0000",
+    "detectedAt": "2026-10-14T11:35:45.964Z"
+  },
+  {
     "model": "GPT-6.1",
     "source": "OpenAI",
     "title": "Asana cuts model costs 76x in browser tests with GPT-6.1 Sol",
