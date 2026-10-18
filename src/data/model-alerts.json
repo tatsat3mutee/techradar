@@ -1,6 +1,14 @@
 [
   {
     "model": "GPT-6",
+    "source": "TechCrunch AI",
+    "title": "Elorian’s first AI model wants to reason with images, not just about them",
+    "url": "https://techcrunch.com/2026/10/16/elorians-first-ai-model-wants-to-reason-with-images-not-just-about-them/",
+    "date": "Fri, 16 Oct 2026 16:01:37 +0000",
+    "detectedAt": "2026-10-18T10:47:44.524Z"
+  },
+  {
+    "model": "GPT-6",
     "source": "OpenAI",
     "title": "Amp puts AI agents to work beyond code with OpenAI models",
     "url": "https://openai.com/index/amp-beyond-coding",
@@ -382,13 +390,5 @@
     "url": "https://deepmind.google/blog/introducing-gemini-3-8-live-and-3-8-live-extended-thinking/",
     "date": "Tue, 15 Sep 2026 17:05:57 +0000",
     "detectedAt": "2026-09-18T10:59:32.666Z"
-  },
-  {
-    "model": "Gemini 3.8 Live and 3.8 Live Extended Thinking",
-    "source": "Google DeepMind",
-    "title": "Introducing Gemini 3.8 Live and 3.8 Live Extended Thinking",
-    "url": "https://deepmind.google/blog/introducing-gemini-3-8-live-and-3-8-live-extended-thinking/",
-    "date": "Tue, 15 Sep 2026 17:05:57 +0000",
-    "detectedAt": "2026-09-17T11:26:16.724Z"
   }
 ]
