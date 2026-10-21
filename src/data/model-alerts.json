@@ -1,5 +1,13 @@
 [
   {
+    "model": "GPT-6.1",
+    "source": "OpenAI",
+    "title": "Terminal X matches senior investor judgment 88.6% with GPT-6.1",
+    "url": "https://openai.com/index/terminal-x",
+    "date": "Tue, 20 Oct 2026 07:00:00 GMT",
+    "detectedAt": "2026-10-21T11:33:59.301Z"
+  },
+  {
     "model": "GPT-6",
     "source": "TechCrunch AI",
     "title": "Elorian’s first AI model wants to reason with images, not just about them",
