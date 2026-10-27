@@ -1,5 +1,29 @@
 [
   {
+    "model": "GPT-6",
+    "source": "OpenAI",
+    "title": "Greptile takes bug detection beyond code review with GPT-6 Astra",
+    "url": "https://openai.com/index/greptile-code-review-codex-astra",
+    "date": "Mon, 26 Oct 2026 22:00:00 GMT",
+    "detectedAt": "2026-10-27T11:56:40.104Z"
+  },
+  {
+    "model": "GPT-6.1",
+    "source": "OpenAI",
+    "title": "GPT-6.1 Sol helps CodeRabbit strengthen security across complex codebases",
+    "url": "https://openai.com/index/gpt-6-1-sol-coderabbit-code-security",
+    "date": "Mon, 26 Oct 2026 13:45:00 GMT",
+    "detectedAt": "2026-10-27T11:56:40.105Z"
+  },
+  {
+    "model": "GPT-6.1 Terra Bringing fast and capable computer use to everyone",
+    "source": "OpenAI",
+    "title": "Introducing GPT-6.1 Terra",
+    "url": "https://openai.com/index/introducing-gpt-6-1-terra",
+    "date": "Mon, 26 Oct 2026 00:00:00 GMT",
+    "detectedAt": "2026-10-27T11:56:40.106Z"
+  },
+  {
     "model": "GPT-6.1",
     "source": "OpenAI",
     "title": "Terminal X matches senior investor judgment 88.6% with GPT-6.1",
@@ -286,21 +310,5 @@
     "url": "https://openai.com/index/proaction",
     "date": "Fri, 25 Sep 2026 19:00:00 GMT",
     "detectedAt": "2026-09-28T13:33:41.677Z"
-  },
-  {
-    "model": "GPT-6",
-    "source": "OpenAI",
-    "title": "Proaction boosts sales 60% and saves 75+ hours with Codex",
-    "url": "https://openai.com/index/proaction",
-    "date": "Fri, 25 Sep 2026 19:00:00 GMT",
-    "detectedAt": "2026-09-27T11:49:53.628Z"
-  },
-  {
-    "model": "Gemini 3.8 Live with Live Avatar",
-    "source": "Google DeepMind",
-    "title": "Introducing Gemini 3.8 Live with Live Avatar",
-    "url": "https://deepmind.google/blog/introducing-gemini-38-live-with-live-avatar/",
-    "date": "Thu, 24 Sep 2026 16:20:39 +0000",
-    "detectedAt": "2026-09-27T11:49:54.215Z"
   }
 ]
