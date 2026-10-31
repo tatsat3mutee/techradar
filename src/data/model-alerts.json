@@ -1,5 +1,21 @@
 [
   {
+    "model": "Gemini 4 Carbon",
+    "source": "Google DeepMind",
+    "title": "Gemini 4 Carbon: Our next frontier model",
+    "url": "https://deepmind.google/blog/gemini-4-carbon-our-next-frontier-model/",
+    "date": "Wed, 28 Oct 2026 17:00:58 +0000",
+    "detectedAt": "2026-10-31T12:03:02.602Z"
+  },
+  {
+    "model": "Mistral Large 4",
+    "source": "Hugging Face",
+    "title": "Welcome Le Chonk: Mistral Large 4 on Hugging Face",
+    "url": "https://huggingface.co/blog/mistral-large4",
+    "date": "Thu, 29 Oct 2026 00:00:00 GMT",
+    "detectedAt": "2026-10-31T12:03:02.656Z"
+  },
+  {
     "model": "GPT-6",
     "source": "OpenAI",
     "title": "Retell uses OpenAI models to help power 100M monthly calls",
