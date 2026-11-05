@@ -1,5 +1,21 @@
 [
   {
+    "model": "Images 2.6 Images 2.6 brings faster image generation",
+    "source": "OpenAI",
+    "title": "Introducing Images 2.6",
+    "url": "https://openai.com/index/introducing-images-2-6",
+    "date": "Wed, 04 Nov 2026 00:00:00 GMT",
+    "detectedAt": "2026-11-05T14:27:16.525Z"
+  },
+  {
+    "model": "GPT-6.1",
+    "source": "OpenAI",
+    "title": "DevRev delivers autonomous self-service with GPT-6.1 Sol",
+    "url": "https://openai.com/index/devrev-enterprise-self-service",
+    "date": "Wed, 04 Nov 2026 00:00:00 GMT",
+    "detectedAt": "2026-11-05T14:27:16.526Z"
+  },
+  {
     "model": "Gemini 4 Carbon",
     "source": "Google DeepMind",
     "title": "Gemini 4 Carbon: Our next frontier model",
@@ -278,13 +294,5 @@
     "url": "https://techcrunch.com/2026/10/06/mistrals-new-1t-model-aims-to-leapfrog-closed-and-open-rivals/",
     "date": "Tue, 06 Oct 2026 14:33:16 +0000",
     "detectedAt": "2026-10-07T13:05:51.157Z"
-  },
-  {
-    "model": "GPT-6",
-    "source": "OpenAI",
-    "title": "A model guide for the GPT-6 family",
-    "url": "https://openai.com/index/practical-guide-building-gpt-6",
-    "date": "Fri, 02 Oct 2026 16:15:00 GMT",
-    "detectedAt": "2026-10-05T14:17:44.168Z"
   }
 ]
