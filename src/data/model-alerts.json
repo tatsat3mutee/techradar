@@ -278,13 +278,5 @@
     "url": "https://deepmind.google/blog/introducing-gemini-4-argon/",
     "date": "Tue, 13 Oct 2026 16:01:52 +0000",
     "detectedAt": "2026-10-14T11:35:45.964Z"
-  },
-  {
-    "model": "GPT-6.1",
-    "source": "OpenAI",
-    "title": "Asana cuts model costs 76x in browser tests with GPT-6.1 Sol",
-    "url": "https://openai.com/index/asana-browser-agent",
-    "date": "Fri, 09 Oct 2026 07:00:00 GMT",
-    "detectedAt": "2026-10-11T12:33:06.352Z"
   }
 ]
