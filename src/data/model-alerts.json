@@ -1,5 +1,29 @@
 [
   {
+    "model": "GPT-6.2 Astra and Sol Introducing GPT",
+    "source": "OpenAI",
+    "title": "Introducing GPT-6.2 Astra and Sol",
+    "url": "https://openai.com/index/introducing-gpt-6-2-astra-sol",
+    "date": "Tue, 17 Nov 2026 17:45:00 GMT",
+    "detectedAt": "2026-11-18T15:28:34.515Z"
+  },
+  {
+    "model": "GPT-6.2",
+    "source": "OpenAI",
+    "title": "Introducing GPT-6.2 Astra and Sol",
+    "url": "https://openai.com/index/introducing-gpt-6-2-astra-sol",
+    "date": "Tue, 17 Nov 2026 17:45:00 GMT",
+    "detectedAt": "2026-11-18T15:28:34.515Z"
+  },
+  {
+    "model": "ChatGPT for Sales Explore the new Sales plugin and 30",
+    "source": "OpenAI",
+    "title": "Introducing ChatGPT for Sales",
+    "url": "https://openai.com/index/introducing-chatgpt-for-sales",
+    "date": "Tue, 17 Nov 2026 08:00:00 GMT",
+    "detectedAt": "2026-11-18T15:28:34.516Z"
+  },
+  {
     "model": "GPT-6",
     "source": "OpenAI",
     "title": "A step toward defining the Standard Model on a lattice",
@@ -214,13 +238,5 @@
     "url": "https://openai.com/index/terminal-x",
     "date": "Tue, 20 Oct 2026 07:00:00 GMT",
     "detectedAt": "2026-10-21T11:33:59.301Z"
-  },
-  {
-    "model": "GPT-6",
-    "source": "TechCrunch AI",
-    "title": "Elorian’s first AI model wants to reason with images, not just about them",
-    "url": "https://techcrunch.com/2026/10/16/elorians-first-ai-model-wants-to-reason-with-images-not-just-about-them/",
-    "date": "Fri, 16 Oct 2026 16:01:37 +0000",
-    "detectedAt": "2026-10-19T12:48:38.580Z"
   }
 ]
