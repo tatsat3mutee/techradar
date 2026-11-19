@@ -1,5 +1,45 @@
 [
   {
+    "model": "GPT-6",
+    "source": "OpenAI",
+    "title": "Advancing chip design with OpenAI models",
+    "url": "https://openai.com/index/advancing-chip-design-with-our-models",
+    "date": "Wed, 18 Nov 2026 00:00:00 GMT",
+    "detectedAt": "2026-11-19T15:34:47.001Z"
+  },
+  {
+    "model": "GPT-6.2 Astra and Sol Introducing GPT",
+    "source": "OpenAI",
+    "title": "Introducing GPT-6.2 Astra and Sol",
+    "url": "https://openai.com/index/introducing-gpt-6-2-astra-sol",
+    "date": "Tue, 17 Nov 2026 17:45:00 GMT",
+    "detectedAt": "2026-11-19T15:34:47.001Z"
+  },
+  {
+    "model": "GPT-6.2",
+    "source": "OpenAI",
+    "title": "Introducing GPT-6.2 Astra and Sol",
+    "url": "https://openai.com/index/introducing-gpt-6-2-astra-sol",
+    "date": "Tue, 17 Nov 2026 17:45:00 GMT",
+    "detectedAt": "2026-11-19T15:34:47.002Z"
+  },
+  {
+    "model": "ChatGPT for Sales Explore the new Sales plugin and 30",
+    "source": "OpenAI",
+    "title": "Introducing ChatGPT for Sales",
+    "url": "https://openai.com/index/introducing-chatgpt-for-sales",
+    "date": "Tue, 17 Nov 2026 08:00:00 GMT",
+    "detectedAt": "2026-11-19T15:34:47.002Z"
+  },
+  {
+    "model": "Gemini 4 Neon",
+    "source": "Google DeepMind",
+    "title": "Introducing Gemini 4 Neon",
+    "url": "https://deepmind.google/blog/introducing-gemini-4-neon/",
+    "date": "Wed, 18 Nov 2026 21:35:43 +0000",
+    "detectedAt": "2026-11-19T15:34:47.171Z"
+  },
+  {
     "model": "GPT-6.2 Astra and Sol Introducing GPT",
     "source": "OpenAI",
     "title": "Introducing GPT-6.2 Astra and Sol",
